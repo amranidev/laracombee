@@ -16,6 +16,7 @@ use Recombee\RecommApi\Requests\ListUsers;
 use Recombee\RecommApi\Requests\MergeUsers;
 use Recombee\RecommApi\Requests\RecommendItemsToUser;
 use Recombee\RecommApi\Requests\SetItemValues;
+use Recombee\RecommApi\Requests\DeleteItem;
 
 class Laracombee
 {
@@ -55,5 +56,16 @@ class Laracombee
     public function updateItem($item_id, $fields)
     {
         return $this->addItem($item_id, $fields);
+    }
+
+    public function removeItem($item_id)
+    {
+        $item = new DeleteItem($item_id);
+
+        $item->setTimeout($this->timeout);
+
+        $this->client->send($item);
+
+        return true;
     }
 }
