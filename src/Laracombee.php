@@ -51,4 +51,9 @@ class Laracombee
 
         return $this->client->send($items);
     }
+
+    public function updateItem($item_id, $fields)
+    {
+        return $this->addItem($item_id, $fields);
+    }
 }
