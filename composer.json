@@ -1,0 +1,7 @@
+{
+    "name": "amranidev/laracombee",
+    "license": "MIT",
+    "require": {
+        "recombee/php-api-client": "^2.1"
+    }
+}
