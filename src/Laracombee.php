@@ -17,7 +17,7 @@ use Recombee\RecommApi\Requests\MergeUsers;
 use Recombee\RecommApi\Requests\RecommendItemsToUser;
 use Recombee\RecommApi\Requests\SetItemValues;
 use Recombee\RecommApi\Requests\DeleteItem;
-
+use Recombee\RecommApi\Requests\DeleteUser;
 class Laracombee
 {
     private $client;
@@ -83,6 +83,15 @@ class Laracombee
         $user = new DeleteUser($user_id);
 
         $this->client->send($user);
+
+        return true;
+    }
+
+    public function mergeUsers($target_user_id, $source_user_id, $params)
+    {
+        $merge = new MergeUsers($target_user_id, $source_user_id, $params);
+
+        $this->client->send($merge);
 
         return true;
     }
