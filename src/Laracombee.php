@@ -95,4 +95,11 @@ class Laracombee
 
         return true;
     }
+
+    public function listUsers($params)
+    {
+        $users = new listUsers($params);
+
+        return $this->client->send($users);
+    }
 }
