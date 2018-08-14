@@ -68,4 +68,22 @@ class Laracombee
 
         return true;
     }
+
+    public function addUser($user_id) 
+    {
+        $user = new AddUser($user_id);
+
+        $this->client->send($user);
+
+        return true;
+    }
+
+    public function deleteUser($user_id)
+    {
+        $user = new DeleteUser($user_id);
+
+        $this->client->send($user);
+
+        return true;
+    }
 }
