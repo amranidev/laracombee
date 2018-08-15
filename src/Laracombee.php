@@ -18,16 +18,17 @@ use Recombee\RecommApi\Requests\RecommendItemsToUser;
 use Recombee\RecommApi\Requests\SetItemValues;
 use Recombee\RecommApi\Requests\DeleteItem;
 use Recombee\RecommApi\Requests\DeleteUser;
+
 class Laracombee
 {
-    private $client;
+    public $client;
 
-    private $timeout;
+    public $timeout;
 
-    public function __constructor() 
+    public function __construct() 
     {
         $this->client = new Client(config('laracombee.database'), config('laracombee.token'));
-        $this->timeout = config('laracombee.tomeout');
+        $this->timeout = config('laracombee.timeout');
     }
 
     public function addItem($item_id, $fields) 
