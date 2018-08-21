@@ -14,7 +14,7 @@ class DefineUserProperties extends Command
      * @var string
      */
     
-    protected $signature = 'laracombee:user-props';
+    protected $signature = 'laracombee:add-user-props';
     /**
      * The console command description.
      *
@@ -53,20 +53,20 @@ class DefineUserProperties extends Command
     {
         $bar = $this->output->createProgressBar($this->properties->count());
 
-        $client = $this->client;
-
-        $this->properties->each(function ($property) use ($client, $bar) {
-            $client->send($property);
+        $this->properties->each(function ($property) use ($bar) {
+            $this->client->send($property);
             $bar->advance();
         });
 
         $bar->finish();
+        $this->line('');
+        $this->info('Created Successfully');
     }
 
     private function loadProperties()
     {
-        return collect(config('laracombee.user-properties'))->map(function ($value, $property) {
-            return new AddUserProperty($property, $value);
+        return collect(config('laracombee.user-properties'))->map(function ($type, $property) {
+            return new AddUserProperty($property, $type);
         });
     }
 }
