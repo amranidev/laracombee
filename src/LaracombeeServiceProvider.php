@@ -17,6 +17,9 @@ class LaracombeeServiceProvider extends ServiceProvider
         $this->app->bind('Laracombee', function () {
             return new Laracombee();
         });
+
+        $this->commands(['Amranidev\Laracombee\Commands\DefineUserProperties']);
+
     }
 
     public function boot()
