@@ -18,7 +18,7 @@ class LaracombeeServiceProvider extends ServiceProvider
             return new Laracombee();
         });
 
-        $this->commands(['Amranidev\Laracombee\Commands\DefineUserProperties']);
+        $this->commands(['Amranidev\Laracombee\Commands\DefineUserProperties', 'Amranidev\Laracombee\Commands\DeleteUserProperty']);
 
     }
 
