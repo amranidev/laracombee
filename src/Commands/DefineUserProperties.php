@@ -20,7 +20,7 @@ class DefineUserProperties extends Command
      *
      * @var string
      */
-    protected $description = 'Add Eecombee User Properties';
+    protected $description = 'Add Recombee User Properties';
 
     /**
      * @var \Recombee\RecommApi\Client
@@ -63,6 +63,11 @@ class DefineUserProperties extends Command
         $this->info('Created Successfully');
     }
 
+    /**
+     * Load Peroperties.
+     * 
+     * @return Collection
+     */
     private function loadProperties()
     {
         return collect(config('laracombee.user-properties'))->map(function ($type, $property) {
