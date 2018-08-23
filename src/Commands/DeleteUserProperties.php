@@ -51,7 +51,7 @@ class DeleteUserProperties extends Command
 
         $bar = $this->output->createProgressBar($properties->count());
 
-        $properties->each(function ($property) use ($bar){
+        $properties->each(function ($property) use ($bar) {
             $this->client->send(new DeleteUserProperty($property));
             $bar->advance();
         });
