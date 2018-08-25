@@ -6,15 +6,15 @@ use Illuminate\Console\Command;
 use Recombee\RecommApi\Client;
 use Recombee\RecommApi\Requests\AddItemProperty;
 
-class DefineItemProperties extends Command 
+class DefineItemProperties extends Command
 {
     /**
      * The name and signature of the console command.
      *
      * @var string
      */
-    
     protected $signature = 'laracombee:add-item-props';
+
     /**
      * The console command description.
      *
@@ -66,7 +66,7 @@ class DefineItemProperties extends Command
 
     /**
      * Load Peroperties.
-     * 
+     *
      * @return \Illuminate\Support\Collection
      */
     private function loadProperties()
