@@ -6,6 +6,8 @@ use Amranidev\Laracombee\Laracombee;
 use Amranidev\Laracombee\Commands\DefineUserProperties;
 use Amranidev\Laracombee\Commands\DeleteUserProperties;
 use Amranidev\Laracombee\Commands\DefineItemProperties;
+use Amranidev\Laracombee\Commands\DeleteItemProperties;
+
 use Illuminate\Support\ServiceProvider;
 
 class LaracombeeServiceProvider extends ServiceProvider
@@ -24,6 +26,7 @@ class LaracombeeServiceProvider extends ServiceProvider
         $this->commands([ DefineUserProperties::class, 
                           DeleteUserProperties::class, 
                           DefineItemProperties::class,
+                          DeleteItemProperties::class,
                         ]);
 
     }
