@@ -3,8 +3,8 @@
 namespace Amranidev\Laracombee;
 
 use Amranidev\Laracombee\AbstractRecombee;
-use Illuminate\Foundation\Auth\User;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Foundation\Auth\User;
 
 class Laracombee extends AbstractRecombee
 {
