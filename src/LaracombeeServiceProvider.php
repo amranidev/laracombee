@@ -2,12 +2,11 @@
 
 namespace Amranidev\Laracombee;
 
-use Amranidev\Laracombee\Laracombee;
-use Amranidev\Laracombee\Commands\DefineUserProperties;
-use Amranidev\Laracombee\Commands\DeleteUserProperties;
 use Amranidev\Laracombee\Commands\DefineItemProperties;
+use Amranidev\Laracombee\Commands\DefineUserProperties;
 use Amranidev\Laracombee\Commands\DeleteItemProperties;
-
+use Amranidev\Laracombee\Commands\DeleteUserProperties;
+use Amranidev\Laracombee\Laracombee;
 use Illuminate\Support\ServiceProvider;
 
 class LaracombeeServiceProvider extends ServiceProvider
@@ -23,18 +22,21 @@ class LaracombeeServiceProvider extends ServiceProvider
             return new Laracombee();
         });
 
-        $this->commands([ DefineUserProperties::class, 
-                          DeleteUserProperties::class, 
-                          DefineItemProperties::class,
-                          DeleteItemProperties::class,
-                        ]);
+        $this->commands(
+            [
+                DefineUserProperties::class,
+                DeleteUserProperties::class,
+                DefineItemProperties::class,
+                DeleteItemProperties::class,
+            ]
+        );
 
     }
 
     public function boot()
     {
-        $configPath = __DIR__.'/../published/laracombee.php';
+        $configPath = __DIR__ . '/../published/laracombee.php';
         $this->publishes([
-            $configPath => config_path('laracombee.php'), ]);
+            $configPath => config_path('laracombee.php')]);
     }
 }
