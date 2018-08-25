@@ -8,6 +8,7 @@ use Recombee\RecommApi\Requests\DeleteUserProperty;
 
 class DeleteUserProperties extends Command
 {
+
     /**
      * The name and signature of the console command.
      *
