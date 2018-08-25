@@ -6,15 +6,16 @@ use Illuminate\Console\Command;
 use Recombee\RecommApi\Client;
 use Recombee\RecommApi\Requests\AddUserProperty;
 
-class DefineUserProperties extends Command 
+class DefineUserProperties extends Command
 {
+
     /**
      * The name and signature of the console command.
      *
      * @var string
      */
-    
     protected $signature = 'laracombee:add-user-props';
+
     /**
      * The console command description.
      *
@@ -66,7 +67,7 @@ class DefineUserProperties extends Command
 
     /**
      * Load Peroperties.
-     * 
+     *
      * @return \Illuminate\Support\Collection
      */
     private function loadProperties()
