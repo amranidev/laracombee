@@ -44,10 +44,11 @@ class DefineUserProperties extends Command
         $this->client = new Client(config('laracombee.database'), config('laracombee.token'));
         $this->properties = $this->loadProperties();
     }
+
     /**
      * Execute the console command.
      *
-     * @return mixed
+     * @return void
      */
     public function handle()
     {
@@ -66,7 +67,7 @@ class DefineUserProperties extends Command
     /**
      * Load Peroperties.
      * 
-     * @return Collection
+     * @return \Illuminate\Support\Collection
      */
     private function loadProperties()
     {
