@@ -12,6 +12,9 @@ use Recombee\RecommApi\Requests\RecommendItemsToUser;
 use Recombee\RecommApi\Requests\SetItemValues;
 use Recombee\RecommApi\Requests\SetUserValues;
 use Recombee\RecommApi\Requests\AddUserProperty;
+use Recombee\RecommApi\Requests\AddItemProperty;
+use Recombee\RecommApi\Requests\DeleteUserProperty;
+use Recombee\RecommApi\Requests\DeleteItemProperty;
 
 class AbstractRecombee
 {
