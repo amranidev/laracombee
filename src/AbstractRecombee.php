@@ -11,6 +11,7 @@ use Recombee\RecommApi\Requests\MergeUsers;
 use Recombee\RecommApi\Requests\RecommendItemsToUser;
 use Recombee\RecommApi\Requests\SetItemValues;
 use Recombee\RecommApi\Requests\SetUserValues;
+use Recombee\RecommApi\Requests\AddUserProperty;
 
 class AbstractRecombee
 {
@@ -177,5 +178,17 @@ class AbstractRecombee
         ]);
 
         return $this->client->send($user);
+    }
+
+    /**
+     * Add user Property.
+     */
+    public function addUserProperty($property, $type)
+    {
+        $userProps =  new AddUserProperty($property, $type);
+
+        $client->send($userProps);
+
+        return true;
     }
 }
