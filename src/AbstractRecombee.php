@@ -191,4 +191,13 @@ class AbstractRecombee
 
         return true;
     }
+
+    public function addItemProperty($property, $type)
+    {
+        $itemProps = new AddItemProperty($property, $type);
+
+        $clinet->send($itemProps);
+
+        return true;
+    }
 }
