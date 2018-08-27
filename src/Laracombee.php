@@ -28,6 +28,6 @@ class Laracombee extends AbstractRecombee
      */
     public function addModel(Model $model)
     {
-        // @Todo
+        // return $model->getConnection()->getSchemaBuilder()->getColumnListing($model->getTable());
     }
 }
