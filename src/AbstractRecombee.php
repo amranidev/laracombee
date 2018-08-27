@@ -192,9 +192,33 @@ class AbstractRecombee
         return true;
     }
 
+    public function deleteUserProperty($property, $type)
+    {
+        $userProps =  new DeleteUserProperty($property, $type);
+
+        $client->send($userProps);
+
+        return true;
+    }
+
+    /**
+     * Add item property.
+     */
     public function addItemProperty($property, $type)
     {
         $itemProps = new AddItemProperty($property, $type);
+
+        $clinet->send($itemProps);
+
+        return true;
+    }
+
+    /**
+     * Add item property.
+     */
+    public function deleteItemProperty($property, $type)
+    {
+        $itemProps = new DeleteItemProperty($property, $type);
 
         $clinet->send($itemProps);
 
