@@ -18,6 +18,7 @@ use Recombee\RecommApi\Requests\DeleteItemProperty;
 use Recombee\RecommApi\Requests\AddDetailedView;
 use Recombee\RecommApi\Requests\DeleteItemView;
 use Recombee\RecommApi\Requests\AddPurchase;
+use Recombee\RecommApi\Requests\DeletePurchase;
 
 class AbstractRecombee
 {
@@ -273,6 +274,22 @@ class AbstractRecombee
     public function addPurchase($user_id, $item_id, $options)
     {
         $purchase = new AddPurchase($user_id, $item_id, $options);
+
+        $this->client->send($purchase);
+
+        return true;
+    }
+
+    /**
+     * Delete Purchase.
+     * 
+     * @var int $user_id
+     * @var int $item_id
+     * @var array $options
+     */
+    public function deletePurchase($user_id, $item_id, $options)
+    {
+        $purchase = new DeletePurchase($user_id, $item_id, $options);
 
         $this->client->send($purchase);
 
