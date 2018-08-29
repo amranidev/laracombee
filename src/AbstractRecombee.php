@@ -246,4 +246,20 @@ class AbstractRecombee
 
         return true;
     }
+
+    /**
+     * Delete Item View.
+     * 
+     * @var int $user_id
+     * @var int $item_id
+     * @var array $options
+     */
+    public function deleteItemView($user_id, $item_id, $options)
+    {
+        $detailedView = new DeleteItemView($user_id, $item_id, $options);
+
+        $this->client->send($detailedView);
+
+        return true;
+    }
 }
