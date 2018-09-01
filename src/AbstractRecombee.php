@@ -302,6 +302,7 @@ class AbstractRecombee
      * 
      * @var int $user_id
      * @var int $item_id
+     * @var int $rating
      * @var array $options
      */
     public function addRating($user_id, $item_id, $rating, $options)
@@ -309,6 +310,22 @@ class AbstractRecombee
         $rating = new AddRating($user_id, $item_id, $rating, $options);
 
         $this->client->send($purchase);
+
+        return true;
+    }
+
+    /**
+     * Delete rating.
+     * 
+     * @var int $user_id
+     * @var int $item_id
+     * @var array $options
+     */
+    public function deleteRating($user_id, $item_id, $options)
+    {
+        $rating = new DeleteRating($user_id, $item_id, $options);
+        
+        $this->client->send($rating);
 
         return true;
     }
