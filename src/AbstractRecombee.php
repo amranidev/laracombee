@@ -20,6 +20,7 @@ use Recombee\RecommApi\Requests\DeleteItemView;
 use Recombee\RecommApi\Requests\AddPurchase;
 use Recombee\RecommApi\Requests\DeletePurchase;
 use Recombee\RecommApi\Requests\AddRating;
+use Recombee\RecommApi\Requests\AddCartAddition;
 
 class AbstractRecombee
 {
@@ -236,9 +237,9 @@ class AbstractRecombee
     /**
      * Add Detailed View.
      * 
-     * @var int $user_id
-     * @var int $item_id
-     * @var array $options
+     * @param int $user_id
+     * @param int $item_id
+     * @param array $options
      */
     public function addDetailedView($user_id, $item_id, $options)
     {
@@ -252,9 +253,9 @@ class AbstractRecombee
     /**
      * Delete Item View.
      * 
-     * @var int $user_id
-     * @var int $item_id
-     * @var array $options
+     * @param int $user_id
+     * @param int $item_id
+     * @param array $options
      */
     public function deleteItemView($user_id, $item_id, $options)
     {
@@ -268,9 +269,9 @@ class AbstractRecombee
     /**
      * Add Purchase.
      * 
-     * @var int $user_id
-     * @var int $item_id
-     * @var array $options
+     * @param int $user_id
+     * @param int $item_id
+     * @param array $options
      */
     public function addPurchase($user_id, $item_id, $options)
     {
@@ -284,9 +285,9 @@ class AbstractRecombee
     /**
      * Delete Purchase.
      * 
-     * @var int $user_id
-     * @var int $item_id
-     * @var array $options
+     * @param int $user_id
+     * @param int $item_id
+     * @param array $options
      */
     public function deletePurchase($user_id, $item_id, $options)
     {
@@ -300,10 +301,10 @@ class AbstractRecombee
     /**
      * Add rating.
      * 
-     * @var int $user_id
-     * @var int $item_id
-     * @var int $rating
-     * @var array $options
+     * @param int $user_id
+     * @param int $item_id
+     * @param int $rating
+     * @param array $options
      */
     public function addRating($user_id, $item_id, $rating, $options)
     {
@@ -317,9 +318,9 @@ class AbstractRecombee
     /**
      * Delete rating.
      * 
-     * @var int $user_id
-     * @var int $item_id
-     * @var array $options
+     * @param int $user_id
+     * @param int $item_id
+     * @param array $options
      */
     public function deleteRating($user_id, $item_id, $options)
     {
@@ -328,5 +329,21 @@ class AbstractRecombee
         $this->client->send($rating);
 
         return true;
+    }
+
+    /**
+     * Card Addtion.
+     * 
+     * @param int $user_id
+     * @param int $item_id
+     * @param array $options
+     */
+    public function addCartAddition($user_id, $item_id, $options)
+    {
+        $addition = new AddCartAddition($user_id, $item_id, $options);
+
+        $this->client->send($addition);
+
+        return 0;
     }
 }
