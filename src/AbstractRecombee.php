@@ -21,6 +21,7 @@ use Recombee\RecommApi\Requests\AddPurchase;
 use Recombee\RecommApi\Requests\DeletePurchase;
 use Recombee\RecommApi\Requests\AddRating;
 use Recombee\RecommApi\Requests\AddCartAddition;
+use Recombee\RecommApi\Requests\DeleteCartAddition;
 
 class AbstractRecombee
 {
@@ -341,6 +342,22 @@ class AbstractRecombee
     public function addCartAddition($user_id, $item_id, $options)
     {
         $addition = new AddCartAddition($user_id, $item_id, $options);
+
+        $this->client->send($addition);
+
+        return 0;
+    }
+
+    /**
+     * Delete Card Addtion.
+     * 
+     * @param int $user_id
+     * @param int $item_id
+     * @param array $options
+     */
+    public function deleteCartAddition($user_id, $item_id, $options)
+    {
+        $addition = new DeleteCartAddition($user_id, $item_id, $options);
 
         $this->client->send($addition);
 
