@@ -22,6 +22,7 @@ use Recombee\RecommApi\Requests\DeletePurchase;
 use Recombee\RecommApi\Requests\AddRating;
 use Recombee\RecommApi\Requests\AddCartAddition;
 use Recombee\RecommApi\Requests\DeleteCartAddition;
+use Recombee\RecommApi\Requests\AddBookmark;
 
 class AbstractRecombee
 {
@@ -360,6 +361,22 @@ class AbstractRecombee
         $addition = new DeleteCartAddition($user_id, $item_id, $options);
 
         $this->client->send($addition);
+
+        return 0;
+    }
+
+    /**
+     * Add Bookmark.
+     * 
+     * @param int $user_id
+     * @param int $item_id
+     * @param array $options
+     */
+    public function addBookmark($user_id, $item_id, $options)
+    {
+        $bookmark = new AddBookmark($user_id, $item_id, $options);
+
+        $this->client->send($bookmark);
 
         return 0;
     }
