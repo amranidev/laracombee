@@ -1,7 +1,34 @@
 {
     "name": "amranidev/laracombee",
+    "description": "Recommendation system for laravel",
+    "keywords": ["recommendation system", "php", "laravel", "recombee", "laravel and recombee", "laravel with recombee"],
     "license": "MIT",
+    "support": {
+        "issues": "https://github.com/laravel/passport/issues",
+        "source": "https://github.com/laravel/passport"
+    },
     "require": {
         "recombee/php-api-client": "^2.1"
+    },
+    "authors": [
+        {
+            "name": "Houssain Amrani",
+            "email": "amranidev@gmail.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Amranidev\\Laracombee\\": "src/"
+        }
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "dev-master"
+        },
+        "laravel": {
+            "providers": [
+                "Amranidev\\LAracombee\\Providers\\LaracombeeServiceProvider"
+            ]
+        }
     }
 }
