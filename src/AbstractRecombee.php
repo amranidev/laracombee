@@ -347,7 +347,7 @@ class AbstractRecombee
 
         $this->client->send($addition);
 
-        return 0;
+        return true;
     }
 
     /**
@@ -363,7 +363,7 @@ class AbstractRecombee
 
         $this->client->send($addition);
 
-        return 0;
+        return true;
     }
 
     /**
@@ -379,7 +379,7 @@ class AbstractRecombee
 
         $this->client->send($bookmark);
 
-        return 0;
+        return true;
     }
 
     /**
@@ -395,6 +395,6 @@ class AbstractRecombee
 
         $this->client->send($bookmark);
 
-        return 0;
+        return true;
     }
 }
