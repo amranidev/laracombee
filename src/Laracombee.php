@@ -12,22 +12,4 @@ class Laracombee extends AbstractRecombee
     {
         parent::__construct();
     }
-
-    /**
-     * Add user Model.
-     */
-    public function addUserModel(User $user)
-    {
-        $this->setUserValues($user->id, $user->toArray());
-
-        return true;
-    }
-
-    /**
-     * Add Model to Items.
-     */
-    public function addModel(Model $model)
-    {
-        // return $model->getConnection()->getSchemaBuilder()->getColumnListing($model->getTable());
-    }
 }
