@@ -30,13 +30,12 @@ class LaracombeeServiceProvider extends ServiceProvider
                 DeleteItemProperties::class,
             ]
         );
-
     }
 
     public function boot()
     {
-        $configPath = __DIR__ . '/../config/laracombee.php';
+        $configPath = __DIR__.'/../config/laracombee.php';
         $this->publishes([
-            $configPath => config_path('laracombee.php')]);
+            $configPath => config_path('laracombee.php'), ]);
     }
 }

@@ -8,7 +8,6 @@ use Recombee\RecommApi\Requests\AddUserProperty;
 
 class DefineUserProperties extends Command
 {
-
     /**
      * The name and signature of the console command.
      *

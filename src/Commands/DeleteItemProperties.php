@@ -58,6 +58,6 @@ class DeleteItemProperties extends Command
 
         $bar->finish();
         $this->line('');
-        $this->info("Delelted Successfully!");
+        $this->info('Delelted Successfully!');
     }
 }
