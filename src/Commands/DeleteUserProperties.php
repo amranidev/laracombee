@@ -8,7 +8,6 @@ use Recombee\RecommApi\Requests\DeleteUserProperty;
 
 class DeleteUserProperties extends Command
 {
-
     /**
      * The name and signature of the console command.
      *
@@ -59,6 +58,6 @@ class DeleteUserProperties extends Command
 
         $bar->finish();
         $this->line('');
-        $this->info("Delelted Successfully!");
+        $this->info('Delelted Successfully!');
     }
 }

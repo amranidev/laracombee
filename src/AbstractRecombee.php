@@ -3,27 +3,27 @@
 namespace Amranidev\Laracombee;
 
 use Recombee\RecommApi\Client;
+use Recombee\RecommApi\Requests\AddBookmark;
+use Recombee\RecommApi\Requests\AddCartAddition;
+use Recombee\RecommApi\Requests\AddDetailedView;
+use Recombee\RecommApi\Requests\AddItemProperty;
+use Recombee\RecommApi\Requests\AddPurchase;
+use Recombee\RecommApi\Requests\AddRating;
 use Recombee\RecommApi\Requests\AddUser;
+use Recombee\RecommApi\Requests\AddUserProperty;
+use Recombee\RecommApi\Requests\DeleteBookmark;
+use Recombee\RecommApi\Requests\DeleteCartAddition;
 use Recombee\RecommApi\Requests\DeleteItem;
+use Recombee\RecommApi\Requests\DeleteItemProperty;
+use Recombee\RecommApi\Requests\DeleteItemView;
+use Recombee\RecommApi\Requests\DeletePurchase;
 use Recombee\RecommApi\Requests\DeleteUser;
+use Recombee\RecommApi\Requests\DeleteUserProperty;
 use Recombee\RecommApi\Requests\ListUsers;
 use Recombee\RecommApi\Requests\MergeUsers;
 use Recombee\RecommApi\Requests\RecommendItemsToUser;
 use Recombee\RecommApi\Requests\SetItemValues;
 use Recombee\RecommApi\Requests\SetUserValues;
-use Recombee\RecommApi\Requests\AddUserProperty;
-use Recombee\RecommApi\Requests\AddItemProperty;
-use Recombee\RecommApi\Requests\DeleteUserProperty;
-use Recombee\RecommApi\Requests\DeleteItemProperty;
-use Recombee\RecommApi\Requests\AddDetailedView;
-use Recombee\RecommApi\Requests\DeleteItemView;
-use Recombee\RecommApi\Requests\AddPurchase;
-use Recombee\RecommApi\Requests\DeletePurchase;
-use Recombee\RecommApi\Requests\AddRating;
-use Recombee\RecommApi\Requests\AddCartAddition;
-use Recombee\RecommApi\Requests\DeleteCartAddition;
-use Recombee\RecommApi\Requests\AddBookmark;
-use Recombee\RecommApi\Requests\DeleteBookmark;
 
 class AbstractRecombee
 {
@@ -49,7 +49,7 @@ class AbstractRecombee
     /**
      * Add new item to recombee.
      *
-     * @param int $item_id
+     * @param int   $item_id
      * @param array $fileds
      *
      * @return mixed
@@ -57,7 +57,7 @@ class AbstractRecombee
     public function addItem($item_id, $fields)
     {
         $item = new SetItemValues($item_id, $fields, [
-            "cascadeCreate" => true,
+            'cascadeCreate' => true,
         ]);
 
         $item->setTimeout($this->timeout);
@@ -70,8 +70,8 @@ class AbstractRecombee
     /**
      * Get recommended items.
      *
-     * @param int $user_id
-     * @param int $limit
+     * @param int   $user_id
+     * @param int   $limit
      * @param array $filters
      *
      * @return mixed
@@ -88,7 +88,7 @@ class AbstractRecombee
     /**
      * Update item.
      *
-     * @param int $item_id
+     * @param int   $item_id
      * @param array $fileds
      *
      * @return mixed
@@ -151,8 +151,8 @@ class AbstractRecombee
     /**
      * Merge users.
      *
-     * @param int $target_user_id
-     * @param int $source_user_id
+     * @param int   $target_user_id
+     * @param int   $source_user_id
      * @param array $params
      *
      * @return mixed
@@ -197,7 +197,7 @@ class AbstractRecombee
      */
     public function addUserProperty($property, $type)
     {
-        $userProps =  new AddUserProperty($property, $type);
+        $userProps = new AddUserProperty($property, $type);
 
         $client->send($userProps);
 
@@ -206,7 +206,7 @@ class AbstractRecombee
 
     public function deleteUserProperty($property, $type)
     {
-        $userProps =  new DeleteUserProperty($property, $type);
+        $userProps = new DeleteUserProperty($property, $type);
 
         $client->send($userProps);
 
@@ -239,9 +239,9 @@ class AbstractRecombee
 
     /**
      * Add Detailed View.
-     * 
-     * @param int $user_id
-     * @param int $item_id
+     *
+     * @param int   $user_id
+     * @param int   $item_id
      * @param array $options
      */
     public function addDetailedView($user_id, $item_id, $options)
@@ -255,9 +255,9 @@ class AbstractRecombee
 
     /**
      * Delete Item View.
-     * 
-     * @param int $user_id
-     * @param int $item_id
+     *
+     * @param int   $user_id
+     * @param int   $item_id
      * @param array $options
      */
     public function deleteItemView($user_id, $item_id, $options)
@@ -271,9 +271,9 @@ class AbstractRecombee
 
     /**
      * Add Purchase.
-     * 
-     * @param int $user_id
-     * @param int $item_id
+     *
+     * @param int   $user_id
+     * @param int   $item_id
      * @param array $options
      */
     public function addPurchase($user_id, $item_id, $options)
@@ -287,9 +287,9 @@ class AbstractRecombee
 
     /**
      * Delete Purchase.
-     * 
-     * @param int $user_id
-     * @param int $item_id
+     *
+     * @param int   $user_id
+     * @param int   $item_id
      * @param array $options
      */
     public function deletePurchase($user_id, $item_id, $options)
@@ -303,10 +303,10 @@ class AbstractRecombee
 
     /**
      * Add rating.
-     * 
-     * @param int $user_id
-     * @param int $item_id
-     * @param int $rating
+     *
+     * @param int   $user_id
+     * @param int   $item_id
+     * @param int   $rating
      * @param array $options
      */
     public function addRating($user_id, $item_id, $rating, $options)
@@ -320,15 +320,15 @@ class AbstractRecombee
 
     /**
      * Delete rating.
-     * 
-     * @param int $user_id
-     * @param int $item_id
+     *
+     * @param int   $user_id
+     * @param int   $item_id
      * @param array $options
      */
     public function deleteRating($user_id, $item_id, $options)
     {
         $rating = new DeleteRating($user_id, $item_id, $options);
-        
+
         $this->client->send($rating);
 
         return true;
@@ -336,9 +336,9 @@ class AbstractRecombee
 
     /**
      * Card Addtion.
-     * 
-     * @param int $user_id
-     * @param int $item_id
+     *
+     * @param int   $user_id
+     * @param int   $item_id
      * @param array $options
      */
     public function addCartAddition($user_id, $item_id, $options)
@@ -352,9 +352,9 @@ class AbstractRecombee
 
     /**
      * Delete Card Addtion.
-     * 
-     * @param int $user_id
-     * @param int $item_id
+     *
+     * @param int   $user_id
+     * @param int   $item_id
      * @param array $options
      */
     public function deleteCartAddition($user_id, $item_id, $options)
@@ -368,9 +368,9 @@ class AbstractRecombee
 
     /**
      * Add Bookmark.
-     * 
-     * @param int $user_id
-     * @param int $item_id
+     *
+     * @param int   $user_id
+     * @param int   $item_id
      * @param array $options
      */
     public function addBookmark($user_id, $item_id, $options)
@@ -384,9 +384,9 @@ class AbstractRecombee
 
     /**
      * Delete Bookmark.
-     * 
-     * @param int $user_id
-     * @param int $item_id
+     *
+     * @param int   $user_id
+     * @param int   $item_id
      * @param array $options
      */
     public function deleteBookmark($user_id, $item_id, $options)

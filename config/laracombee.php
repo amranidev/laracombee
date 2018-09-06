@@ -23,14 +23,14 @@ return [
     |
     | Here where you can define the item properties in the recombee database.
     |
-    | Value type of the user property to be created. One of: 
+    | Value type of the user property to be created. One of:
     | int, double, string, boolean, timestamp, set, image or imageList.
     |
     */
 
     'user-properties' => [
-        "name" => "string",
-        "age"  => "boolean",   
+        'name' => 'string',
+        'age'  => 'boolean',
     ],
 
     /*
@@ -40,13 +40,13 @@ return [
     |
     | Here where you can define the item properties in the recombee database.
     |
-    | Value type of the item property to be created. One of: 
+    | Value type of the item property to be created. One of:
     | int, double, string, boolean, timestamp, set, image or imageList.
     |
     */
 
     'item-properties' => [
-        "item-name" => "string",
-        "price"     => "int",
-    ]
+        'item-name' => 'string',
+        'price'     => 'int',
+    ],
 ];
