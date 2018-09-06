@@ -3,6 +3,8 @@
 namespace Amranidev\Laracombee;
 
 use Recombee\RecommApi\Client;
+use REcombee\RecommApi\Batch;
+use Recombee\RecommApi\Exceptions;
 use Recombee\RecommApi\Requests\AddBookmark;
 use Recombee\RecommApi\Requests\AddCartAddition;
 use Recombee\RecommApi\Requests\AddDetailedView;
@@ -47,14 +49,40 @@ class AbstractRecombee
     }
 
     /**
+     * Send request.
+     */
+    public function batch(array $bulk)
+    {
+        $this->send(new Batch($bulk));
+    }
+
+    /**
+     * Send request.
+     */
+    public function send($request)
+    {
+        try {
+            $this->client->send($request);
+        } catch(Exceptions\ApiTimeoutException $e) {
+            // @todo
+        }
+        catch(Exceptions\ResponseException $e) {
+            // @todo
+        }
+        catch(Exceptions\ApiException $e) {
+            // @todo
+        }
+    }
+
+    /**
      * Add new item to recombee.
      *
      * @param int   $item_id
      * @param array $fileds
      *
-     * @return mixed
+     * @return SetItemValues
      */
-    public function addItem($item_id, $fields)
+    public function addItem($item_id, $fields) 
     {
         $item = new SetItemValues($item_id, $fields, [
             'cascadeCreate' => true,
@@ -62,9 +90,7 @@ class AbstractRecombee
 
         $item->setTimeout($this->timeout);
 
-        $this->client->send($item);
-
-        return true;
+        return $item;
     }
 
     /**
