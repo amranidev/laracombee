@@ -23,6 +23,9 @@ return [
     |
     | Here where you can define the item properties in the recombee database.
     |
+    | Value type of the user property to be created. One of: 
+    | int, double, string, boolean, timestamp, set, image or imageList.
+    |
     */
 
     'user-properties' => [
@@ -36,6 +39,9 @@ return [
     |--------------------------------------------------------------------------
     |
     | Here where you can define the item properties in the recombee database.
+    |
+    | Value type of the item property to be created. One of: 
+    | int, double, string, boolean, timestamp, set, image or imageList.
     |
     */
 
