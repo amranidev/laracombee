@@ -203,9 +203,9 @@ class AbstractRecombee
     /**
      * Set Users Values.
      *
-     * @param int $user_id
+     * @param int   $user_id
      * @param array $fields
-     * 
+     *
      * @return SetUserValues
      */
     public function setUserValues(int $user_id, array $fileds)
