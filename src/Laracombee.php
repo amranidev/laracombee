@@ -2,8 +2,8 @@
 
 namespace Amranidev\Laracombee;
 
-use Illuminate\Foundation\Auth\User;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Foundation\Auth\User;
 
 class Laracombee extends AbstractRecombee
 {
@@ -12,7 +12,8 @@ class Laracombee extends AbstractRecombee
         parent::__construct();
     }
 
-    public function addUserModel(User $user) {
+    public function addUserModel(User $user)
+    {
         // @todo
     }
 
