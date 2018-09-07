@@ -50,6 +50,8 @@ class AbstractRecombee
 
     /**
      * Send request.
+     *
+     * @return void
      */
     public function batch(array $bulk)
     {
@@ -58,6 +60,8 @@ class AbstractRecombee
 
     /**
      * Send request.
+     *
+     * @return void
      */
     public function send($request)
     {
@@ -135,9 +139,7 @@ class AbstractRecombee
 
         $item->setTimeout($this->timeout);
 
-        $this->client->send($item);
-
-        return true;
+        return $item;
     }
 
     /**
@@ -151,9 +153,7 @@ class AbstractRecombee
     {
         $user = new AddUser($user_id);
 
-        $this->client->send($user);
-
-        return true;
+        return $user;
     }
 
     /**
@@ -167,9 +167,7 @@ class AbstractRecombee
     {
         $user = new DeleteUser($user_id);
 
-        $this->client->send($user);
-
-        return true;
+        return $user;
     }
 
     /**
@@ -185,9 +183,7 @@ class AbstractRecombee
     {
         $merge = new MergeUsers($target_user_id, $source_user_id, $params);
 
-        $this->client->send($merge);
-
-        return true;
+        return $merge;
     }
 
     /**
@@ -206,6 +202,11 @@ class AbstractRecombee
 
     /**
      * Set Users Values.
+     *
+     * @param int $user_id
+     * @param array $fields
+     * 
+     * @return SetUserValues
      */
     public function setUserValues(int $user_id, array $fileds)
     {
@@ -213,28 +214,37 @@ class AbstractRecombee
             'cascadeCreate' => true,
         ]);
 
-        return $this->client->send($user);
+        return $user;
     }
 
     /**
      * Add user Property.
+     *
+     * @param string $property
+     * @param string $type
+     *
+     * @return AddUserProperty
      */
     public function addUserProperty($property, $type)
     {
         $userProps = new AddUserProperty($property, $type);
 
-        $client->send($userProps);
-
-        return true;
+        return $userProps;
     }
 
+    /**
+     * Delete User Property.
+     *
+     * @param string $property
+     * @param string $type
+     *
+     * @return DeleteUserProperty
+     */
     public function deleteUserProperty($property, $type)
     {
         $userProps = new DeleteUserProperty($property, $type);
 
-        $client->send($userProps);
-
-        return true;
+        return $userProps;
     }
 
     /**
@@ -244,9 +254,7 @@ class AbstractRecombee
     {
         $itemProps = new AddItemProperty($property, $type);
 
-        $clinet->send($itemProps);
-
-        return true;
+        return itemProps;
     }
 
     /**
@@ -256,9 +264,7 @@ class AbstractRecombee
     {
         $itemProps = new DeleteItemProperty($property, $type);
 
-        $clinet->send($itemProps);
-
-        return true;
+        return $itemProps;
     }
 
     /**
@@ -272,9 +278,7 @@ class AbstractRecombee
     {
         $detailedView = new AddDetailedView($user_id, $item_id, $options);
 
-        $this->client->send($detailedView);
-
-        return true;
+        return $detailedView;
     }
 
     /**
@@ -288,9 +292,7 @@ class AbstractRecombee
     {
         $detailedView = new DeleteItemView($user_id, $item_id, $options);
 
-        $this->client->send($detailedView);
-
-        return true;
+        return $detailedView;
     }
 
     /**
@@ -304,9 +306,7 @@ class AbstractRecombee
     {
         $purchase = new AddPurchase($user_id, $item_id, $options);
 
-        $this->client->send($purchase);
-
-        return true;
+        return $purchase;
     }
 
     /**
@@ -320,9 +320,7 @@ class AbstractRecombee
     {
         $purchase = new DeletePurchase($user_id, $item_id, $options);
 
-        $this->client->send($purchase);
-
-        return true;
+        return $purchase;
     }
 
     /**
@@ -337,9 +335,7 @@ class AbstractRecombee
     {
         $rating = new AddRating($user_id, $item_id, $rating, $options);
 
-        $this->client->send($purchase);
-
-        return true;
+        return $rating;
     }
 
     /**
@@ -353,9 +349,7 @@ class AbstractRecombee
     {
         $rating = new DeleteRating($user_id, $item_id, $options);
 
-        $this->client->send($rating);
-
-        return true;
+        return $rating;
     }
 
     /**
@@ -369,9 +363,7 @@ class AbstractRecombee
     {
         $addition = new AddCartAddition($user_id, $item_id, $options);
 
-        $this->client->send($addition);
-
-        return true;
+        return $addition;
     }
 
     /**
@@ -385,9 +377,7 @@ class AbstractRecombee
     {
         $addition = new DeleteCartAddition($user_id, $item_id, $options);
 
-        $this->client->send($addition);
-
-        return true;
+        return $addition;
     }
 
     /**
@@ -401,9 +391,7 @@ class AbstractRecombee
     {
         $bookmark = new AddBookmark($user_id, $item_id, $options);
 
-        $this->client->send($bookmark);
-
-        return true;
+        return $bookmark;
     }
 
     /**
@@ -417,8 +405,6 @@ class AbstractRecombee
     {
         $bookmark = new DeleteBookmark($user_id, $item_id, $options);
 
-        $this->client->send($bookmark);
-
-        return true;
+        return $bookmark;
     }
 }
