@@ -2,8 +2,8 @@
 
 namespace Amranidev\Laracombee;
 
-use Recombee\RecommApi\Client;
 use REcombee\RecommApi\Batch;
+use Recombee\RecommApi\Client;
 use Recombee\RecommApi\Exceptions;
 use Recombee\RecommApi\Requests\AddBookmark;
 use Recombee\RecommApi\Requests\AddCartAddition;
@@ -63,13 +63,11 @@ class AbstractRecombee
     {
         try {
             $this->client->send($request);
-        } catch(Exceptions\ApiTimeoutException $e) {
+        } catch (Exceptions\ApiTimeoutException $e) {
             // @todo
-        }
-        catch(Exceptions\ResponseException $e) {
+        } catch (Exceptions\ResponseException $e) {
             // @todo
-        }
-        catch(Exceptions\ApiException $e) {
+        } catch (Exceptions\ApiException $e) {
             // @todo
         }
     }
@@ -82,7 +80,7 @@ class AbstractRecombee
      *
      * @return SetItemValues
      */
-    public function addItem($item_id, $fields) 
+    public function addItem($item_id, $fields)
     {
         $item = new SetItemValues($item_id, $fields, [
             'cascadeCreate' => true,
