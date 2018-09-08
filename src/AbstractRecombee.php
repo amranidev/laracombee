@@ -249,10 +249,10 @@ class AbstractRecombee
 
     /**
      * Add item property.
-     * 
+     *
      * @param string $property
      * @param string $type
-     * 
+     *
      * @return AddItemProperty
      */
     public function addItemProperty($property, $type)
@@ -264,10 +264,10 @@ class AbstractRecombee
 
     /**
      * Add item property.
-     * 
+     *
      * @param string $property
      * @param string $type
-     * 
+     *
      * @return DeleteItemProperty
      */
     public function deleteItemProperty($property, $type)
@@ -283,7 +283,7 @@ class AbstractRecombee
      * @param int   $user_id
      * @param int   $item_id
      * @param array $options
-     * 
+     *
      * @return AddDetailedView
      */
     public function addDetailedView($user_id, $item_id, $options)
@@ -299,7 +299,7 @@ class AbstractRecombee
      * @param int   $user_id
      * @param int   $item_id
      * @param array $options
-     * 
+     *
      * @return DeleteItemView
      */
     public function deleteItemView($user_id, $item_id, $options)
@@ -315,7 +315,7 @@ class AbstractRecombee
      * @param int   $user_id
      * @param int   $item_id
      * @param array $options
-     * 
+     *
      * @return AddPurchase
      */
     public function addPurchase($user_id, $item_id, $options)
@@ -331,7 +331,7 @@ class AbstractRecombee
      * @param int   $user_id
      * @param int   $item_id
      * @param array $options
-     * 
+     *
      * @return DeletePurchase
      */
     public function deletePurchase($user_id, $item_id, $options)
@@ -348,7 +348,7 @@ class AbstractRecombee
      * @param int   $item_id
      * @param int   $rating
      * @param array $options
-     * 
+     *
      * @return AddRating
      */
     public function addRating($user_id, $item_id, $rating, $options)
@@ -364,7 +364,7 @@ class AbstractRecombee
      * @param int   $user_id
      * @param int   $item_id
      * @param array $options
-     * 
+     *
      * @return DeleteRating
      */
     public function deleteRating($user_id, $item_id, $options)
@@ -380,7 +380,7 @@ class AbstractRecombee
      * @param int   $user_id
      * @param int   $item_id
      * @param array $options
-     * 
+     *
      * @return AddCartAddition
      */
     public function addCartAddition($user_id, $item_id, $options)
@@ -396,7 +396,7 @@ class AbstractRecombee
      * @param int   $user_id
      * @param int   $item_id
      * @param array $options
-     * 
+     *
      * @return DeleteCartAddition
      */
     public function deleteCartAddition($user_id, $item_id, $options)
@@ -412,7 +412,7 @@ class AbstractRecombee
      * @param int   $user_id
      * @param int   $item_id
      * @param array $options
-     * 
+     *
      * @return AddBookmark
      */
     public function addBookmark($user_id, $item_id, $options)
@@ -428,7 +428,7 @@ class AbstractRecombee
      * @param int   $user_id
      * @param int   $item_id
      * @param array $options
-     * 
+     *
      * @return DeleteBookmark
      */
     public function deleteBookmark($user_id, $item_id, $options)
