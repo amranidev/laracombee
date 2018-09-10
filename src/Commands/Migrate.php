@@ -68,7 +68,7 @@ class Migrate extends Command
             case 'item':
                 return $this->prepareItemProperties();
             default:
-                $this->info("Nothing to migrate");
+                $this->info('Nothing to migrate');
                 die();
         }
     }
