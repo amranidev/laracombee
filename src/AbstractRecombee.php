@@ -49,7 +49,7 @@ class AbstractRecombee
     }
 
     /**
-     * Send request.
+     * Send request as bulk.
      *
      * @return void
      */
