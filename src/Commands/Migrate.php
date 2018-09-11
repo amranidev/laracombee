@@ -3,7 +3,7 @@
 namespace Amranidev\Laracombee\Commands;
 
 use Illuminate\Console\Command;
-use Recombee\RecommApi\Client;
+use Laracombee;
 
 class Migrate extends Command
 {
@@ -13,7 +13,7 @@ class Migrate extends Command
      * @var string
      */
     protected $signature = 'laracombee:migrate
-    						{type : Catalog type (User or Item)}
+    						{type : Catalog type (user or item)}
     						{--class= : Laravel model}';
 
     /**
@@ -24,9 +24,11 @@ class Migrate extends Command
     protected $description = 'Migrate to recombee';
 
     /**
-     * @var \Recombee\RecommApi\Client
+     * The default user model.
+     *
+     * @var string
      */
-    protected $client;
+    protected static $userModel = '\\App\\User';
 
     /**
      * Create a new command instance.
@@ -36,8 +38,6 @@ class Migrate extends Command
     public function __construct()
     {
         parent::__construct();
-
-        $this->client = new Client(config('laracombee.database'), config('laracombee.token'));
     }
 
     /**
@@ -47,12 +47,11 @@ class Migrate extends Command
      */
     public function handle()
     {
-        if (!$this->option('class')) {
-            $this->error('--class option is required!');
-            die();
-        }
-
         $scope = $this->prepareScope();
+
+        Laracombee::batch($scope);
+
+        $this->info("Done!");
     }
 
     /**
@@ -75,8 +74,36 @@ class Migrate extends Command
 
     /**
      * Prepare User Properties.
+     *
+     * @return \Illuminate\Support\Collection
      */
     public function prepareUserProperties()
     {
+        $class = $this->option('class') ?: self::$userModel;
+        $properties = $class::laracombeeProperties();
+
+        return collect($properties)->map(function ($type, $property) {
+            return Laracombee::addUserProperty($property, $type);
+        });
+    }
+
+    /**
+     * Prepare Item Properties.
+     *
+     * @return Illuminate\Support\Collection
+     */
+    public function prepareItemProperties()
+    {
+        if (!$this->option('class')) {
+            $this->error('--class option is required!');
+            die();
+        }
+
+        $class = $this->option('class');
+        $properties = $class::laracombeeProperties();
+
+        return collect($properties)->map(function ($type, $property) {
+            return Laracombee::addItemProperty($property, $type);
+        });
     }
 }
