@@ -259,7 +259,7 @@ class AbstractRecombee
     {
         $itemProps = new AddItemProperty($property, $type);
 
-        return itemProps;
+        return $itemProps;
     }
 
     /**
