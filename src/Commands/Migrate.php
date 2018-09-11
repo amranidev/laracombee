@@ -51,7 +51,7 @@ class Migrate extends Command
 
         Laracombee::batch($scope);
 
-        $this->info("Done!");
+        $this->info('Done!');
     }
 
     /**
