@@ -2,7 +2,6 @@
 
 namespace Amranidev\Laracombee;
 
-use Recombee\RecommApi\Batch;
 use Recombee\RecommApi\Client;
 use Recombee\RecommApi\Exceptions;
 use Recombee\RecommApi\Requests\AddBookmark;
@@ -13,6 +12,7 @@ use Recombee\RecommApi\Requests\AddPurchase;
 use Recombee\RecommApi\Requests\AddRating;
 use Recombee\RecommApi\Requests\AddUser;
 use Recombee\RecommApi\Requests\AddUserProperty;
+use Recombee\RecommApi\Requests\Batch;
 use Recombee\RecommApi\Requests\DeleteBookmark;
 use Recombee\RecommApi\Requests\DeleteCartAddition;
 use Recombee\RecommApi\Requests\DeleteItem;
@@ -53,7 +53,7 @@ class AbstractRecombee
      *
      * @return void
      */
-    public function batch(array $bulk)
+    public function batch($bulk)
     {
         $this->send(new Batch($bulk));
     }
