@@ -9,9 +9,10 @@ abstract class TestCase extends OrchestraTestCase
     protected function getPackageAliases($app)
     {
         return [
-            'Laracombee' => 'Amranidev\Laracombee\Facades\LaracombeeFacade'
+            'Laracombee' => 'Amranidev\Laracombee\Facades\LaracombeeFacade',
         ];
     }
+
     protected function getPackageProviders($app)
     {
         return ['Amranidev\Laracombee\Providers\LaracombeeServiceProvider'];
