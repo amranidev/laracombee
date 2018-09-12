@@ -137,7 +137,7 @@ class AbstractRecombee
      *
      * @return \Recombee\RecommApi\DeleteItem
      */
-    public function removeItem($item_id)
+    public function deleteItem($item_id)
     {
         $item = new DeleteItem($item_id);
 
