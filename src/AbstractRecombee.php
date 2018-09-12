@@ -66,14 +66,18 @@ class AbstractRecombee
     public function send($request)
     {
         try {
-            $this->client->send($request);
+            $request = $this->client->send($request);
         } catch (Exceptions\ApiTimeoutException $e) {
-            // @todo
+            echo $e->getMessage();
         } catch (Exceptions\ResponseException $e) {
+            echo $e->getMessage();
             // @todo
         } catch (Exceptions\ApiException $e) {
+            echo $e->getMessage();
             // @todo
         }
+
+        return $request;
     }
 
     /**
@@ -236,13 +240,12 @@ class AbstractRecombee
      * Delete User Property.
      *
      * @param string $property
-     * @param string $type
      *
      * @return \Recombee\RecommApi\DeleteUserProperty
      */
-    public function deleteUserProperty($property, $type)
+    public function deleteUserProperty($property)
     {
-        $userProps = new DeleteUserProperty($property, $type);
+        $userProps = new DeleteUserProperty($property);
 
         return $userProps;
     }
@@ -266,13 +269,12 @@ class AbstractRecombee
      * Add item property.
      *
      * @param string $property
-     * @param string $type
      *
      * @return \Recombee\RecommApi\DeleteItemProperty
      */
-    public function deleteItemProperty($property, $type)
+    public function deleteItemProperty($property)
     {
-        $itemProps = new DeleteItemProperty($property, $type);
+        $itemProps = new DeleteItemProperty($property);
 
         return $itemProps;
     }
