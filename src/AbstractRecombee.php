@@ -88,7 +88,7 @@ class AbstractRecombee
      *
      * @return \Recombee\RecommApi\SetItemValues
      */
-    public function addItem($item_id, $fields)
+    public function setItemValues($item_id, $fields)
     {
         $item = new SetItemValues($item_id, $fields, [
             'cascadeCreate' => true,
