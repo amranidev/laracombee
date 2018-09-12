@@ -6,7 +6,6 @@ use Laracombee;
 
 class LaracombeeTest extends TestCase
 {
-
     public $recombeeResponse = '"ok"';
 
     public $userId = 1;
@@ -44,7 +43,7 @@ class LaracombeeTest extends TestCase
 
         $response = Laracombee::send($request);
 
-        $this->assertEquals($response, "ok");
+        $this->assertEquals($response, 'ok');
     }
 
     public function testAddItem()
@@ -55,7 +54,7 @@ class LaracombeeTest extends TestCase
 
         $response = Laracombee::send($request);
 
-        $this->assertEquals($response, "ok");
+        $this->assertEquals($response, 'ok');
     }
 
     public function testDeleteUser()
