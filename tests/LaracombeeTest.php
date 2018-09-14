@@ -74,4 +74,22 @@ class LaracombeeTest extends TestCase
 
         $this->assertEquals($response, $this->recombeeResponse);
     }
+
+    public function testDeleteUserProperty()
+    {
+        $request = Laracombee::deleteUserProperty('firstName');
+
+        $response = Laracombee::send($request);
+
+        $this->assertEquals($response, $this->recombeeResponse);
+    }
+
+    public function testDeleteItemProperty()
+    {
+        $request = Laracombee::deleteItemProperty('productName');
+
+        $response = Laracombee::send($request);
+
+        $this->assertEquals($response, $this->recombeeResponse);
+    }
 }
