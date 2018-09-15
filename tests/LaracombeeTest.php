@@ -64,8 +64,8 @@ class LaracombeeTest extends TestCase
         $rec = Laracombee::recommendItemsToUser($this->userId, 1, $filter);
 
         $this->assertInternalType('array', $rec);
-        $this->assertArrayHasKey('recomms',$rec);
-        $this->assertArrayHasKey('recommId',$rec);
+        $this->assertArrayHasKey('recomms', $rec);
+        $this->assertArrayHasKey('recommId', $rec);
     }
 
     public function testDeleteUser()
