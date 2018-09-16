@@ -7,6 +7,7 @@ use Amranidev\Laracombee\Commands\DefineUserProperties;
 use Amranidev\Laracombee\Commands\DeleteItemProperties;
 use Amranidev\Laracombee\Commands\DeleteUserProperties;
 use Amranidev\Laracombee\Commands\Migrate;
+use Amranidev\Laracombee\Commands\Rollback;
 use Amranidev\Laracombee\Laracombee;
 use Illuminate\Support\ServiceProvider;
 
@@ -30,6 +31,7 @@ class LaracombeeServiceProvider extends ServiceProvider
                 DefineItemProperties::class,
                 DeleteItemProperties::class,
                 Migrate::class,
+                Rollback::class,
             ]
         );
     }
