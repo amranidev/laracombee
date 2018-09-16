@@ -4,7 +4,7 @@ namespace Amranidev\Laracombee\Commands;
 
 use Illuminate\Console\Command;
 use Recombee\RecommApi\Client;
-use Recombee\RecommApi\Requests\DeleteItemProperty;
+use Laracombee;
 
 class DeleteItemProperties extends Command
 {
@@ -24,11 +24,6 @@ class DeleteItemProperties extends Command
     protected $description = 'Delete Recombee Item Property';
 
     /**
-     * @var \Recombee\RecommApi\Client
-     */
-    protected $client;
-
-    /**
      * Create a new command instance.
      *
      * @return void
@@ -36,8 +31,6 @@ class DeleteItemProperties extends Command
     public function __construct()
     {
         parent::__construct();
-
-        $this->client = new Client(config('laracombee.database'), config('laracombee.token'));
     }
 
     /**
@@ -52,7 +45,7 @@ class DeleteItemProperties extends Command
         $bar = $this->output->createProgressBar($properties->count());
 
         $properties->each(function ($property) use ($bar) {
-            $this->client->send(new DeleteItemProperty($property));
+            Laracombee::send(Laracombee::deleteItemProperty($property));
             $bar->advance();
         });
 
