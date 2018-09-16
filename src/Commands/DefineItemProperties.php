@@ -3,9 +3,8 @@
 namespace Amranidev\Laracombee\Commands;
 
 use Illuminate\Console\Command;
-use Recombee\RecommApi\Client;
-use Recombee\RecommApi\Requests\AddItemProperty;
 use Laracombee;
+use Recombee\RecommApi\Requests\AddItemProperty;
 
 class DefineItemProperties extends Command
 {
