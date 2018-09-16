@@ -5,6 +5,7 @@ namespace Amranidev\Laracombee\Commands;
 use Illuminate\Console\Command;
 use Recombee\RecommApi\Client;
 use Recombee\RecommApi\Requests\AddUserProperty;
+use Laracombee;
 
 class DefineUserProperties extends Command
 {
@@ -23,11 +24,6 @@ class DefineUserProperties extends Command
     protected $description = 'Add Recombee User Properties';
 
     /**
-     * @var \Recombee\RecommApi\Client
-     */
-    protected $client;
-
-    /**
      * @var Collection
      */
     protected $properties;
@@ -41,7 +37,6 @@ class DefineUserProperties extends Command
     {
         parent::__construct();
 
-        $this->client = new Client(config('laracombee.database'), config('laracombee.token'));
         $this->properties = $this->loadProperties();
     }
 
@@ -55,7 +50,7 @@ class DefineUserProperties extends Command
         $bar = $this->output->createProgressBar($this->properties->count());
 
         $this->properties->each(function ($property) use ($bar) {
-            $this->client->send($property);
+            Laracombee::send($property);
             $bar->advance();
         });
 
@@ -72,7 +67,7 @@ class DefineUserProperties extends Command
     private function loadProperties()
     {
         return collect(config('laracombee.user-properties'))->map(function ($type, $property) {
-            return new AddUserProperty($property, $type);
+            return Laracombee::addUserProperty($property, $type);
         });
     }
 }
