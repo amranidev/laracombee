@@ -3,7 +3,6 @@
 namespace Amranidev\Laracombee\Commands;
 
 use Illuminate\Console\Command;
-use Recombee\RecommApi\Client;
 use Laracombee;
 
 class DeleteUserProperties extends Command

@@ -3,9 +3,8 @@
 namespace Amranidev\Laracombee\Commands;
 
 use Illuminate\Console\Command;
-use Recombee\RecommApi\Client;
-use Recombee\RecommApi\Requests\AddUserProperty;
 use Laracombee;
+use Recombee\RecommApi\Requests\AddUserProperty;
 
 class DefineUserProperties extends Command
 {
