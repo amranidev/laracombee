@@ -26,6 +26,9 @@ use Recombee\RecommApi\Requests\MergeUsers;
 use Recombee\RecommApi\Requests\RecommendItemsToUser;
 use Recombee\RecommApi\Requests\SetItemValues;
 use Recombee\RecommApi\Requests\SetUserValues;
+use Recombee\RecommApi\Requests\ListItemDetailViews;
+use Recombee\RecommApi\Requests\ListUserDetailViews;
+
 
 class AbstractRecombee
 {
@@ -251,6 +254,20 @@ class AbstractRecombee
     }
 
     /**
+     * List Item Detail Views.
+     *
+     * @param int   $user_id
+     *
+     * @return \Recombee\RecommApi\ListUserDetailViews
+     */
+    public function listItemDetailViews($user_id)
+    {
+        $details = new ListUserDetailViews($user_id);
+
+        return $details;
+    }
+
+    /**
      * Add item property.
      *
      * @param string $property
@@ -309,6 +326,20 @@ class AbstractRecombee
         $detailedView = new DeleteItemView($user_id, $item_id, $options);
 
         return $detailedView;
+    }
+
+    /**
+     * List Item Detail Views.
+     *
+     * @param int   $item_id
+     *
+     * @return \Recombee\RecommApi\ListItemDetailViews
+     */
+    public function listItemDetailViews($item_id)
+    {
+        $details = new ListItemDetailViews($item_id);
+
+        return $details;
     }
 
     /**
@@ -375,20 +406,6 @@ class AbstractRecombee
 
         return $rating;
     }
-
-    /**
-     * List Item Detail Views.
-     *
-     * @param int   $item_id
-     *
-     * @return \Recombee\RecommApi\ListItemDetailViews
-     */
-    public function listItemDetailViews($item_id)
-    {
-        $rating = new ListItemDetailViews($item_id);
-
-        return $rating;
-    }   
     
     /**
      * Card Addtion.
