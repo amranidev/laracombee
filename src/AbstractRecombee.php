@@ -21,14 +21,13 @@ use Recombee\RecommApi\Requests\DeleteItemView;
 use Recombee\RecommApi\Requests\DeletePurchase;
 use Recombee\RecommApi\Requests\DeleteUser;
 use Recombee\RecommApi\Requests\DeleteUserProperty;
+use Recombee\RecommApi\Requests\ListItemDetailViews;
+use Recombee\RecommApi\Requests\ListUserDetailViews;
 use Recombee\RecommApi\Requests\ListUsers;
 use Recombee\RecommApi\Requests\MergeUsers;
 use Recombee\RecommApi\Requests\RecommendItemsToUser;
 use Recombee\RecommApi\Requests\SetItemValues;
 use Recombee\RecommApi\Requests\SetUserValues;
-use Recombee\RecommApi\Requests\ListItemDetailViews;
-use Recombee\RecommApi\Requests\ListUserDetailViews;
-
 
 class AbstractRecombee
 {
@@ -256,7 +255,7 @@ class AbstractRecombee
     /**
      * List User Detail Views.
      *
-     * @param int   $user_id
+     * @param int $user_id
      *
      * @return \Recombee\RecommApi\ListUserDetailViews
      */
@@ -331,7 +330,7 @@ class AbstractRecombee
     /**
      * List Item Detail Views.
      *
-     * @param int   $item_id
+     * @param int $item_id
      *
      * @return \Recombee\RecommApi\ListItemDetailViews
      */
@@ -406,7 +405,7 @@ class AbstractRecombee
 
         return $rating;
     }
-    
+
     /**
      * Card Addtion.
      *
