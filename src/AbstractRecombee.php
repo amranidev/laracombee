@@ -377,6 +377,20 @@ class AbstractRecombee
     }
 
     /**
+     * List Item Detail Views.
+     *
+     * @param int   $item_id
+     *
+     * @return \Recombee\RecommApi\ListItemDetailViews
+     */
+    public function listItemDetailViews($item_id)
+    {
+        $rating = new ListItemDetailViews($item_id);
+
+        return $rating;
+    }   
+    
+    /**
      * Card Addtion.
      *
      * @param int   $user_id
