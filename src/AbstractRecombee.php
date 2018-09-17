@@ -254,7 +254,7 @@ class AbstractRecombee
     }
 
     /**
-     * List Item Detail Views.
+     * List User Detail Views.
      *
      * @param int   $user_id
      *
