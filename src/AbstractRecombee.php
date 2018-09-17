@@ -260,7 +260,7 @@ class AbstractRecombee
      *
      * @return \Recombee\RecommApi\ListUserDetailViews
      */
-    public function listItemDetailViews($user_id)
+    public function listUserDetailViews($user_id)
     {
         $details = new ListUserDetailViews($user_id);
 
