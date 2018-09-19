@@ -30,7 +30,7 @@ class Laracombee extends AbstractRecombee
             return isset($laracombeeProperties[$key]);
         })->all();
 
-        return Laracombee::setUserValues($user->id, $values);
+        return $this->setUserValues($user->id, $values);
     }
 
     /**
@@ -60,7 +60,7 @@ class Laracombee extends AbstractRecombee
             return isset($laracombeeProperties[$key]);
         })->all();
 
-        return Laracombee::setItemValues($item->id, $values);
+        return $this->setItemValues($item->id, $values);
     }
 
     /**
