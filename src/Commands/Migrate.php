@@ -100,7 +100,7 @@ class Migrate extends Command
         }
 
         $class = $this->option('class');
-        $properties = $class::laracombeeProperties();
+        $properties = $class::$laracombee;
 
         return collect($properties)->map(function ($type, $property) {
             return Laracombee::addItemProperty($property, $type);
