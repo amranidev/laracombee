@@ -80,7 +80,7 @@ class Rollback extends Command
     public function prepareUserProperties()
     {
         $class = $this->option('class') ?: self::$userModel;
-        $properties = $class::laracombeeProperties();
+        $properties = $class::$laracombee;
 
         return collect($properties)->map(function ($type, $property) {
             return Laracombee::deleteUserProperty($property);
@@ -100,7 +100,7 @@ class Rollback extends Command
         }
 
         $class = $this->option('class');
-        $properties = $class::laracombeeProperties();
+        $properties = $class::$laracombee;
 
         return collect($properties)->map(function ($type, $property) {
             return Laracombee::deleteItemProperty($property);
