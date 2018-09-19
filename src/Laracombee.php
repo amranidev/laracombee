@@ -34,6 +34,18 @@ class Laracombee extends AbstractRecombee
     }
 
     /**
+     * Update a user in recombee.
+     *
+     * @param \Illuminate\Foundation\Auth\User $user
+     *
+     * @return \Amranidev\Laracombee\AbstractRecombee
+     */
+    public function updateUserModel(User $user)
+    {
+        return $this->addUserModel($user);
+    }
+
+    /**
      * Add an item to recombee db.
      *
      * @param \Illuminate\Database\Eloquent\Model $item
@@ -49,5 +61,17 @@ class Laracombee extends AbstractRecombee
         })->all();
 
         return Laracombee::setItemValues($item->id, $values);
+    }
+
+    /**
+     * Update an item in recombee db.
+     *
+     * @param \Illuminate\Database\Eloquent\Model $item
+     *
+     * @return \Amranidev\Laracombee\AbstractRecombee
+     */
+    public function updateItemModel(Model $item)
+    {
+        return $this->addItemModel($model);
     }
 }
