@@ -34,12 +34,12 @@ class AbstractRecombee
     /**
      * @var Recombee\RecommApi\Client
      */
-    public $client;
+    protected $client;
 
     /**
      * @var int
      */
-    public $timeout;
+    protected $timeout;
 
     /**
      * Create new Laracombee instance.
@@ -57,7 +57,11 @@ class AbstractRecombee
      */
     public function batch($bulk)
     {
-        $this->send(new Batch($bulk));
+        $batch = new Batch($bulk);
+
+        $batch->setTimeout($this->timeout);
+
+        $this->send($batch);
     }
 
     /**
@@ -202,6 +206,8 @@ class AbstractRecombee
     public function listUsers($params)
     {
         $users = new listUsers($params);
+
+        $users->setTimeout($this->timeout);
 
         return $this->client->send($users);
     }
