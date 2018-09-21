@@ -77,6 +77,15 @@ class LaracombeeTest extends TestCase
         $this->assertInternalType('array', $response);
     }
 
+    public function testListItemDetailViews()
+    {
+        $details = Laracombee::listItemDetailViews($this->itemId);
+
+        $response = Laracombee::send($details);
+
+        $this->assertInternalType('array', $response);
+    }
+
     public function testDeleteUser()
     {
         $request = Laracombee::deleteUser($this->userId);
