@@ -10,7 +10,6 @@ use Recombee\RecommApi\Requests\AddDetailedView;
 use Recombee\RecommApi\Requests\AddItemProperty;
 use Recombee\RecommApi\Requests\AddPurchase;
 use Recombee\RecommApi\Requests\AddRating;
-use Recombee\RecommApi\Requests\AddUser;
 use Recombee\RecommApi\Requests\AddUserProperty;
 use Recombee\RecommApi\Requests\Batch;
 use Recombee\RecommApi\Requests\DeleteBookmark;
@@ -26,6 +25,8 @@ use Recombee\RecommApi\Requests\ListUserDetailViews;
 use Recombee\RecommApi\Requests\ListUsers;
 use Recombee\RecommApi\Requests\MergeUsers;
 use Recombee\RecommApi\Requests\RecommendItemsToUser;
+use Recombee\RecommApi\Requests\RecommendUsersToUser;
+use Recombee\RecommApi\Requests\Request;
 use Recombee\RecommApi\Requests\SetItemValues;
 use Recombee\RecommApi\Requests\SetUserValues;
 
@@ -53,9 +54,11 @@ class AbstractRecombee
     /**
      * Send request as bulk.
      *
+     * @param array $bulk
+     *
      * @return void
      */
-    public function batch($bulk)
+    public function batch(array $bulk)
     {
         $batch = new Batch($bulk);
 
@@ -67,9 +70,11 @@ class AbstractRecombee
     /**
      * Send request.
      *
+     * @param \Recombee\RecommApi\Requests\Request $request
+     *
      * @return void
      */
-    public function send($request)
+    public function send(Request $request)
     {
         try {
             $request = $this->client->send($request);
@@ -94,7 +99,7 @@ class AbstractRecombee
      *
      * @return \Recombee\RecommApi\SetItemValues
      */
-    public function setItemValues($item_id, $fields)
+    public function setItemValues($item_id, array $fields)
     {
         $item = new SetItemValues($item_id, $fields, [
             'cascadeCreate' => true,
@@ -114,26 +119,31 @@ class AbstractRecombee
      *
      * @return mixed
      */
-    public function recommendItemsToUser($user_id, $limit, $filters)
+    public function recommendItemsToUser($user_id, int $limit, array $filters)
     {
         $items = new RecommendItemsToUser($user_id, $limit, $filters);
 
         $items->setTimeout($this->timeout);
 
-        return $this->client->send($items);
+        return $this->send($items);
     }
 
     /**
-     * Update item.
+     * Recommend Users to User
      *
-     * @param int   $item_id
-     * @param array $fileds
+     * @param int $user_id
+     * @param int $limit
+     * @param array $filters
      *
      * @return mixed
      */
-    public function updateItem($item_id, $fields)
+    public function recommendUsersToUser($usre_id, int $limit, array $filters)
     {
-        return $this->addItem($item_id, $fields);
+        $users = new RecommendUsersToUser($user_id, $limit, $filters);
+
+        $items->setTimeout($this->timeout);
+
+        return $this->send($users);
     }
 
     /**
@@ -150,20 +160,6 @@ class AbstractRecombee
         $item->setTimeout($this->timeout);
 
         return $item;
-    }
-
-    /**
-     * Add new user to recombee.
-     *
-     * @param int $item_id
-     *
-     * @return \Recombee\RecommApi\AddUser
-     */
-    public function addUser($user_id)
-    {
-        $user = new AddUser($user_id);
-
-        return $user;
     }
 
     /**
@@ -189,7 +185,7 @@ class AbstractRecombee
      *
      * @return \Recombee\RecommApi\MergeUsers
      */
-    public function mergeUsers($target_user_id, $source_user_id, $params)
+    public function mergeUsersWithId($target_user_id, $source_user_id, array $params)
     {
         $merge = new MergeUsers($target_user_id, $source_user_id, $params);
 
@@ -199,17 +195,17 @@ class AbstractRecombee
     /**
      * List Users.
      *
-     * @param int $params
+     * @param array $filters
      *
      * @return mixed
      */
-    public function listUsers($params)
+    public function listUsers(array $filters)
     {
-        $users = new listUsers($params);
+        $users = new listUsers($filters);
 
         $users->setTimeout($this->timeout);
 
-        return $this->client->send($users);
+        return $this->send($users);
     }
 
     /**
@@ -220,7 +216,7 @@ class AbstractRecombee
      *
      * @return \Recombee\RecommApi\SetUserValues
      */
-    public function setUserValues(int $user_id, array $fileds)
+    public function setUserValues($user_id, array $fileds)
     {
         $user = new SetUserValues($user_id, $fileds, [
             'cascadeCreate' => true,
@@ -237,7 +233,7 @@ class AbstractRecombee
      *
      * @return \Recombee\RecommApi\AddUserProperty
      */
-    public function addUserProperty($property, $type)
+    public function addUserProperty(string $property, string $type)
     {
         $userProps = new AddUserProperty($property, $type);
 
@@ -251,7 +247,7 @@ class AbstractRecombee
      *
      * @return \Recombee\RecommApi\DeleteUserProperty
      */
-    public function deleteUserProperty($property)
+    public function deleteUserProperty(string $property)
     {
         $userProps = new DeleteUserProperty($property);
 
@@ -280,7 +276,7 @@ class AbstractRecombee
      *
      * @return \Recombee\RecommApi\AddItemProperty
      */
-    public function addItemProperty($property, $type)
+    public function addItemProperty(string $property, string $type)
     {
         $itemProps = new AddItemProperty($property, $type);
 
@@ -310,7 +306,7 @@ class AbstractRecombee
      *
      * @return \Recombee\RecommApi\AddDetailedView
      */
-    public function addDetailedView($user_id, $item_id, $options)
+    public function addDetailedView($user_id, $item_id, array $options)
     {
         $detailedView = new AddDetailedView($user_id, $item_id, $options);
 
@@ -326,7 +322,7 @@ class AbstractRecombee
      *
      * @return \Recombee\RecommApi\DeleteItemView
      */
-    public function deleteItemView($user_id, $item_id, $options)
+    public function deleteItemView($user_id, $item_id, array $options)
     {
         $detailedView = new DeleteItemView($user_id, $item_id, $options);
 
@@ -372,7 +368,7 @@ class AbstractRecombee
      *
      * @return \Recombee\RecommApi\DeletePurchase
      */
-    public function deletePurchase($user_id, $item_id, $options)
+    public function deletePurchase($user_id, $item_id, array $options)
     {
         $purchase = new DeletePurchase($user_id, $item_id, $options);
 
@@ -389,7 +385,7 @@ class AbstractRecombee
      *
      * @return \Recombee\RecommApi\AddRating
      */
-    public function addRating($user_id, $item_id, $rating, $options)
+    public function addRating($user_id, $item_id, int $rating, array $options)
     {
         $rating = new AddRating($user_id, $item_id, $rating, $options);
 
@@ -405,7 +401,7 @@ class AbstractRecombee
      *
      * @return \Recombee\RecommApi\DeleteRating
      */
-    public function deleteRating($user_id, $item_id, $options)
+    public function deleteRating($user_id, $item_id, array $options)
     {
         $rating = new DeleteRating($user_id, $item_id, $options);
 
@@ -421,7 +417,7 @@ class AbstractRecombee
      *
      * @return \Recombee\RecommApi\AddCartAddition
      */
-    public function addCartAddition($user_id, $item_id, $options)
+    public function addCartAddition($user_id, $item_id, array $options)
     {
         $addition = new AddCartAddition($user_id, $item_id, $options);
 
@@ -437,7 +433,7 @@ class AbstractRecombee
      *
      * @return \Recombee\RecommApi\DeleteCartAddition
      */
-    public function deleteCartAddition($user_id, $item_id, $options)
+    public function deleteCartAddition($user_id, $item_id, array $options)
     {
         $addition = new DeleteCartAddition($user_id, $item_id, $options);
 
@@ -453,7 +449,7 @@ class AbstractRecombee
      *
      * @return \Recombee\RecommApi\AddBookmark
      */
-    public function addBookmark($user_id, $item_id, $options)
+    public function addBookmark($user_id, $item_id, array $options)
     {
         $bookmark = new AddBookmark($user_id, $item_id, $options);
 
@@ -469,7 +465,7 @@ class AbstractRecombee
      *
      * @return \Recombee\RecommApi\DeleteBookmark
      */
-    public function deleteBookmark($user_id, $item_id, $options)
+    public function deleteBookmark($user_id, $item_id, array $options)
     {
         $bookmark = new DeleteBookmark($user_id, $item_id, $options);
 
