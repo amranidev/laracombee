@@ -22,7 +22,7 @@ class Laracombee extends AbstractRecombee
      *
      * @return \Amranidev\Laracombee\AbstractRecombee
      */
-    public function addUserModel(User $user)
+    public function addUser(User $user)
     {
         $laracombeeProperties = $user::$laracombee;
 
@@ -40,9 +40,9 @@ class Laracombee extends AbstractRecombee
      *
      * @return \Amranidev\Laracombee\AbstractRecombee
      */
-    public function updateUserModel(User $user)
+    public function updateUser(User $user)
     {
-        return $this->addUserModel($user);
+        return $this->addUser($user);
     }
 
     /**
@@ -52,7 +52,7 @@ class Laracombee extends AbstractRecombee
      *
      * @return \Amranidev\Laracombee\AbstractRecombee
      */
-    public function addItemModel(Model $item)
+    public function addItem(Model $item)
     {
         $laracombeeProperties = $item::$laracombee;
 
@@ -70,8 +70,21 @@ class Laracombee extends AbstractRecombee
      *
      * @return \Amranidev\Laracombee\AbstractRecombee
      */
-    public function updateItemModel(Model $item)
+    public function updateItem(Model $item)
     {
-        return $this->addItemModel($model);
+        return $this->addItem($model);
+    }
+
+    /**
+     * Merge users.
+     *
+     * @param \Illuminate\Foundation\Auth\User $user
+     * @param \Illuminate\Foundation\Auth\User $user
+     *
+     * @return \Recombee\RecommApi\MergeUsers
+     */
+    public function mergeUsers(User $target_user, User $source_user)
+    {
+        return $this->mergeUsersWithId($target_user->id, $source_user->id, ['cascade_create' => true]);
     }
 }
