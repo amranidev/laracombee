@@ -129,10 +129,10 @@ class AbstractRecombee
     }
 
     /**
-     * Recommend Users to User
+     * Recommend Users to User.
      *
-     * @param int $user_id
-     * @param int $limit
+     * @param int   $user_id
+     * @param int   $limit
      * @param array $filters
      *
      * @return mixed
