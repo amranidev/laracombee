@@ -61,7 +61,8 @@ class AddColumns extends Command
     {
         return collect($columns)->map(function (string $column) {
             list($property, $type) = explode(':', $column);
-            return $this->{'add' . ucfirst($this->option('to')) . 'Property'}($property, $type);
+
+            return $this->{'add'.ucfirst($this->option('to')).'Property'}($property, $type);
         });
     }
 
