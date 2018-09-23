@@ -47,7 +47,7 @@ class Migrate extends Command
      */
     public function handle()
     {
-        $scope = $this->prepareScope();
+        $scope = $this->prepareScope()->all();
 
         Laracombee::batch($scope);
 
@@ -82,7 +82,7 @@ class Migrate extends Command
         $class = $this->option('class') ?: self::$userModel;
         $properties = $class::$laracombee;
 
-        return collect($properties)->map(function ($type, $property) {
+        return collect($properties)->map(function (string $type, string $property) {
             return Laracombee::addUserProperty($property, $type);
         });
     }
@@ -102,7 +102,7 @@ class Migrate extends Command
         $class = $this->option('class');
         $properties = $class::$laracombee;
 
-        return collect($properties)->map(function ($type, $property) {
+        return collect($properties)->map(function (string $type, string $property) {
             return Laracombee::addItemProperty($property, $type);
         });
     }
