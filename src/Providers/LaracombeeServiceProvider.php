@@ -2,10 +2,8 @@
 
 namespace Amranidev\Laracombee\Providers;
 
-use Amranidev\Laracombee\Commands\DefineItemProperties;
-use Amranidev\Laracombee\Commands\DefineUserProperties;
-use Amranidev\Laracombee\Commands\DeleteItemProperties;
-use Amranidev\Laracombee\Commands\DeleteUserProperties;
+use Amranidev\Laracombee\Commands\AddColumns;
+use Amranidev\Laracombee\Commands\DropColumns;
 use Amranidev\Laracombee\Commands\Migrate;
 use Amranidev\Laracombee\Commands\Rollback;
 use Amranidev\Laracombee\Laracombee;
@@ -26,20 +24,18 @@ class LaracombeeServiceProvider extends ServiceProvider
 
         $this->commands(
             [
-                DefineUserProperties::class,
-                DeleteUserProperties::class,
-                DefineItemProperties::class,
-                DeleteItemProperties::class,
                 Migrate::class,
                 Rollback::class,
+                AddColumns::class,
+                DropColumns::class,
             ]
         );
     }
 
     public function boot()
     {
-        $configPath = __DIR__.'/../config/laracombee.php';
+        $configPath = __DIR__ . '/../config/laracombee.php';
         $this->publishes([
-            $configPath => config_path('laracombee.php'), ]);
+            $configPath => config_path('laracombee.php')]);
     }
 }
