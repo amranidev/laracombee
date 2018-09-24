@@ -53,7 +53,6 @@ class AddColumns extends Command
                 $this->error($error);
             })
             ->wait();
-
     }
 
     /**
