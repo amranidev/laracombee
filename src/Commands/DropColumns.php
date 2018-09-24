@@ -45,9 +45,14 @@ class DropColumns extends Command
             die();
         }
 
-        Laracombee::batch($this->loadColumns($this->argument('columns'))->all());
-
-        $this->info('Done!');
+        Laracombee::batch($this->loadColumns($this->argument('columns'))->all())
+            ->then(function ($response) {
+                $this->info('Done!');
+            })
+            ->otherwise(function ($error) {
+                $this->error($error);
+            })
+            ->wait();
     }
 
     /**
