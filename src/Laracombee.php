@@ -34,6 +34,20 @@ class Laracombee extends AbstractRecombee
     }
 
     /**
+     * Add a users to recombee db.
+     *
+     * @param array $users
+     *
+     * @return array
+     */
+    public function addUsers(array $users)
+    {
+        return array_map(function ($user) {
+            return $this->addUser($user);
+        }, $users);
+    }
+
+    /**
      * Update a user in recombee.
      *
      * @param \Illuminate\Foundation\Auth\User $user
