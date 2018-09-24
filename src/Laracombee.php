@@ -34,7 +34,7 @@ class Laracombee extends AbstractRecombee
     }
 
     /**
-     * Add a users to recombee db.
+     * Add multiple users to recombee db.
      *
      * @param array $users
      *
@@ -57,6 +57,19 @@ class Laracombee extends AbstractRecombee
     public function updateUser(User $user)
     {
         return $this->addUser($user);
+    }
+
+    /**
+     * Merge users.
+     *
+     * @param \Illuminate\Foundation\Auth\User $user
+     * @param \Illuminate\Foundation\Auth\User $user
+     *
+     * @return \Recombee\RecommApi\MergeUsers
+     */
+    public function mergeUsers(User $target_user, User $source_user)
+    {
+        return $this->mergeUsersWithId($target_user->id, $source_user->id, ['cascade_create' => true]);
     }
 
     /**
@@ -86,19 +99,20 @@ class Laracombee extends AbstractRecombee
      */
     public function updateItem(Model $item)
     {
-        return $this->addItem($model);
+        return $this->addItem($item);
     }
 
     /**
-     * Merge users.
+     * Add multiple items to recombee db.
      *
-     * @param \Illuminate\Foundation\Auth\User $user
-     * @param \Illuminate\Foundation\Auth\User $user
+     * @param array $items
      *
-     * @return \Recombee\RecommApi\MergeUsers
+     * @return array
      */
-    public function mergeUsers(User $target_user, User $source_user)
+    public function addItems(array $items)
     {
-        return $this->mergeUsersWithId($target_user->id, $source_user->id, ['cascade_create' => true]);
+        return array_map(function ($item) {
+            return $this->addItem($item);
+        }, $items);
     }
 }
