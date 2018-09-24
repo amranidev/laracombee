@@ -45,9 +45,15 @@ class AddColumns extends Command
             die();
         }
 
-        Laracombee::batch($this->loadColumns($this->argument('columns'))->all());
+        Laracombee::batch($this->loadColumns($this->argument('columns'))->all())
+            ->then(function ($response) {
+                $this->info('Done!');
+            })
+            ->otherwise(function ($error) {
+                $this->error($error);
+            })
+            ->wait();
 
-        $this->info('Done!');
     }
 
     /**
