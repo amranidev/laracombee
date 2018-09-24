@@ -20,7 +20,7 @@ class Laracombee extends AbstractRecombee
      *
      * @param \Illuminate\Foundation\Auth\User $user
      *
-     * @return \Amranidev\Laracombee\AbstractRecombee
+     * @return \Recombee\RecommApi\Requests\SetUserValues
      */
     public function addUser(User $user)
     {
@@ -52,7 +52,7 @@ class Laracombee extends AbstractRecombee
      *
      * @param \Illuminate\Foundation\Auth\User $user
      *
-     * @return \Amranidev\Laracombee\AbstractRecombee
+     * @return \Amranidev\Laracombee\AbstractRecombee;
      */
     public function updateUser(User $user)
     {
@@ -77,7 +77,7 @@ class Laracombee extends AbstractRecombee
      *
      * @param \Illuminate\Database\Eloquent\Model $item
      *
-     * @return \Amranidev\Laracombee\AbstractRecombee
+     * @return \Recombee\RecommApi\Requests\SetItemValues
      */
     public function addItem(Model $item)
     {
@@ -95,7 +95,7 @@ class Laracombee extends AbstractRecombee
      *
      * @param \Illuminate\Database\Eloquent\Model $item
      *
-     * @return \Amranidev\Laracombee\AbstractRecombee
+     * @return \Recombee\RecommApi\Requests\AddItemProperty
      */
     public function updateItem(Model $item)
     {
