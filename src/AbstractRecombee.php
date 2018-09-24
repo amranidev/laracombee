@@ -2,6 +2,7 @@
 
 namespace Amranidev\Laracombee;
 
+use GuzzleHttp\Promise\Promise;
 use Recombee\RecommApi\Client;
 use Recombee\RecommApi\Exceptions;
 use Recombee\RecommApi\Requests\AddBookmark;
@@ -72,23 +73,22 @@ class AbstractRecombee
      *
      * @param \Recombee\RecommApi\Requests\Request $request
      *
-     * @return void
+     * @return \GuzzleHttp\Promise\Promise
      */
     public function send(Request $request)
     {
-        try {
-            $request = $this->client->send($request);
-        } catch (Exceptions\ApiTimeoutException $e) {
-            echo $e->getMessage();
-        } catch (Exceptions\ResponseException $e) {
-            echo $e->getMessage();
-            // @todo
-        } catch (Exceptions\ApiException $e) {
-            echo $e->getMessage();
-            // @todo
-        }
-
-        return $request;
+        return $promise = new Promise(function () use (&$promise, $request) {
+            try {
+                $response = $this->client->send($request);
+                $promise->resolve($response);
+            } catch (Exceptions\ApiTimeoutException $e) {
+                $promise->reject($e->getMessage());
+            } catch (Exceptions\ResponseException $e) {
+                $promise->reject($e->getMessage());
+            } catch (Exceptions\ApiException $e) {
+                $promise->reject($e->getMessage());
+            }
+        });
     }
 
     /**
