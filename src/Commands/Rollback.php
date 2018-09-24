@@ -49,9 +49,14 @@ class Rollback extends Command
     {
         $scope = $this->prepareScope()->all();
 
-        Laracombee::batch($scope);
-
-        $this->info('Done!');
+        Laracombee::batch($scope)
+            ->then(function ($response) {
+                $this->info('Done!');
+            })
+            ->otherwise(function ($error) {
+                $this->error($error);
+            })
+            ->wait();
     }
 
     /**
