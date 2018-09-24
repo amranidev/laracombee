@@ -57,7 +57,7 @@ class AbstractRecombee
      *
      * @param array $bulk
      *
-     * @return void
+     * @return \GuzzleHttp\Promise\Promise
      */
     public function batch(array $bulk)
     {
@@ -65,7 +65,7 @@ class AbstractRecombee
 
         $batch->setTimeout($this->timeout);
 
-        $this->send($batch);
+        return $this->send($batch);
     }
 
     /**
