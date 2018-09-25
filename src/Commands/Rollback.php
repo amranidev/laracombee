@@ -2,7 +2,6 @@
 
 namespace Amranidev\Laracombee\Commands;
 
-use Amranidev\Laracombee\Commands\LaracombeeCommand;
 use Laracombee;
 
 class Rollback extends LaracombeeCommand
@@ -77,7 +76,7 @@ class Rollback extends LaracombeeCommand
         $properties = $class::$laracombee;
 
         return collect($properties)->map(function (string $type, string $property) {
-            return $this->{'delete' . ucfirst($this->argument('type')) . 'Property'}($property, $type);
+            return $this->{'delete'.ucfirst($this->argument('type')).'Property'}($property, $type);
         });
     }
 }
