@@ -2,10 +2,10 @@
 
 namespace Amranidev\Laracombee\Commands;
 
-use Illuminate\Console\Command;
+use Amranidev\Laracombee\Commands\LaracombeeCommand;
 use Laracombee;
 
-class DropColumns extends Command
+class DropColumns extends LaracombeeCommand
 {
     /**
      * The name and signature of the console command.
@@ -65,31 +65,7 @@ class DropColumns extends Command
     public function loadColumns(array $columns)
     {
         return collect($columns)->map(function (string $column) {
-            return $this->{'delete'.ucfirst($this->option('from')).'Property'}($column);
+            return $this->{'delete' . ucfirst($this->option('from')) . 'Property'}($column);
         });
-    }
-
-    /**
-     * Delete User property.
-     *
-     * @param string $property.
-     *
-     * @return \Recombee\RecommApi\Requests\DeleteUserProperty
-     */
-    public function deleteUserProperty(string $property)
-    {
-        return Laracombee::deleteUserProperty($property);
-    }
-
-    /**
-     * Delete Item property.
-     *
-     * @param string $property.
-     *
-     * @return \Recombee\RecommApi\Requests\DeleteItemProperty
-     */
-    public function deleteItemProperty(string $property)
-    {
-        return Laracombee::deleteItemProperty($property);
     }
 }
