@@ -2,7 +2,6 @@
 
 namespace Amranidev\Laracombee\Commands;
 
-use Amranidev\Laracombee\Commands\LaracombeeCommand;
 use Laracombee;
 
 class DropColumns extends LaracombeeCommand
@@ -65,7 +64,7 @@ class DropColumns extends LaracombeeCommand
     public function loadColumns(array $columns)
     {
         return collect($columns)->map(function (string $column) {
-            return $this->{'delete' . ucfirst($this->option('from')) . 'Property'}($column);
+            return $this->{'delete'.ucfirst($this->option('from')).'Property'}($column);
         });
     }
 }

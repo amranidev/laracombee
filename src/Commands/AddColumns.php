@@ -2,7 +2,6 @@
 
 namespace Amranidev\Laracombee\Commands;
 
-use Amranidev\Laracombee\Commands\LaracombeeCommand;
 use Laracombee;
 
 class AddColumns extends LaracombeeCommand
@@ -67,7 +66,7 @@ class AddColumns extends LaracombeeCommand
         return collect($columns)->map(function (string $column) {
             list($property, $type) = explode(':', $column);
 
-            return $this->{'add' . ucfirst($this->option('to')) . 'Property'}($property, $type);
+            return $this->{'add'.ucfirst($this->option('to')).'Property'}($property, $type);
         });
     }
 }
