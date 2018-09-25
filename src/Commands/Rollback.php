@@ -2,10 +2,10 @@
 
 namespace Amranidev\Laracombee\Commands;
 
-use Illuminate\Console\Command;
+use Amranidev\Laracombee\Commands\LaracombeeCommand;
 use Laracombee;
 
-class Rollback extends Command
+class Rollback extends LaracombeeCommand
 {
     /**
      * The name and signature of the console command.
@@ -47,6 +47,8 @@ class Rollback extends Command
      */
     public function handle()
     {
+        $this->ping();
+
         $scope = $this->prepareScope()->all();
 
         Laracombee::batch($scope)
@@ -66,39 +68,6 @@ class Rollback extends Command
      */
     public function prepareScope()
     {
-        switch ($this->argument('type')) {
-            case 'user':
-                return $this->prepareUserProperties();
-            case 'item':
-                return $this->prepareItemProperties();
-            default:
-                $this->info('Nothing to migrate');
-                die();
-        }
-    }
-
-    /**
-     * Prepare User Properties.
-     *
-     * @return \Illuminate\Support\Collection
-     */
-    public function prepareUserProperties()
-    {
-        $class = $this->option('class') ?: self::$userModel;
-        $properties = $class::$laracombee;
-
-        return collect($properties)->map(function (string $type, string $property) {
-            return Laracombee::deleteUserProperty($property);
-        });
-    }
-
-    /**
-     * Prepare Item Properties.
-     *
-     * @return Illuminate\Support\Collection
-     */
-    public function prepareItemProperties()
-    {
         if (!$this->option('class')) {
             $this->error('--class option is required!');
             die();
@@ -108,7 +77,7 @@ class Rollback extends Command
         $properties = $class::$laracombee;
 
         return collect($properties)->map(function (string $type, string $property) {
-            return Laracombee::deleteItemProperty($property);
+            return $this->{'delete' . ucfirst($this->argument('type')) . 'Property'}($property, $type);
         });
     }
 }
