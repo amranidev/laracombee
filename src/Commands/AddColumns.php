@@ -2,10 +2,10 @@
 
 namespace Amranidev\Laracombee\Commands;
 
-use Illuminate\Console\Command;
+use Amranidev\Laracombee\Commands\LaracombeeCommand;
 use Laracombee;
 
-class AddColumns extends Command
+class AddColumns extends LaracombeeCommand
 {
     /**
      * The name and signature of the console command.
@@ -67,33 +67,7 @@ class AddColumns extends Command
         return collect($columns)->map(function (string $column) {
             list($property, $type) = explode(':', $column);
 
-            return $this->{'add'.ucfirst($this->option('to')).'Property'}($property, $type);
+            return $this->{'add' . ucfirst($this->option('to')) . 'Property'}($property, $type);
         });
-    }
-
-    /**
-     * Add User property.
-     *
-     * @param string $property.
-     * @param string $type.
-     *
-     * @return \Recombee\RecommApi\Requests\AddUserProperty
-     */
-    public function addUserProperty(string $property, string $type)
-    {
-        return Laracombee::addUserProperty($property, $type);
-    }
-
-    /**
-     * Add Item property.
-     *
-     * @param string $property.
-     * @param string $type.
-     *
-     * @return \Recombee\RecommApi\Requests\AddItemProperty
-     */
-    public function addItemProperty(string $property, string $type)
-    {
-        return Laracombee::addItemProperty($property, $type);
     }
 }
