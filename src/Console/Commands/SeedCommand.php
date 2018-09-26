@@ -57,10 +57,10 @@ class SeedCommand extends LaracombeeCommand
         $records = $class::all();
         $total = $records->count();
 
-        $bar = $this->output->createProgressBar($total/100);
+        $bar = $this->output->createProgressBar($total / 100);
 
         $records->chunk(100)->each(function ($users) use ($bar) {
-            $batch = $this->{'add'. ucfirst($this->argument('type')).'s'}($users->all());
+            $batch = $this->{'add'.ucfirst($this->argument('type')).'s'}($users->all());
             Laracombee::batch($batch)->then(function ($response) use ($bar) {
             })->otherwise(function ($error) {
                 $this->error($error);
