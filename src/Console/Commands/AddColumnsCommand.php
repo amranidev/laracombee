@@ -67,7 +67,7 @@ class AddColumnsCommand extends LaracombeeCommand
         return collect($columns)->map(function (string $column) {
             list($property, $type) = explode(':', $column);
 
-            return $this->{'add' . ucfirst($this->option('to')) . 'Property'}($property, $type);
+            return $this->{'add'.ucfirst($this->option('to')).'Property'}($property, $type);
         });
     }
 }

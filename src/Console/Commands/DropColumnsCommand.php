@@ -65,7 +65,7 @@ class DropColumnsCommand extends LaracombeeCommand
     public function loadColumns(array $columns)
     {
         return collect($columns)->map(function (string $column) {
-            return $this->{'delete' . ucfirst($this->option('from')) . 'Property'}($column);
+            return $this->{'delete'.ucfirst($this->option('from')).'Property'}($column);
         });
     }
 }
