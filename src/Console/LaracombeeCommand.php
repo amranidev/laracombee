@@ -3,6 +3,7 @@
 namespace Amranidev\Laracombee\Console;
 
 use Illuminate\Console\Command;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Auth\User;
 use Laracombee;
 
@@ -76,6 +77,18 @@ class LaracombeeCommand extends Command
      * @return \Recombee\RecommApi\Requests\Request
      */
     public function addUser(User $user)
+    {
+        return Laracombee::addUser($user);
+    }
+
+    /**
+     * Add item to recombee.
+     *
+     * @param \Illuminate\Database\Eloquent\Model $user.
+     *
+     * @return \Recombee\RecommApi\Requests\Request
+     */
+    public function addItem(Model $item)
     {
         return Laracombee::addUser($user);
     }
