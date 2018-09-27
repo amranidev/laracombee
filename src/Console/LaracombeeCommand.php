@@ -3,6 +3,7 @@
 namespace Amranidev\Laracombee\Console;
 
 use Illuminate\Console\Command;
+use Illuminate\Foundation\Auth\User;
 use Laracombee;
 
 class LaracombeeCommand extends Command
@@ -65,6 +66,18 @@ class LaracombeeCommand extends Command
     public function deleteItemProperty(string $property)
     {
         return Laracombee::deleteItemProperty($property);
+    }
+
+    /**
+     * Add user to recombee.
+     *
+     * @param \Illuminate\Foundation\Auth\User $user.
+     *
+     * @return \Recombee\RecommApi\Requests\Request
+     */
+    public function addUser(User $user)
+    {
+        return Laracombee::addUser($user);
     }
 
     /**
