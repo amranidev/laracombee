@@ -112,7 +112,6 @@ class LaracombeeTest extends TestCase
 
         $this->assertInstanceOf(\Recombee\RecommApi\Requests\Request::class, $detailView);
         $this->assertEquals($response, $this->recombeeResponse);
-
     }
 
     public function testDeleteUser()
