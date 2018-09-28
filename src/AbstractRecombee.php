@@ -7,7 +7,7 @@ use Recombee\RecommApi\Client;
 use Recombee\RecommApi\Exceptions;
 use Recombee\RecommApi\Requests\AddBookmark;
 use Recombee\RecommApi\Requests\AddCartAddition;
-use Recombee\RecommApi\Requests\AddDetailedView;
+use Recombee\RecommApi\Requests\AddDetailView;
 use Recombee\RecommApi\Requests\AddItemProperty;
 use Recombee\RecommApi\Requests\AddPurchase;
 use Recombee\RecommApi\Requests\AddRating;
@@ -304,11 +304,11 @@ class AbstractRecombee
      * @param int   $item_id
      * @param array $options
      *
-     * @return \Recombee\RecommApi\AddDetailedView
+     * @return \Recombee\RecommApi\AddDetailView
      */
     public function addDetailedView($user_id, $item_id, array $options)
     {
-        $detailedView = new AddDetailedView($user_id, $item_id, $options);
+        $detailedView = new AddDetailView($user_id, $item_id, $options);
 
         return $detailedView;
     }
