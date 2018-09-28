@@ -2,6 +2,7 @@
 
 namespace Amranidev\Laracombee\Tests;
 
+use Carbon\Carbon;
 use Laracombee;
 
 class LaracombeeTest extends TestCase
@@ -54,6 +55,18 @@ class LaracombeeTest extends TestCase
         $itemProperties = ['productName' => 'My product'];
 
         $request = Laracombee::setItemValues($this->itemId, $itemProperties);
+
+        $response = Laracombee::send($request)->wait();
+
+        $this->assertInstanceOf(\Recombee\RecommApi\Requests\Request::class, $request);
+        $this->assertEquals($response, 'ok');
+    }
+
+    public function testAddDetailedView()
+    {
+        $options = ['timestamp' => Carbon::now()->toIso8601String(), 'duration' => 15, 'cascadeCreate' => true];
+
+        $request = Laracombee::addDetailedView($this->userId, $this->itemId, $options);
 
         $response = Laracombee::send($request)->wait();
 
