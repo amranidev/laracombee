@@ -15,9 +15,9 @@ use Recombee\RecommApi\Requests\AddUserProperty;
 use Recombee\RecommApi\Requests\Batch;
 use Recombee\RecommApi\Requests\DeleteBookmark;
 use Recombee\RecommApi\Requests\DeleteCartAddition;
+use Recombee\RecommApi\Requests\DeleteDetailView;
 use Recombee\RecommApi\Requests\DeleteItem;
 use Recombee\RecommApi\Requests\DeleteItemProperty;
-use Recombee\RecommApi\Requests\DeleteItemView;
 use Recombee\RecommApi\Requests\DeletePurchase;
 use Recombee\RecommApi\Requests\DeleteUser;
 use Recombee\RecommApi\Requests\DeleteUserProperty;
@@ -34,7 +34,7 @@ use Recombee\RecommApi\Requests\SetUserValues;
 class AbstractRecombee
 {
     /**
-     * @var Recombee\RecommApi\Client
+     * @var \Recombee\RecommApi\Client
      */
     protected $client;
 
@@ -320,11 +320,11 @@ class AbstractRecombee
      * @param int   $item_id
      * @param array $options
      *
-     * @return \Recombee\RecommApi\DeleteItemView
+     * @return \Recombee\RecommApi\DeleteDetailView
      */
-    public function deleteItemView($user_id, $item_id, array $options)
+    public function deleteDetailView($user_id, $item_id, array $options)
     {
-        $detailedView = new DeleteItemView($user_id, $item_id, $options);
+        $detailedView = new DeleteDetailView($user_id, $item_id, $options);
 
         return $detailedView;
     }
