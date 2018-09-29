@@ -22,6 +22,7 @@ use Recombee\RecommApi\Requests\DeletePurchase;
 use Recombee\RecommApi\Requests\DeleteUser;
 use Recombee\RecommApi\Requests\DeleteUserProperty;
 use Recombee\RecommApi\Requests\ListItemDetailViews;
+use Recombee\RecommApi\Requests\ListItems;
 use Recombee\RecommApi\Requests\ListUserDetailViews;
 use Recombee\RecommApi\Requests\ListUsers;
 use Recombee\RecommApi\Requests\MergeUsers;
@@ -160,6 +161,20 @@ class AbstractRecombee
         $item->setTimeout($this->timeout);
 
         return $item;
+    }
+
+    /**
+     * List items.
+     *
+     * @param array $options
+     *
+     * @return \Recombee\RecommApi\ListItems
+     */
+    public function listItems(array $options)
+    {
+        $items = new ListItems($options);
+
+        return $items;
     }
 
     /**
