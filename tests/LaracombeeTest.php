@@ -104,6 +104,28 @@ class LaracombeeTest extends TestCase
         $this->assertInternalType('array', $response);
     }
 
+    public function testListItems()
+    {
+        $options = [
+            'filter' => '',
+            'count' => 5,
+            'offset' => 0,
+            'returnProperties' => true,
+            'includedProperties' => ['productName'],
+        ];
+
+        $request = Laracombee::listItems($options);
+
+        $response = Laracombee::send($request)->wait();
+
+        $this->assertInternalType('array', $response);
+
+        foreach ($response as $item) {
+            $this->assertArrayHasKey('productName', $item);
+            $this->assertArrayHasKey('itemId', $item);
+        }
+    }
+
     public function testDeleteDetailView()
     {
         $detailView = Laracombee::deleteDetailView($this->userId, $this->itemId, []);
