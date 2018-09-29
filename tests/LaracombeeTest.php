@@ -126,6 +126,29 @@ class LaracombeeTest extends TestCase
         }
     }
 
+    public function testListUsers()
+    {
+        $options = [
+            'filter' => '',
+            'count' => 5,
+            'offset' => 0,
+            'returnProperties' => true,
+            'includedProperties' => ['firstName'],
+        ];
+
+        $request = Laracombee::listUsers($options);
+
+        $response = Laracombee::send($request)->wait();
+
+        $this->assertInternalType('array', $response);
+        $this->assertEquals(5, count($response));
+
+        foreach ($response as $user) {
+            $this->assertArrayHasKey('firstName', $user);
+            $this->assertArrayHasKey('userId', $user);
+        }
+    }
+
     public function testDeleteDetailView()
     {
         $detailView = Laracombee::deleteDetailView($this->userId, $this->itemId, []);
