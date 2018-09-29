@@ -98,7 +98,7 @@ class AbstractRecombee
      * @param int   $item_id
      * @param array $fileds
      *
-     * @return \Recombee\RecommApi\SetItemValues
+     * @return \Recombee\RecommApi\Requests\SetItemValues
      */
     public function setItemValues($item_id, array $fields)
     {
@@ -152,7 +152,7 @@ class AbstractRecombee
      *
      * @param int $item_id
      *
-     * @return \Recombee\RecommApi\DeleteItem
+     * @return \Recombee\RecommApi\Requests\DeleteItem
      */
     public function deleteItem($item_id)
     {
@@ -168,11 +168,13 @@ class AbstractRecombee
      *
      * @param array $options
      *
-     * @return \Recombee\RecommApi\ListItems
+     * @return \Recombee\RecommApi\Requests\ListItems
      */
     public function listItems(array $options)
     {
         $items = new ListItems($options);
+
+        $items->setTimeout($this->timeout);
 
         return $items;
     }
@@ -182,7 +184,7 @@ class AbstractRecombee
      *
      * @param int $user_id
      *
-     * @return \Recombee\RecommApi\DeleteUser
+     * @return \Recombee\RecommApi\Requests\DeleteUser
      */
     public function deleteUser($user_id)
     {
@@ -198,7 +200,7 @@ class AbstractRecombee
      * @param int   $source_user_id
      * @param array $params
      *
-     * @return \Recombee\RecommApi\MergeUsers
+     * @return \Recombee\RecommApi\Requests\MergeUsers
      */
     public function mergeUsersWithId($target_user_id, $source_user_id, array $params)
     {
@@ -218,6 +220,8 @@ class AbstractRecombee
     {
         $users = new listUsers($options);
 
+        $users->setTimeout($this->timeout);
+
         return $users;
     }
 
@@ -227,7 +231,7 @@ class AbstractRecombee
      * @param int   $user_id
      * @param array $fields
      *
-     * @return \Recombee\RecommApi\SetUserValues
+     * @return \Recombee\RecommApi\Requests\SetUserValues
      */
     public function setUserValues($user_id, array $fileds)
     {
@@ -244,7 +248,7 @@ class AbstractRecombee
      * @param string $property
      * @param string $type
      *
-     * @return \Recombee\RecommApi\AddUserProperty
+     * @return \Recombee\RecommApi\Requests\AddUserProperty
      */
     public function addUserProperty(string $property, string $type)
     {
@@ -258,7 +262,7 @@ class AbstractRecombee
      *
      * @param string $property
      *
-     * @return \Recombee\RecommApi\DeleteUserProperty
+     * @return \Recombee\RecommApi\Requests\DeleteUserProperty
      */
     public function deleteUserProperty(string $property)
     {
@@ -272,7 +276,7 @@ class AbstractRecombee
      *
      * @param int $user_id
      *
-     * @return \Recombee\RecommApi\ListUserDetailViews
+     * @return \Recombee\RecommApi\Requests\ListUserDetailViews
      */
     public function listUserDetailViews($user_id)
     {
@@ -287,7 +291,7 @@ class AbstractRecombee
      * @param string $property
      * @param string $type
      *
-     * @return \Recombee\RecommApi\AddItemProperty
+     * @return \Recombee\RecommApi\Requests\AddItemProperty
      */
     public function addItemProperty(string $property, string $type)
     {
@@ -301,7 +305,7 @@ class AbstractRecombee
      *
      * @param string $property
      *
-     * @return \Recombee\RecommApi\DeleteItemProperty
+     * @return \Recombee\RecommApi\Requests\DeleteItemProperty
      */
     public function deleteItemProperty($property)
     {
@@ -317,7 +321,7 @@ class AbstractRecombee
      * @param int   $item_id
      * @param array $options
      *
-     * @return \Recombee\RecommApi\AddDetailView
+     * @return \Recombee\RecommApi\Requests\AddDetailView
      */
     public function addDetailedView($user_id, $item_id, array $options)
     {
@@ -333,7 +337,7 @@ class AbstractRecombee
      * @param int   $item_id
      * @param array $options
      *
-     * @return \Recombee\RecommApi\DeleteDetailView
+     * @return \Recombee\RecommApi\Requests\DeleteDetailView
      */
     public function deleteDetailView($user_id, $item_id, array $options)
     {
@@ -347,7 +351,7 @@ class AbstractRecombee
      *
      * @param int $item_id
      *
-     * @return \Recombee\RecommApi\ListItemDetailViews
+     * @return \Recombee\RecommApi\Requests\ListItemDetailViews
      */
     public function listItemDetailViews($item_id)
     {
@@ -363,7 +367,7 @@ class AbstractRecombee
      * @param int   $item_id
      * @param array $options
      *
-     * @return \Recombee\RecommApi\AddPurchase
+     * @return \Recombee\RecommApi\Requests\AddPurchase
      */
     public function addPurchase($user_id, $item_id, $options)
     {
@@ -379,7 +383,7 @@ class AbstractRecombee
      * @param int   $item_id
      * @param array $options
      *
-     * @return \Recombee\RecommApi\DeletePurchase
+     * @return \Recombee\RecommApi\Requests\DeletePurchase
      */
     public function deletePurchase($user_id, $item_id, array $options)
     {
@@ -396,7 +400,7 @@ class AbstractRecombee
      * @param int   $rating
      * @param array $options
      *
-     * @return \Recombee\RecommApi\AddRating
+     * @return \Recombee\RecommApi\Requests\AddRating
      */
     public function addRating($user_id, $item_id, int $rating, array $options)
     {
@@ -412,7 +416,7 @@ class AbstractRecombee
      * @param int   $item_id
      * @param array $options
      *
-     * @return \Recombee\RecommApi\DeleteRating
+     * @return \Recombee\RecommApi\Requests\DeleteRating
      */
     public function deleteRating($user_id, $item_id, array $options)
     {
@@ -428,7 +432,7 @@ class AbstractRecombee
      * @param int   $item_id
      * @param array $options
      *
-     * @return \Recombee\RecommApi\AddCartAddition
+     * @return \Recombee\RecommApi\Requests\AddCartAddition
      */
     public function addCartAddition($user_id, $item_id, array $options)
     {
@@ -444,7 +448,7 @@ class AbstractRecombee
      * @param int   $item_id
      * @param array $options
      *
-     * @return \Recombee\RecommApi\DeleteCartAddition
+     * @return \Recombee\RecommApi\Requests\DeleteCartAddition
      */
     public function deleteCartAddition($user_id, $item_id, array $options)
     {
@@ -460,7 +464,7 @@ class AbstractRecombee
      * @param int   $item_id
      * @param array $options
      *
-     * @return \Recombee\RecommApi\AddBookmark
+     * @return \Recombee\RecommApi\Requests\AddBookmark
      */
     public function addBookmark($user_id, $item_id, array $options)
     {
@@ -476,7 +480,7 @@ class AbstractRecombee
      * @param int   $item_id
      * @param array $options
      *
-     * @return \Recombee\RecommApi\DeleteBookmark
+     * @return \Recombee\RecommApi\Requests\DeleteBookmark
      */
     public function deleteBookmark($user_id, $item_id, array $options)
     {
