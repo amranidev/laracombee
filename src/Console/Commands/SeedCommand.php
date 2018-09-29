@@ -33,7 +33,6 @@ class SeedCommand extends LaracombeeCommand
     protected static $userModel = '\\App\\User';
 
     /**
-     *
      * The default chunk value.
      *
      * @var int
@@ -73,7 +72,7 @@ class SeedCommand extends LaracombeeCommand
         $bar = $this->output->createProgressBar($total / $chunk);
 
         $records->chunk($chunk)->each(function ($users) use ($bar) {
-            $batch = $this->{'add' . ucfirst($this->argument('type')) . 's'}($users->all());
+            $batch = $this->{'add'.ucfirst($this->argument('type')).'s'}($users->all());
             Laracombee::batch($batch)->then(function ($response) use ($bar) {
             })->otherwise(function ($error) {
                 $this->info();

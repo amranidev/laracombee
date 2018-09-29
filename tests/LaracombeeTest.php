@@ -107,10 +107,10 @@ class LaracombeeTest extends TestCase
     public function testListItems()
     {
         $options = [
-            'filter' => '',
-            'count' => 5,
-            'offset' => 0,
-            'returnProperties' => true,
+            'filter'             => '',
+            'count'              => 5,
+            'offset'             => 0,
+            'returnProperties'   => true,
             'includedProperties' => ['productName'],
         ];
 
@@ -129,10 +129,10 @@ class LaracombeeTest extends TestCase
     public function testListUsers()
     {
         $options = [
-            'filter' => '',
-            'count' => 5,
-            'offset' => 0,
-            'returnProperties' => true,
+            'filter'             => '',
+            'count'              => 5,
+            'offset'             => 0,
+            'returnProperties'   => true,
             'includedProperties' => ['firstName'],
         ];
 
