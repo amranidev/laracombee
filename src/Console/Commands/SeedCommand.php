@@ -34,7 +34,7 @@ class SeedCommand extends LaracombeeCommand
 
     /**
      *
-     * The default chunk value
+     * The default chunk value.
      *
      * @var int
      */
@@ -76,6 +76,7 @@ class SeedCommand extends LaracombeeCommand
             $batch = $this->{'add' . ucfirst($this->argument('type')) . 's'}($users->all());
             Laracombee::batch($batch)->then(function ($response) use ($bar) {
             })->otherwise(function ($error) {
+                $this->info();
                 $this->error($error);
                 die();
             })->wait();
@@ -85,6 +86,7 @@ class SeedCommand extends LaracombeeCommand
 
         $bar->finish();
 
-        $this->info('Done');
+        $this->info('');
+        $this->info('Done!');
     }
 }
