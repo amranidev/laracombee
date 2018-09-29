@@ -15,7 +15,8 @@ class SeedCommand extends LaracombeeCommand
      */
     protected $signature = 'laracombee:seed
                             {type : Catalog type (user or item)}
-                            {--class= : Laravel model}';
+                            {--class= : Laravel model}
+                            {--chunk= : total chunk}';
 
     /**
      * The console command description.
@@ -30,6 +31,14 @@ class SeedCommand extends LaracombeeCommand
      * @var string
      */
     protected static $userModel = '\\App\\User';
+
+    /**
+     *
+     * The default chunk value
+     *
+     * @var int
+     */
+    protected static $chunk = 100;
 
     /**
      * Create a new command instance.
@@ -53,14 +62,18 @@ class SeedCommand extends LaracombeeCommand
             die();
         }
 
+        $chunk = (int) $this->option('chunk') ?: self::$chunk;
+
         $class = $this->option('class');
+
         $records = $class::all();
+
         $total = $records->count();
 
-        $bar = $this->output->createProgressBar($total / 100);
+        $bar = $this->output->createProgressBar($total / $chunk);
 
-        $records->chunk(100)->each(function ($users) use ($bar) {
-            $batch = $this->{'add'.ucfirst($this->argument('type')).'s'}($users->all());
+        $records->chunk($chunk)->each(function ($users) use ($bar) {
+            $batch = $this->{'add' . ucfirst($this->argument('type')) . 's'}($users->all());
             Laracombee::batch($batch)->then(function ($response) use ($bar) {
             })->otherwise(function ($error) {
                 $this->error($error);
