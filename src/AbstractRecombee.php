@@ -210,17 +210,15 @@ class AbstractRecombee
     /**
      * List Users.
      *
-     * @param array $filters
+     * @param array $options
      *
-     * @return mixed
+     * @return \Recombee\RecommApi\Requests\ListUsers
      */
-    public function listUsers(array $filters)
+    public function listUsers(array $options)
     {
-        $users = new listUsers($filters);
+        $users = new listUsers($options);
 
-        $users->setTimeout($this->timeout);
-
-        return $this->send($users);
+        return $users;
     }
 
     /**
