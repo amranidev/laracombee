@@ -149,15 +149,15 @@ class LaracombeeTest extends TestCase
         }
     }
 
-//     public function testDeleteDetailView()
-//     {
-//         $detailView = Laracombee::deleteDetailView($this->userId, $this->itemId, []);
+    public function testDeleteDetailView()
+    {
+        $detailView = Laracombee::deleteDetailView($this->userId, $this->itemId, []);
 
-//         $response = Laracombee::send($detailView)->wait();
+        $response = Laracombee::send($detailView)->wait();
 
-//         $this->assertInstanceOf(\Recombee\RecommApi\Requests\Request::class, $detailView);
-//         $this->assertEquals($response, $this->recombeeResponse);
-//     }
+        $this->assertInstanceOf(\Recombee\RecommApi\Requests\Request::class, $detailView);
+        $this->assertEquals($response, $this->recombeeResponse);
+    }
 
     public function testDeleteUser()
     {
