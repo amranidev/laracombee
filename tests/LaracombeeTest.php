@@ -104,6 +104,16 @@ class LaracombeeTest extends TestCase
         $this->assertInternalType('array', $response);
     }
 
+    public function testDeleteDetailView()
+    {
+        $detailView = Laracombee::deleteDetailView($this->userId, $this->itemId, []);
+
+        $response = Laracombee::send($detailView)->wait();
+
+        $this->assertInstanceOf(\Recombee\RecommApi\Requests\Request::class, $detailView);
+        $this->assertEquals($response, $this->recombeeResponse);
+    }
+
     public function testListItems()
     {
         $options = [
@@ -147,16 +157,6 @@ class LaracombeeTest extends TestCase
             $this->assertArrayHasKey('firstName', $user);
             $this->assertArrayHasKey('userId', $user);
         }
-    }
-
-    public function testDeleteDetailView()
-    {
-        $detailView = Laracombee::deleteDetailView($this->userId, $this->itemId, []);
-
-        $response = Laracombee::send($detailView)->wait();
-
-        $this->assertInstanceOf(\Recombee\RecommApi\Requests\Request::class, $detailView);
-        $this->assertEquals($response, $this->recombeeResponse);
     }
 
     public function testDeleteUser()
