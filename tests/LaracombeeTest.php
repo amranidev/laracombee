@@ -13,9 +13,12 @@ class LaracombeeTest extends TestCase
 
     public $itemId = 1;
 
+    public $timestamp;
+
     public function setUp()
     {
         parent::setUp();
+        $this->timestamp = Carbon::now()->toIso8601String();
     }
 
     public function testAddItemProperty()
@@ -74,10 +77,10 @@ class LaracombeeTest extends TestCase
         $this->assertEquals($response, 'ok');
     }
 
-    public function testAddPurchase()
+    public function testAddandDeletePurchase()
     {
         $options = [
-            'timestamp' => Carbon::now()->toIso8601String(),
+            'timestamp' => $this->timestamp,
             'cascadeCreate' => true,
             'amount' => 5,
             'price' => 15,
@@ -89,6 +92,15 @@ class LaracombeeTest extends TestCase
         $response = Laracombee::send($request)->wait();
 
         $this->assertInstanceOf(\Recombee\RecommApi\Requests\Request::class, $request);
+        $this->assertEquals($response, 'ok');
+
+        $deleteOptions = [];
+
+        $delete = Laracombee::deletePurchase($this->userId, $this->itemId, $deleteOptions);
+
+        $deleteResponse = Laracombee::send($delete)->wait();
+
+        $this->assertInstanceOf(\Recombee\RecommApi\Requests\Request::class, $delete);
         $this->assertEquals($response, 'ok');
     }
 
@@ -220,7 +232,7 @@ class LaracombeeTest extends TestCase
 
     public function testDeleteRating()
     {
-        $options = [];
+        $options = ['timestamp' => Carbon::now()->toIso8601String()];
 
         $request = Laracombee::deleteRating($this->userId, $this->itemId, $options);
 
@@ -232,7 +244,7 @@ class LaracombeeTest extends TestCase
 
     public function testDeleteCardAddition()
     {
-        $options = [];
+        $options = ['timestamp' => Carbon::now()->toIso8601String()];
 
         $request = Laracombee::deleteCartAddition($this->userId, $this->itemId, $options);
 
@@ -244,21 +256,9 @@ class LaracombeeTest extends TestCase
 
     public function testDeleteBookmark()
     {
-        $options = [];
+        $options = ['timestamp' => Carbon::now()->toIso8601String()];
 
         $request = Laracombee::deleteBookmark($this->userId, $this->itemId, $options);
-
-        $response = Laracombee::send($request)->wait();
-
-        $this->assertInstanceOf(\Recombee\RecommApi\Requests\Request::class, $request);
-        $this->assertEquals($response, $this->recombeeResponse);
-    }
-
-    public function testDeletePurchase()
-    {
-        $options = [];
-
-        $request = Laracombee::deletePurchase($this->userId, $this->itemId, $options);
 
         $response = Laracombee::send($request)->wait();
 
