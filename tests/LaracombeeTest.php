@@ -79,13 +79,13 @@ class LaracombeeTest extends TestCase
 
     public function testAddandDeletePurchase()
     {
-        $time = (float) Carbon::now()->timestamp . '.0';
+        $time = (float) Carbon::now()->timestamp.'.0';
         $options = [
-            'timestamp' => $time,
+            'timestamp'     => $time,
             'cascadeCreate' => true,
-            'amount' => 5,
-            'price' => 15,
-            'profit' => 20,
+            'amount'        => 5,
+            'price'         => 15,
+            'profit'        => 20,
         ];
 
         $request = Laracombee::addPurchase($this->userId, $this->itemId, $options);
@@ -126,8 +126,8 @@ class LaracombeeTest extends TestCase
     {
         $options = [
             'cascadeCreate' => true,
-            'amount' => 5,
-            'price' => 50,
+            'amount'        => 5,
+            'price'         => 50,
         ];
 
         $request = Laracombee::addCartAddition($this->userId, $this->itemId, $options);
@@ -185,10 +185,10 @@ class LaracombeeTest extends TestCase
     public function testListItems()
     {
         $options = [
-            'filter' => '',
-            'count' => 5,
-            'offset' => 0,
-            'returnProperties' => true,
+            'filter'             => '',
+            'count'              => 5,
+            'offset'             => 0,
+            'returnProperties'   => true,
             'includedProperties' => ['productName'],
         ];
 
@@ -207,10 +207,10 @@ class LaracombeeTest extends TestCase
     public function testListUsers()
     {
         $options = [
-            'filter' => '',
-            'count' => 5,
-            'offset' => 0,
-            'returnProperties' => true,
+            'filter'             => '',
+            'count'              => 5,
+            'offset'             => 0,
+            'returnProperties'   => true,
             'includedProperties' => ['firstName'],
         ];
 
