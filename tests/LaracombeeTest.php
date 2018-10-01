@@ -80,7 +80,6 @@ class LaracombeeTest extends TestCase
     public function testAddandDeletePurchase()
     {
         $time = (float) Carbon::now()->timestamp . '.0';
-        echo "\n" . $time . "\n";
         $options = [
             'timestamp' => $time,
             'cascadeCreate' => true,
@@ -258,6 +257,18 @@ class LaracombeeTest extends TestCase
         $options = [];
 
         $request = Laracombee::deleteBookmark($this->userId, $this->itemId, $options);
+
+        $response = Laracombee::send($request)->wait();
+
+        $this->assertInstanceOf(\Recombee\RecommApi\Requests\Request::class, $request);
+        $this->assertEquals($response, $this->recombeeResponse);
+    }
+
+    public function testDeleteDetailView()
+    {
+        $options = [];
+
+        $request = Laracombee::deleteDetailView($this->userId, $this->itemId, $options);
 
         $response = Laracombee::send($request)->wait();
 
