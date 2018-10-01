@@ -221,6 +221,17 @@ class LaracombeeTest extends TestCase
         $this->assertEquals($response, 'ok');
     }
 
+    public function testDeleteCardAddition()
+    {
+        $options = [];
+
+        $request = Laracombee::deleteCartAddition($this->userId, $this->itemId, $options);
+
+        $response = Laracombee::send($request)->wait();
+
+        $this->assertEquals($response, $this->recombeeResponse);
+    }
+
     public function testDeleteUser()
     {
         $request = Laracombee::deleteUser($this->userId);
