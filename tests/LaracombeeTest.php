@@ -232,6 +232,20 @@ class LaracombeeTest extends TestCase
         $this->assertEquals($response, $this->recombeeResponse);
     }
 
+    public function testAddBookmark()
+    {
+        $options = [
+            'timestamp' => Carbon::now()->toIso8601String(),
+            'cascadeCreate' => true,
+        ];
+
+        $request = Laracombee::addBookmark($this->userId, $this->itemId, $options);
+
+        $response = Laracombee::send($request)->wait();
+
+        $this->assertEquals($response, 'ok');
+    }
+
     public function testDeleteUser()
     {
         $request = Laracombee::deleteUser($this->userId);
