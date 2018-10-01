@@ -94,7 +94,7 @@ class LaracombeeTest extends TestCase
         $this->assertInstanceOf(\Recombee\RecommApi\Requests\Request::class, $request);
         $this->assertEquals($response, 'ok');
 
-        $deleteOptions = [];
+        $deleteOptions = ['timestamp' => $this->timestamp];
 
         $delete = Laracombee::deletePurchase($this->userId, $this->itemId, $deleteOptions);
 
