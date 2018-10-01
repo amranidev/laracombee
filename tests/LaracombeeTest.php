@@ -166,6 +166,17 @@ class LaracombeeTest extends TestCase
         $this->assertEquals($response, 'ok');
     }
 
+    public function testDeletePurchase()
+    {
+        $options = [];
+
+        $request = Laracombee::deletePurchase($this->userId, $this->itemId, $options);
+
+        $response = Laracombee::send($request)->wait();
+
+        $this->assertEquals($response, $this->recombeeResponse);
+    }
+
     public function testDeleteUser()
     {
         $request = Laracombee::deleteUser($this->userId);
