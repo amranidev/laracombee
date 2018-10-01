@@ -177,6 +177,26 @@ class LaracombeeTest extends TestCase
         $this->assertEquals($response, $this->recombeeResponse);
     }
 
+    /**
+     *
+     */
+    public function testAddRating()
+    {
+        $options = [
+            'timestamp' => Carbon::now()->toIso8601String(),
+            'cascadeCreate' => true,
+        ];
+
+        // rating shoud be a real number betweed  -1.0 < x < 1.0
+        $rating = 0.8;
+
+        $request = Laracombee::addRating($this->userId, $this->itemId, (float) $rating, $options);
+
+        $response = Laracombee::send($request)->wait();
+
+        $this->assertEquals($response, 'ok');
+    }
+
     public function testDeleteUser()
     {
         $request = Laracombee::deleteUser($this->userId);
