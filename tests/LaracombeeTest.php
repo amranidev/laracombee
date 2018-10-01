@@ -107,10 +107,10 @@ class LaracombeeTest extends TestCase
     public function testListItems()
     {
         $options = [
-            'filter'             => '',
-            'count'              => 5,
-            'offset'             => 0,
-            'returnProperties'   => true,
+            'filter' => '',
+            'count' => 5,
+            'offset' => 0,
+            'returnProperties' => true,
             'includedProperties' => ['productName'],
         ];
 
@@ -129,10 +129,10 @@ class LaracombeeTest extends TestCase
     public function testListUsers()
     {
         $options = [
-            'filter'             => '',
-            'count'              => 5,
-            'offset'             => 0,
-            'returnProperties'   => true,
+            'filter' => '',
+            'count' => 5,
+            'offset' => 0,
+            'returnProperties' => true,
             'includedProperties' => ['firstName'],
         ];
 
@@ -147,6 +147,23 @@ class LaracombeeTest extends TestCase
             $this->assertArrayHasKey('firstName', $user);
             $this->assertArrayHasKey('userId', $user);
         }
+    }
+
+    public function testAddPurchase()
+    {
+        $options = [
+            'timestamp' => Carbon::now()->toIso8601String(),
+            'cascadeCreate' => true,
+            'amount' => 5,
+            'price' => 15,
+            'profit' => 20,
+        ];
+
+        $request = Laracombee::addPurchase($this->userId, $this->itemId, $options);
+
+        $response = Laracombee::send($request)->wait();
+
+        $this->assertEquals($response, 'ok');
     }
 
     public function testDeleteUser()
