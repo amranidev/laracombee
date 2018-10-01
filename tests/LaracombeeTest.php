@@ -177,9 +177,6 @@ class LaracombeeTest extends TestCase
         $this->assertEquals($response, $this->recombeeResponse);
     }
 
-    /**
-     *
-     */
     public function testAddRating()
     {
         $options = [
@@ -195,6 +192,17 @@ class LaracombeeTest extends TestCase
         $response = Laracombee::send($request)->wait();
 
         $this->assertEquals($response, 'ok');
+    }
+
+    public function testDeleteRating()
+    {
+        $options = [];
+
+        $request = Laracombee::deleteRating($this->userId, $this->itemId, $options);
+
+        $response = Laracombee::send($request)->wait();
+
+        $this->assertEquals($response, $this->recombeeResponse);
     }
 
     public function testDeleteUser()
