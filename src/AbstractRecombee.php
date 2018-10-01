@@ -19,6 +19,7 @@ use Recombee\RecommApi\Requests\DeleteDetailView;
 use Recombee\RecommApi\Requests\DeleteItem;
 use Recombee\RecommApi\Requests\DeleteItemProperty;
 use Recombee\RecommApi\Requests\DeletePurchase;
+use Recombee\RecommApi\Requests\DeleteRating;
 use Recombee\RecommApi\Requests\DeleteUser;
 use Recombee\RecommApi\Requests\DeleteUserProperty;
 use Recombee\RecommApi\Requests\ListItemDetailViews;
