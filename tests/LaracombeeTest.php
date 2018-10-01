@@ -142,6 +142,7 @@ class LaracombeeTest extends TestCase
 
         $this->assertInternalType('array', $response);
         $this->assertEquals(5, count($response));
+        $this->assertInstanceOf(\Recombee\RecommApi\Requests\Request::class, $request);
 
         foreach ($response as $user) {
             $this->assertArrayHasKey('firstName', $user);
@@ -163,6 +164,7 @@ class LaracombeeTest extends TestCase
 
         $response = Laracombee::send($request)->wait();
 
+        $this->assertInstanceOf(\Recombee\RecommApi\Requests\Request::class, $request);
         $this->assertEquals($response, 'ok');
     }
 
@@ -174,6 +176,7 @@ class LaracombeeTest extends TestCase
 
         $response = Laracombee::send($request)->wait();
 
+        $this->assertInstanceOf(\Recombee\RecommApi\Requests\Request::class, $request);
         $this->assertEquals($response, $this->recombeeResponse);
     }
 
@@ -191,6 +194,7 @@ class LaracombeeTest extends TestCase
 
         $response = Laracombee::send($request)->wait();
 
+        $this->assertInstanceOf(\Recombee\RecommApi\Requests\Request::class, $request);
         $this->assertEquals($response, 'ok');
     }
 
@@ -202,6 +206,7 @@ class LaracombeeTest extends TestCase
 
         $response = Laracombee::send($request)->wait();
 
+        $this->assertInstanceOf(\Recombee\RecommApi\Requests\Request::class, $request);
         $this->assertEquals($response, $this->recombeeResponse);
     }
 
@@ -218,6 +223,7 @@ class LaracombeeTest extends TestCase
 
         $response = Laracombee::send($request)->wait();
 
+        $this->assertInstanceOf(\Recombee\RecommApi\Requests\Request::class, $request);
         $this->assertEquals($response, 'ok');
     }
 
@@ -229,6 +235,7 @@ class LaracombeeTest extends TestCase
 
         $response = Laracombee::send($request)->wait();
 
+        $this->assertInstanceOf(\Recombee\RecommApi\Requests\Request::class, $request);
         $this->assertEquals($response, $this->recombeeResponse);
     }
 
@@ -243,6 +250,7 @@ class LaracombeeTest extends TestCase
 
         $response = Laracombee::send($request)->wait();
 
+        $this->assertInstanceOf(\Recombee\RecommApi\Requests\Request::class, $request);
         $this->assertEquals($response, 'ok');
     }
 
@@ -254,6 +262,7 @@ class LaracombeeTest extends TestCase
 
         $response = Laracombee::send($request)->wait();
 
+        $this->assertInstanceOf(\Recombee\RecommApi\Requests\Request::class, $request);
         $this->assertEquals($response, $this->recombeeResponse);
     }
 
