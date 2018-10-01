@@ -8,7 +8,7 @@
         "source": "https://github.com/laravel/passport"
     },
     "require": {
-        "recombee/php-api-client": "^2.1",
+        "recombee/php-api-client": "^2.2",
         "guzzlehttp/promises": "^1.3"
     },
     "require-dev": {
