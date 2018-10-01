@@ -395,14 +395,14 @@ class AbstractRecombee
     /**
      * Add rating.
      *
-     * @param int   $user_id
-     * @param int   $item_id
-     * @param int   $rating
-     * @param array $options
+     * @param int     $user_id
+     * @param int     $item_id
+     * @param float   $rating
+     * @param array   $options
      *
      * @return \Recombee\RecommApi\Requests\AddRating
      */
-    public function addRating($user_id, $item_id, int $rating, array $options)
+    public function addRating($user_id, $item_id, float $rating, array $options)
     {
         $rating = new AddRating($user_id, $item_id, $rating, $options);
 
