@@ -67,7 +67,7 @@ class LaracombeeTest extends TestCase
 
     public function testAddDetailedView()
     {
-        $options = ['timestamp' => Carbon::now()->toIso8601String(), 'duration' => 15, 'cascadeCreate' => true];
+        $options = ['duration' => 15, 'cascadeCreate' => true];
 
         $request = Laracombee::addDetailedView($this->userId, $this->itemId, $options);
 
@@ -79,8 +79,10 @@ class LaracombeeTest extends TestCase
 
     public function testAddandDeletePurchase()
     {
+        $time = (float) Carbon::now()->timestamp . '.0';
+        echo "\n" . $time . "\n";
         $options = [
-            'timestamp' => $this->timestamp,
+            'timestamp' => $time,
             'cascadeCreate' => true,
             'amount' => 5,
             'price' => 15,
@@ -94,7 +96,7 @@ class LaracombeeTest extends TestCase
         $this->assertInstanceOf(\Recombee\RecommApi\Requests\Request::class, $request);
         $this->assertEquals($response, 'ok');
 
-        $deleteOptions = ['timestamp' => $this->timestamp];
+        $deleteOptions = ['timestamp' => $time];
 
         $delete = Laracombee::deletePurchase($this->userId, $this->itemId, $deleteOptions);
 
@@ -107,7 +109,6 @@ class LaracombeeTest extends TestCase
     public function testAddRating()
     {
         $options = [
-            'timestamp' => Carbon::now()->toIso8601String(),
             'cascadeCreate' => true,
         ];
 
@@ -125,7 +126,6 @@ class LaracombeeTest extends TestCase
     public function testAddCardAddition()
     {
         $options = [
-            'timestamp' => Carbon::now()->toIso8601String(),
             'cascadeCreate' => true,
             'amount' => 5,
             'price' => 50,
@@ -142,7 +142,6 @@ class LaracombeeTest extends TestCase
     public function testAddBookmark()
     {
         $options = [
-            'timestamp' => Carbon::now()->toIso8601String(),
             'cascadeCreate' => true,
         ];
 
@@ -232,7 +231,7 @@ class LaracombeeTest extends TestCase
 
     public function testDeleteRating()
     {
-        $options = ['timestamp' => Carbon::now()->toIso8601String()];
+        $options = [];
 
         $request = Laracombee::deleteRating($this->userId, $this->itemId, $options);
 
@@ -244,7 +243,7 @@ class LaracombeeTest extends TestCase
 
     public function testDeleteCardAddition()
     {
-        $options = ['timestamp' => Carbon::now()->toIso8601String()];
+        $options = [];
 
         $request = Laracombee::deleteCartAddition($this->userId, $this->itemId, $options);
 
@@ -256,7 +255,7 @@ class LaracombeeTest extends TestCase
 
     public function testDeleteBookmark()
     {
-        $options = ['timestamp' => Carbon::now()->toIso8601String()];
+        $options = [];
 
         $request = Laracombee::deleteBookmark($this->userId, $this->itemId, $options);
 
