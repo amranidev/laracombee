@@ -74,6 +74,74 @@ class LaracombeeTest extends TestCase
         $this->assertEquals($response, 'ok');
     }
 
+    public function testAddPurchase()
+    {
+        $options = [
+            'timestamp' => Carbon::now()->toIso8601String(),
+            'cascadeCreate' => true,
+            'amount' => 5,
+            'price' => 15,
+            'profit' => 20,
+        ];
+
+        $request = Laracombee::addPurchase($this->userId, $this->itemId, $options);
+
+        $response = Laracombee::send($request)->wait();
+
+        $this->assertInstanceOf(\Recombee\RecommApi\Requests\Request::class, $request);
+        $this->assertEquals($response, 'ok');
+    }
+
+    public function testAddRating()
+    {
+        $options = [
+            'timestamp' => Carbon::now()->toIso8601String(),
+            'cascadeCreate' => true,
+        ];
+
+        // rating shoud be a real number betweed  -1.0 < x < 1.0
+        $rating = 0.8;
+
+        $request = Laracombee::addRating($this->userId, $this->itemId, (float) $rating, $options);
+
+        $response = Laracombee::send($request)->wait();
+
+        $this->assertInstanceOf(\Recombee\RecommApi\Requests\Request::class, $request);
+        $this->assertEquals($response, 'ok');
+    }
+
+    public function testAddCardAddition()
+    {
+        $options = [
+            'timestamp' => Carbon::now()->toIso8601String(),
+            'cascadeCreate' => true,
+            'amount' => 5,
+            'price' => 50,
+        ];
+
+        $request = Laracombee::addCartAddition($this->userId, $this->itemId, $options);
+
+        $response = Laracombee::send($request)->wait();
+
+        $this->assertInstanceOf(\Recombee\RecommApi\Requests\Request::class, $request);
+        $this->assertEquals($response, 'ok');
+    }
+
+    public function testAddBookmark()
+    {
+        $options = [
+            'timestamp' => Carbon::now()->toIso8601String(),
+            'cascadeCreate' => true,
+        ];
+
+        $request = Laracombee::addBookmark($this->userId, $this->itemId, $options);
+
+        $response = Laracombee::send($request)->wait();
+
+        $this->assertInstanceOf(\Recombee\RecommApi\Requests\Request::class, $request);
+        $this->assertEquals($response, 'ok');
+    }
+
     public function testRecommendItemsToUser()
     {
         $filter = [];
@@ -150,54 +218,6 @@ class LaracombeeTest extends TestCase
         }
     }
 
-    public function testAddPurchase()
-    {
-        $options = [
-            'timestamp' => Carbon::now()->toIso8601String(),
-            'cascadeCreate' => true,
-            'amount' => 5,
-            'price' => 15,
-            'profit' => 20,
-        ];
-
-        $request = Laracombee::addPurchase($this->userId, $this->itemId, $options);
-
-        $response = Laracombee::send($request)->wait();
-
-        $this->assertInstanceOf(\Recombee\RecommApi\Requests\Request::class, $request);
-        $this->assertEquals($response, 'ok');
-    }
-
-    public function testDeletePurchase()
-    {
-        $options = [];
-
-        $request = Laracombee::deletePurchase($this->userId, $this->itemId, $options);
-
-        $response = Laracombee::send($request)->wait();
-
-        $this->assertInstanceOf(\Recombee\RecommApi\Requests\Request::class, $request);
-        $this->assertEquals($response, $this->recombeeResponse);
-    }
-
-    public function testAddRating()
-    {
-        $options = [
-            'timestamp' => Carbon::now()->toIso8601String(),
-            'cascadeCreate' => true,
-        ];
-
-        // rating shoud be a real number betweed  -1.0 < x < 1.0
-        $rating = 0.8;
-
-        $request = Laracombee::addRating($this->userId, $this->itemId, (float) $rating, $options);
-
-        $response = Laracombee::send($request)->wait();
-
-        $this->assertInstanceOf(\Recombee\RecommApi\Requests\Request::class, $request);
-        $this->assertEquals($response, 'ok');
-    }
-
     public function testDeleteRating()
     {
         $options = [];
@@ -208,23 +228,6 @@ class LaracombeeTest extends TestCase
 
         $this->assertInstanceOf(\Recombee\RecommApi\Requests\Request::class, $request);
         $this->assertEquals($response, $this->recombeeResponse);
-    }
-
-    public function testAddCardAddition()
-    {
-        $options = [
-            'timestamp' => Carbon::now()->toIso8601String(),
-            'cascadeCreate' => true,
-            'amount' => 5,
-            'price' => 50,
-        ];
-
-        $request = Laracombee::addCartAddition($this->userId, $this->itemId, $options);
-
-        $response = Laracombee::send($request)->wait();
-
-        $this->assertInstanceOf(\Recombee\RecommApi\Requests\Request::class, $request);
-        $this->assertEquals($response, 'ok');
     }
 
     public function testDeleteCardAddition()
@@ -239,26 +242,23 @@ class LaracombeeTest extends TestCase
         $this->assertEquals($response, $this->recombeeResponse);
     }
 
-    public function testAddBookmark()
-    {
-        $options = [
-            'timestamp' => Carbon::now()->toIso8601String(),
-            'cascadeCreate' => true,
-        ];
-
-        $request = Laracombee::addBookmark($this->userId, $this->itemId, $options);
-
-        $response = Laracombee::send($request)->wait();
-
-        $this->assertInstanceOf(\Recombee\RecommApi\Requests\Request::class, $request);
-        $this->assertEquals($response, 'ok');
-    }
-
     public function testDeleteBookmark()
     {
         $options = [];
 
         $request = Laracombee::deleteBookmark($this->userId, $this->itemId, $options);
+
+        $response = Laracombee::send($request)->wait();
+
+        $this->assertInstanceOf(\Recombee\RecommApi\Requests\Request::class, $request);
+        $this->assertEquals($response, $this->recombeeResponse);
+    }
+
+    public function testDeletePurchase()
+    {
+        $options = [];
+
+        $request = Laracombee::deletePurchase($this->userId, $this->itemId, $options);
 
         $response = Laracombee::send($request)->wait();
 
