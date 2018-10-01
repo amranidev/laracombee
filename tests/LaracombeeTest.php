@@ -205,6 +205,22 @@ class LaracombeeTest extends TestCase
         $this->assertEquals($response, $this->recombeeResponse);
     }
 
+    public function testAddCardAddition()
+    {
+        $options = [
+            'timestamp' => Carbon::now()->toIso8601String(),
+            'cascadeCreate' => true,
+            'amount' => 5,
+            'price' => 50,
+        ];
+
+        $request = Laracombee::addCartAddition($this->userId, $this->itemId, $options);
+
+        $response = Laracombee::send($request)->wait();
+
+        $this->assertEquals($response, 'ok');
+    }
+
     public function testDeleteUser()
     {
         $request = Laracombee::deleteUser($this->userId);
