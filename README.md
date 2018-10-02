@@ -8,7 +8,7 @@
 
 ### Introduction.
 
-Larcombe is a [Recombee](https://recombee.com) API package for Laravel, it provides a simple API implementation, to get recommendations based on the user's behaviors and interests, whatever you build with Laravel, an e-commerce, music marketplace or movies platform, you diffinatly need a recommendation system that can keep users diving into your platform for more time.
+Larcombe is a [Recombee](https://recombee.com) API package for Laravel, it provides a simple API implementation, to get recommendations based on the user's behaviors and interests, whatever you build with Laravel, an e-commerce, music marketplace or movies platform, you definitely need a recommendation system that can keep users diving into your platform for more time.
 
 ### What is Recombee?
 
