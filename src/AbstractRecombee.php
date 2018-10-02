@@ -2,9 +2,7 @@
 
 namespace Amranidev\Laracombee;
 
-use GuzzleHttp\Promise\Promise;
 use Recombee\RecommApi\Client;
-use Recombee\RecommApi\Exceptions;
 use Recombee\RecommApi\Requests\AddBookmark;
 use Recombee\RecommApi\Requests\AddCartAddition;
 use Recombee\RecommApi\Requests\AddDetailView;
@@ -33,7 +31,7 @@ use Recombee\RecommApi\Requests\Request;
 use Recombee\RecommApi\Requests\SetItemValues;
 use Recombee\RecommApi\Requests\SetUserValues;
 
-class AbstractRecombee
+abstract class AbstractRecombee
 {
     /**
      * @var \Recombee\RecommApi\Client
@@ -75,23 +73,9 @@ class AbstractRecombee
      *
      * @param \Recombee\RecommApi\Requests\Request $request
      *
-     * @return \GuzzleHttp\Promise\Promise
+     * @return mixed
      */
-    public function send(Request $request)
-    {
-        return $promise = new Promise(function () use (&$promise, $request) {
-            try {
-                $response = $this->client->send($request);
-                $promise->resolve($response);
-            } catch (Exceptions\ApiTimeoutException $e) {
-                $promise->reject($e->getMessage());
-            } catch (Exceptions\ResponseException $e) {
-                $promise->reject($e->getMessage());
-            } catch (Exceptions\ApiException $e) {
-                $promise->reject($e->getMessage());
-            }
-        });
-    }
+    abstract public function send(Request $request);
 
     /**
      * Add new item to recombee.
