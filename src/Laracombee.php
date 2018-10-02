@@ -2,8 +2,11 @@
 
 namespace Amranidev\Laracombee;
 
+use GuzzleHttp\Promise\Promise;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Auth\User;
+use Recombee\RecommApi\Exceptions;
+use Recombee\RecommApi\Requests\Request;
 
 class Laracombee extends AbstractRecombee
 {
@@ -114,5 +117,28 @@ class Laracombee extends AbstractRecombee
         return array_map(function ($item) {
             return $this->addItem($item);
         }, $items);
+    }
+
+    /**
+     * Send request.
+     *
+     * @param \Recombee\RecommApi\Requests\Request $request
+     *
+     * @return \GuzzleHttp\Promise\Promise
+     */
+    public function send(Request $request)
+    {
+        return $promise = new Promise(function () use (&$promise, $request) {
+            try {
+                $response = $this->client->send($request);
+                $promise->resolve($response);
+            } catch (Exceptions\ApiTimeoutException $e) {
+                $promise->reject($e->getMessage());
+            } catch (Exceptions\ResponseException $e) {
+                $promise->reject($e->getMessage());
+            } catch (Exceptions\ApiException $e) {
+                $promise->reject($e->getMessage());
+            }
+        });
     }
 }
