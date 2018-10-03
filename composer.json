@@ -3,9 +3,10 @@
     "description": "Recommendation system for laravel",
     "keywords": ["recommendation system", "php", "laravel", "recombee", "laravel and recombee", "laravel with recombee"],
     "license": "MIT",
+    "type": "laravel-package",
     "support": {
-        "issues": "https://github.com/laravel/passport/issues",
-        "source": "https://github.com/laravel/passport"
+        "issues": "https://github.com/amranidev/laracombee/issues",
+        "source": "https://github.com/amranidev/laracombee"
     },
     "require": {
         "recombee/php-api-client": "^2.2",
