@@ -33,9 +33,6 @@
         }
     },
     "extra": {
-        "branch-alias": {
-            "dev-master": "dev-master"
-        },
         "laravel": {
             "providers": [
                 "Amranidev\\LAracombee\\Providers\\LaracombeeServiceProvider"
