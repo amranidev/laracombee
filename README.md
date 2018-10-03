@@ -8,11 +8,11 @@
 
 ### Introduction.
 
-Larcombee is a [Recombee](https://recombee.com) API package for Laravel, it provides a simple API implementation, to get recommendations based on the user's behaviors and interests, whatever you build with Laravel, an e-commerce, music marketplace or movies platform, you definitely need a recommendation system that can keep users diving into your platform for more time.
+Larcombee is a [Recombee](https://recombee.com) API package for Laravel, it provides a simple API implementation, to get recommendations based on the user's behaviors and interests, whatever you build using Laravel, an e-commerce, music marketplace or movies platform, a recommendation system is a must, that way you can garantee users will spend more time on your platform.
 
 ### What is Recombee?
 
-An artificial Intelligence powered recommender as a service with an intuitive RESTful API & SDKs tailored by data scientists.
+An artificial Intelligence powered recommendation system service with an intuitive RESTful API & SDKs tailored by data scientists.
 
 Want to know more about how it works? check this following [link](https://medium.com/recombee-blog/recommender-systems-explained-d98e8221f468).
 
