@@ -31,5 +31,9 @@ Amranidev\Laracombee\Providers\LaracombeeServiceProvider::class,
 // Alias.
 'Laracombee' => Amranidev\Laracombee\facades\LaracombeeFacade::class,
 ```
+
+ 3. Create a new instance in [recombee.com](https://www.recombee.com/)
  
+ 4. Add `databaseId` and `token` to `config/laracombee.php` in your project.
+
 Congratulations, you have successfully installed Laracombee!
