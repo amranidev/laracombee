@@ -37,3 +37,61 @@ Amranidev\Laracombee\Providers\LaracombeeServiceProvider::class,
  4. Add `databaseId` and `token` to `config/laracombee.php` in your project.
 
 Congratulations, you have successfully installed Laracombee!
+
+### Usage
+
+With Laracombe, the integration of your data is simple, as you may know, Recombee used the user-item based database to predict recommendation based on users interests and interactions, so, you have to address which Laravel eloquent model you want to use as user as well as item.
+
+Go to `App\User` and add `$laracombee` that you want to be migrated to Recombee db and do the same for `item`.
+
+> Note: $laracombee property should always be static. 
+
+```php
+<?php
+
+namespace App;
+
+use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Notifications\Notifiable;
+
+class User extends Authenticatable
+{
+    use Notifiable;
+
+    public static $laracombee = ['name', 'age'];
+}
+```
+
+#### Commands.
+
+Larcombe comes with a bunch of artisan commands that provides a fluent workflow for you, such as migrate, rollback, seed, add columns and drop columns.
+
+##### Migration and Rollback commands.
+
+As you remember, every time you trigger the migrate or the rollback command, Laracombee will look for `$laracombee` property and prepare the schema, you just have to specify which catalog you want to migrate/rollback (user/item) and provide the model namespace, Laracombee will do the job for you.
+
+Migrate **`user`** : `php artisan laracombee:migrate user --class=\App\User`
+
+Migrate **`item`** : `php artisan laracombee:migrate item --class=\App\Product`
+
+Rollback **`user`** : `php artisan laracombee:rollback user --class=\App\User`
+
+Rollback **`item`** : `php artisan laracombee:rollback item --class=\App\Product`
+
+##### The Seed command.
+
+If you want to index your users or items records that already exist in your database to recombee, you can run the seed command.
+
+> Note: Running this command may take several minutes, depends on your records.
+
+Index **`user`** : `php artisan laracombee:seed user --class=\App\User`
+
+Index **`item`** : `php artisan laracombee:seed item --class=\App\Product`
+
+##### Add/Drop columns.
+
+You can add or frop columns with these following commands:
+
+Add column : `php artisan laracombee:add email:string age:integer --to=user`
+
+Drop column : `php artisan laracombee:drop email age --from=user`
