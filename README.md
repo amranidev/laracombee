@@ -18,4 +18,18 @@ Want to know more about how it works? check this following [link](https://medium
 
 ### Getting started.
 
-Coming soon...
+ 1. Install Laracombee:
+ 
+`composer require amranidev/laracombee`
+ 
+ 2. Add the service provider and the alias to config/app.php:
+ 
+```php
+// Service provider.
+Amranidev\Laracombee\Providers\LaracombeeServiceProvider::class,
+
+// Alias.
+'Laracombee' => Amranidev\Laracombee\facades\LaracombeeFacade::class,
+```
+ 
+Congratulations, you have successfully installed Laracombee!

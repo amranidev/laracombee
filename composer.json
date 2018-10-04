@@ -35,7 +35,7 @@
     "extra": {
         "laravel": {
             "providers": [
-                "Amranidev\\LAracombee\\Providers\\LaracombeeServiceProvider"
+                "Amranidev\\Laracombee\\Providers\\LaracombeeServiceProvider"
             ]
         }
     }
