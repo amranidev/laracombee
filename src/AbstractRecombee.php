@@ -24,6 +24,7 @@ use Recombee\RecommApi\Requests\ListItemDetailViews;
 use Recombee\RecommApi\Requests\ListItemRatings;
 use Recombee\RecommApi\Requests\ListItems;
 use Recombee\RecommApi\Requests\ListUserDetailViews;
+use Recombee\RecommApi\Requests\ListUserRatings;
 use Recombee\RecommApi\Requests\ListUsers;
 use Recombee\RecommApi\Requests\MergeUsers;
 use Recombee\RecommApi\Requests\RecommendItemsToUser;
@@ -412,15 +413,29 @@ abstract class AbstractRecombee
     }
 
     /**
-     * list item ratings.
+     * List item ratings.
      *
      * @param int   $item_id
      *
-     * @return \Recombee\RecommApi\Requests\DeleteRating
+     * @return \Recombee\RecommApi\Requests\ListItemRatings
      */
     public function listItemRatings($item_id)
     {
         $ratings = new ListItemRatings($item_id);
+
+        return $ratings;
+    }
+
+    /**
+     * list user ratings.
+     *
+     * @param int   $user_id
+     *
+     * @return \Recombee\RecommApi\Requests\ListUserRatings
+     */
+    public function listUserRatings($user_id)
+    {
+        $ratings = new ListUserRatings($user_id);
 
         return $ratings;
     }
