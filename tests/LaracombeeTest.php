@@ -94,15 +94,6 @@ class LaracombeeTest extends TestCase
 
         $this->assertInstanceOf(\Recombee\RecommApi\Requests\Request::class, $request);
         $this->assertEquals($response, 'ok');
-
-        $deleteOptions = ['timestamp' => $time];
-
-        $delete = Laracombee::deletePurchase($this->userId, $this->itemId, $deleteOptions);
-
-        $deleteResponse = Laracombee::send($delete)->wait();
-
-        $this->assertInstanceOf(\Recombee\RecommApi\Requests\Request::class, $delete);
-        $this->assertEquals($response, 'ok');
     }
 
     public function testAddRating()
@@ -228,53 +219,62 @@ class LaracombeeTest extends TestCase
         }
     }
 
-    public function testDeleteRating()
+    public function testListItemRatings()
     {
-        $options = [];
-
-        $request = Laracombee::deleteRating($this->userId, $this->itemId, $options);
-
+        $request = Laracombee::listItemRatings($this->itemId);
         $response = Laracombee::send($request)->wait();
 
         $this->assertInstanceOf(\Recombee\RecommApi\Requests\Request::class, $request);
-        $this->assertEquals($response, $this->recombeeResponse);
+        $this->assertInternalType('array', $response);
     }
 
-    public function testDeleteCardAddition()
-    {
-        $options = [];
+    // public function testDeleteRating()
+    // {
+    //     $options = [];
 
-        $request = Laracombee::deleteCartAddition($this->userId, $this->itemId, $options);
+    //     $request = Laracombee::deleteRating($this->userId, $this->itemId, $options);
 
-        $response = Laracombee::send($request)->wait();
+    //     $response = Laracombee::send($request)->wait();
 
-        $this->assertInstanceOf(\Recombee\RecommApi\Requests\Request::class, $request);
-        $this->assertEquals($response, $this->recombeeResponse);
-    }
+    //     $this->assertInstanceOf(\Recombee\RecommApi\Requests\Request::class, $request);
+    //     $this->assertEquals($response, $this->recombeeResponse);
+    // }
 
-    public function testDeleteBookmark()
-    {
-        $options = [];
+    // public function testDeleteCardAddition()
+    // {
+    //     $options = [];
 
-        $request = Laracombee::deleteBookmark($this->userId, $this->itemId, $options);
+    //     $request = Laracombee::deleteCartAddition($this->userId, $this->itemId, $options);
 
-        $response = Laracombee::send($request)->wait();
+    //     $response = Laracombee::send($request)->wait();
 
-        $this->assertInstanceOf(\Recombee\RecommApi\Requests\Request::class, $request);
-        $this->assertEquals($response, $this->recombeeResponse);
-    }
+    //     $this->assertInstanceOf(\Recombee\RecommApi\Requests\Request::class, $request);
+    //     $this->assertEquals($response, $this->recombeeResponse);
+    // }
 
-    public function testDeleteDetailView()
-    {
-        $options = [];
+    // public function testDeleteBookmark()
+    // {
+    //     $options = [];
 
-        $request = Laracombee::deleteDetailView($this->userId, $this->itemId, $options);
+    //     $request = Laracombee::deleteBookmark($this->userId, $this->itemId, $options);
 
-        $response = Laracombee::send($request)->wait();
+    //     $response = Laracombee::send($request)->wait();
 
-        $this->assertInstanceOf(\Recombee\RecommApi\Requests\Request::class, $request);
-        $this->assertEquals($response, $this->recombeeResponse);
-    }
+    //     $this->assertInstanceOf(\Recombee\RecommApi\Requests\Request::class, $request);
+    //     $this->assertEquals($response, $this->recombeeResponse);
+    // }
+
+    // public function testDeleteDetailView()
+    // {
+    //     $options = [];
+
+    //     $request = Laracombee::deleteDetailView($this->userId, $this->itemId, $options);
+
+    //     $response = Laracombee::send($request)->wait();
+
+    //     $this->assertInstanceOf(\Recombee\RecommApi\Requests\Request::class, $request);
+    //     $this->assertEquals($response, $this->recombeeResponse);
+    // }
 
     public function testDeleteUser()
     {
