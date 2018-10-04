@@ -21,6 +21,7 @@ use Recombee\RecommApi\Requests\DeleteRating;
 use Recombee\RecommApi\Requests\DeleteUser;
 use Recombee\RecommApi\Requests\DeleteUserProperty;
 use Recombee\RecommApi\Requests\ListItemDetailViews;
+use Recombee\RecommApi\Requests\ListItemRatings;
 use Recombee\RecommApi\Requests\ListItems;
 use Recombee\RecommApi\Requests\ListUserDetailViews;
 use Recombee\RecommApi\Requests\ListUsers;
@@ -408,6 +409,20 @@ abstract class AbstractRecombee
         $rating = new DeleteRating($user_id, $item_id, $options);
 
         return $rating;
+    }
+
+    /**
+     * list item ratings.
+     *
+     * @param int   $item_id
+     *
+     * @return \Recombee\RecommApi\Requests\DeleteRating
+     */
+    public function listItemRatings($item_id)
+    {
+        $ratings = new ListItemRatings($item_id);
+
+        return $ratings;
     }
 
     /**
