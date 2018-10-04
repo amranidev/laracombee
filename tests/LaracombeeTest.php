@@ -228,6 +228,15 @@ class LaracombeeTest extends TestCase
         $this->assertInternalType('array', $response);
     }
 
+    public function testListUserRatings()
+    {
+        $request = Laracombee::listUserRatings($this->userId);
+        $response = Laracombee::send($request)->wait();
+
+        $this->assertInstanceOf(\Recombee\RecommApi\Requests\Request::class, $request);
+        $this->assertInternalType('array', $response);
+    }
+
     // public function testDeleteRating()
     // {
     //     $options = [];
