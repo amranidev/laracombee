@@ -90,7 +90,7 @@ Index **`item`** : `php artisan laracombee:seed item --class=\App\Product`
 
 ##### Add/Drop columns.
 
-You can add or frop columns with these following commands:
+You can add or drop columns with these following commands:
 
 Add column : `php artisan laracombee:add email:string age:integer --to=user`
 
