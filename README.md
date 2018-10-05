@@ -96,3 +96,20 @@ You can add or drop columns with these following commands:
 Add column : `php artisan laracombee:add email:string age:integer --to=user`
 
 Drop column : `php artisan laracombee:drop email age --from=user`
+
+### Laracombee magic methods.
+
+Laracombee provides a bunch of magic methods that you can use.
+
+#### Adding users.
+
+```php
+public function addUserToRecombee(Request $request)
+{
+    $user = \App\User::findOrFail($request->get('id'));
+    
+    $recombeeUser = Laracombee::addUser($user);
+    
+    Laracombee::send($recombeeUser)->wait();
+}
+```
