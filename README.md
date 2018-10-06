@@ -99,17 +99,26 @@ Drop column : `php artisan laracombee:drop email age --from=user`
 
 ### Laracombee magic methods.
 
-Laracombee provides a bunch of magic methods that you can use.
+The package allows to manage recombee users/items through magic methods.
 
-#### Adding users.
+#### Example.
 
 ```php
-public function addUserToRecombee(Request $request)
-{
-    $user = \App\User::findOrFail($request->get('id'));
-    
-    $recombeeUser = Laracombee::addUser($user);
-    
-    Laracombee::send($recombeeUser)->wait();
-}
+// Add a user to recombee.
+
+$user = User::findOrFail($id);
+
+$addUser = Laracombee::addUser($user);
+
+Laracombee::send($addUser)->then(function () {
+  // Success.
+})->otherWise(function ($error) {
+  //Handle Exeption.
+})->wait();
 ```
+
+As you can see, we've used the magic method called `addUser`, which returns `\Recombee\RecommApi\Requests\Request`, then we triggered the `send` method to save the user in recombee database, let me tell you a little bit about the `send` method.
+
+This method is the one responsible for sending a request to Recombee server, whenever you want your app to interact with Recombee, you probably need to trigger this method, adding a new user, adding an item, or even deleting it.
+
+The send method always returns a promise, so it becomes easy for you to manage the response from the server.
