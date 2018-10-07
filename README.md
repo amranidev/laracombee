@@ -142,7 +142,7 @@ Laracombee::batch($users);
 
 Update user, `Laracombee::updateUser($user);`
 
-Merge users, `Laracombee::mergeUsers($user_1, $user_2);`
+Merge users, `Laracombee::mergeUsers($user1, $user2);`
 
 Add an Item, `Laracombee::addItem($item);`
 
