@@ -122,3 +122,30 @@ As you can see, we've used the magic method called `addUser`, which returns `\Re
 This method is the one responsible for sending a request to Recombee server, whenever you want your app to interact with Recombee, you probably need to trigger this method, adding a new user, adding an item, or even deleting it.
 
 The send method always returns a promise, so it becomes easy for you to manage the response from the server.
+
+You can also add multiple users as bulk to the Recombee database, if you want to, you can use `addUsers` magic method and pass an array of users through the parameter, then you must trigger `batch` method to send the request, using `batch` could be better when sending multiple requests at the same time.
+
+```php
+// Get users from your db.
+$user1 = User::findOrFail(1);
+$user2 = User::findOrFail(2);
+$user3 = User::findOrFail(3);
+
+// Prepare request.
+$users = Laracombee::addUsers([$user1, $user2, $user3]);
+
+// Send request as bulk.
+Laracombee::batch($users);
+```
+
+#### Other magic methods.
+
+Update user, `Laracombee::updateUser($user);`
+
+Merge users, `Laracombee::mergeUsers($user_1, $user_2);`
+
+Add an Item, `Laracombee::addItem($item);`
+
+Update an item, `Laracombee::updateItem($item);`
+
+Add multiple items, `Laracombee::addItems($items);`
