@@ -149,3 +149,27 @@ Add an Item, `Laracombee::addItem($item);`
 Update an item, `Laracombee::updateItem($item);`
 
 Add multiple items, `Laracombee::addItems($items);`
+
+### API
+
+Laracombee follows the same naming conventions as recombee, please check recombee api [docs](https://docs.recombee.com/api.html).
+
+#### Users
+
+- Deletes a user of given userId from the database, `Laracombee::deleteUser($user_id);`
+
+- Merge two users, `Laracombee::mergeUsersWithId($source_user_id, $target_user_id);`
+
+Merges interactions (purchases, ratings, bookmarks, detail views ...) of two different users under a single user ID. This is especially useful for online e-commerce applications working with anonymous users identified by unique tokens such as the session ID. In such applications, it may often happen that a user owns a persistent account, yet accesses the system anonymously while, e.g., putting items into a shopping cart. At some point in time, such as when the user wishes to confirm the purchase, (s)he logs into the system using his/her username and password. The interactions made under anonymous session ID then become connected with the persistent account, and merging these two together becomes desirable.
+
+Merging happens between two users referred to as the target and the source. After the merge, all the interactions of the source user are attributed to the target user, and the source user is deleted.
+
+- Gets a list of IDs of users currently present in the catalog, `Laracombee::listUsers($options);`.
+
+- Adding an user property is somehow equivalent to adding a column to the table of users. The users may be characterized by various properties of different types, `Laracombee::addUserProperty($property, $type);`.
+
+- Deleting an user property is roughly equivalent to removing a column from the table of users, `Laracombee::deleteUserProperty($property);`.
+
+- Set/update (some) property values of a given user. The properties (columns) must be previously created by Add user property, `Laracombee::setUserValues($user_id, $fields);`.
+
+- Get all the current property values of a given user, `Laracombee::getUserValues($user_id);`.
