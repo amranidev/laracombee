@@ -233,7 +233,7 @@ abstract class AbstractRecombee
     /**
      * Get Users Values.
      *
-     * @param string   $user_id
+     * @param string $user_id
      *
      * @return \Recombee\RecommApi\Requests\GetUserValues
      */
