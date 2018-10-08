@@ -84,8 +84,8 @@ abstract class AbstractRecombee
     /**
      * Add new item to recombee.
      *
-     * @param string   $item_id
-     * @param array $fields
+     * @param string $item_id
+     * @param array  $fields
      *
      * @return \Recombee\RecommApi\Requests\SetItemValues
      */
@@ -103,7 +103,7 @@ abstract class AbstractRecombee
     /**
      * Get item values.
      *
-     * @param string   $item_id
+     * @param string $item_id
      *
      * @return \Recombee\RecommApi\Requests\GetItemValues
      */
