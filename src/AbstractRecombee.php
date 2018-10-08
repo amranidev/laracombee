@@ -20,6 +20,7 @@ use Recombee\RecommApi\Requests\DeletePurchase;
 use Recombee\RecommApi\Requests\DeleteRating;
 use Recombee\RecommApi\Requests\DeleteUser;
 use Recombee\RecommApi\Requests\DeleteUserProperty;
+use Recombee\RecommApi\Requests\GetUserValues;
 use Recombee\RecommApi\Requests\ListItemDetailViews;
 use Recombee\RecommApi\Requests\ListItemRatings;
 use Recombee\RecommApi\Requests\ListItems;
@@ -169,7 +170,7 @@ abstract class AbstractRecombee
     /**
      * Delete user.
      *
-     * @param int $user_id
+     * @param string $user_id
      *
      * @return \Recombee\RecommApi\Requests\DeleteUser
      */
@@ -220,13 +221,27 @@ abstract class AbstractRecombee
      *
      * @return \Recombee\RecommApi\Requests\SetUserValues
      */
-    public function setUserValues($user_id, array $fileds)
+    public function setUserValues($user_id, array $fields)
     {
-        $user = new SetUserValues($user_id, $fileds, [
+        $user = new SetUserValues($user_id, $fields, [
             'cascadeCreate' => true,
         ]);
 
         return $user;
+    }
+
+    /**
+     * Get Users Values.
+     *
+     * @param string   $user_id
+     *
+     * @return \Recombee\RecommApi\Requests\GetUserValues
+     */
+    public function getUserValues($user_id)
+    {
+        $values = new GetUserValues($user_id);
+
+        return $values;
     }
 
     /**
