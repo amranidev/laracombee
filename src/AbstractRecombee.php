@@ -430,7 +430,7 @@ abstract class AbstractRecombee
     /**
      * List item ratings.
      *
-     * @param int   $item_id
+     * @param int $item_id
      *
      * @return \Recombee\RecommApi\Requests\ListItemRatings
      */
@@ -444,7 +444,7 @@ abstract class AbstractRecombee
     /**
      * list user ratings.
      *
-     * @param int   $user_id
+     * @param int $user_id
      *
      * @return \Recombee\RecommApi\Requests\ListUserRatings
      */
