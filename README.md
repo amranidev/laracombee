@@ -173,3 +173,14 @@ Merging happens between two users referred to as the target and the source. Afte
 - Set/update (some) property values of a given user. The properties (columns) must be previously created by Add user property, `Laracombee::setUserValues($user_id, $fields);`.
 
 - Get all the current property values of a given user, `Laracombee::getUserValues($user_id);`.
+
+#### Items
+
+- Adding an item property is somehow equivalent to adding a column to the table of items. The items may be characterized by various properties of different types, `Laracombee::addItemProperty($property, $type);`
+
+- Deleting an item property is roughly equivalent to removing a column from the table of items, `Laracombee::deleteItemProperty($property);`
+
+- Set/update (some) property values of a given item. The properties (columns) must be previously created by Add item property, `Laracombee::setItemValues($item_id, $fields);`
+
+- Get all the current property values of a given item, `Laracombee::getItemValues($item_id);`
+
