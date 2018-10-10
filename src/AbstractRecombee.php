@@ -188,7 +188,7 @@ abstract class AbstractRecombee
     /**
      * Get item property info.
      *
-     * @param  string $property_name
+     * @param string $property_name
      *
      * @return \Recombee\RecommApi\Requests\GetItemPropertyInfo
      */
