@@ -20,6 +20,7 @@ use Recombee\RecommApi\Requests\DeletePurchase;
 use Recombee\RecommApi\Requests\DeleteRating;
 use Recombee\RecommApi\Requests\DeleteUser;
 use Recombee\RecommApi\Requests\DeleteUserProperty;
+use Recombee\RecommApi\Requests\GetItemPropertyInfo;
 use Recombee\RecommApi\Requests\GetItemValues;
 use Recombee\RecommApi\Requests\GetUserValues;
 use Recombee\RecommApi\Requests\ListItemDetailViews;
@@ -182,6 +183,18 @@ abstract class AbstractRecombee
         $items->setTimeout($this->timeout);
 
         return $items;
+    }
+
+    /**
+     * Get item property info.
+     * @param  string $property_name
+     * @return \Recombee\RecommApi\Requests\GetItemPropertyInfo
+     */
+    public function getItemPropertyInfo(string $property_name)
+    {
+        $info = new GetItemPropertyInfo($property_name);
+
+        return $info;
     }
 
     /**
