@@ -150,11 +150,11 @@ Update an item, `Laracombee::updateItem($item);`
 
 Add multiple items, `Laracombee::addItems($items);`
 
-### API
+### API.
 
 Laracombee follows the same naming conventions as recombee, please check recombee api [docs](https://docs.recombee.com/api.html).
 
-#### Users
+#### Users.
 
 - Deletes a user of given userId from the database, `Laracombee::deleteUser($user_id);`
 
@@ -174,7 +174,7 @@ Merging happens between two users referred to as the target and the source. Afte
 
 - Get all the current property values of a given user, `Laracombee::getUserValues($user_id);`.
 
-#### Items
+#### Items.
 
 - Adding an item property is somehow equivalent to adding a column to the table of items. The items may be characterized by various properties of different types, `Laracombee::addItemProperty($property, $type);`
 
@@ -184,3 +184,18 @@ Merging happens between two users referred to as the target and the source. Afte
 
 - Get all the current property values of a given item, `Laracombee::getItemValues($item_id);`
 
+- Deletes an item of given itemId from the catalog, `Laracombee::deleteItem($item_id);`
+
+#### User-Item Interactions.
+
+The following method allow adding, deleting and listing of interactions between the users and the items.
+
+##### Detail views
+
+- Adds a detail view of a given item made by a given user, `Laracombee::addDetailView($user_id, $item_id, $options);`
+
+- Deletes an existing detail view uniquely specified by (userId, itemId, and timestamp) or all the detail views with given userId and itemId if timestamp is omitted, `Laracombee::deleteDetailView($user_id, $item_id, $options);`
+
+- List all the detail views of a given item ever made by different users, `Laracombee::listItemDetailViews($item_id);`
+
+- Lists all the detail views of different items ever made by a given user, `Laracombee::listUserDetailViews($user_id);`
