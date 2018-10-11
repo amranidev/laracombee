@@ -84,13 +84,13 @@ class LaracombeeCommand extends Command
     /**
      * Add item to recombee.
      *
-     * @param \Illuminate\Database\Eloquent\Model $user.
+     * @param \Illuminate\Database\Eloquent\Model $item.
      *
      * @return \Recombee\RecommApi\Requests\Request
      */
     public function addItem(Model $item)
     {
-        return Laracombee::addUser($user);
+        return Laracombee::addItem($user);
     }
 
     /**
