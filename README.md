@@ -7,6 +7,8 @@
   <a href="http://laravel.com"><img src="https://img.shields.io/badge/built%20for-laravel-blue.svg" alt="Laravel"></a>
 </p>
 
+> Under development stage, thanks for your testing.
+
 ### Introduction.
 
 Larcombee is a [Recombee](https://recombee.com) API package for Laravel, it provides a simple API implementation, to get recommendations based on the user's behaviors and interests, whatever you build using Laravel, an e-commerce, music marketplace or movies platform, a recommendation system is a must, that way you can garantee users will spend more time on your platform.
