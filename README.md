@@ -201,3 +201,9 @@ The following method allow adding, deleting and listing of interactions between 
 - List all the detail views of a given item ever made by different users, `Laracombee::listItemDetailViews($item_id);`
 
 - Lists all the detail views of different items ever made by a given user, `Laracombee::listUserDetailViews($user_id);`
+
+##### Purchases
+
+- Adds a purchase of a given item made by a given user, `Laracombee::dddPurchase($user_id, $item_id, $options);`
+
+- Deletes an existing purchase uniquely specified by userId, itemId, and timestamp or all the purchases with given userId and itemId if timestamp is omitted, `Laracombee::deletePurchase($user_id, $item_id, $options);`
