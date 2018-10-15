@@ -34,6 +34,11 @@ class LaracombeeServiceProvider extends ServiceProvider
         );
     }
 
+    /**
+     * Seriveprovider's boot method.
+     * 
+     * @return void
+     */
     public function boot()
     {
         $configPath = __DIR__.'/../../config/laracombee.php';
