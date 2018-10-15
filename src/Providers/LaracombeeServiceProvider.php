@@ -36,7 +36,7 @@ class LaracombeeServiceProvider extends ServiceProvider
 
     /**
      * Seriveprovider's boot method.
-     * 
+     *
      * @return void
      */
     public function boot()
