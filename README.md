@@ -226,3 +226,12 @@ The following method allow adding, deleting and listing of interactions between 
 - Adds a bookmark of a given item made by a given user, `Laracombee::addBookmark($user_id, $item_id, $options);`
 
 - Deletes a bookmark uniquely specified by userId, itemId, and timestamp or all the bookmarks with given userId and itemId if timestamp is omitted, `Laracombee::deleteBookmark($user_id, $item_id, $options);`
+
+
+##### Retrieve Recommendations
+
+Recommendation methods are capable of recommending items (Recommend items to user, Recommend users to user).
+
+- Based on user’s past interactions (purchases, ratings, etc.) with the items, recommends top-N items that are most likely to be of high value for a given user, `Laracombee::recommendItemsToUser($user_id, $limit, $options);`
+
+- Get similar users as some given user, based on the user’s past interactions (purchases, ratings, etc.) and values of properties, `Laracombee::recommendUsersToUser($user_id, $limit, $options);`
