@@ -140,6 +140,20 @@ $users = Laracombee::addUsers([$user1, $user2, $user3]);
 Laracombee::batch($users);
 ```
 
+You can also recommend items to user.
+
+```php
+
+$user = User::findOrFail($id);
+
+// Prepare the request for recombee server, we need 10 recommended items for a given user.
+$recommendations = Laracombee::recommendTo($user, 1O);
+
+// Results
+$response = Laracombee::send($recommendations)->wait();
+
+```
+
 #### Other magic methods.
 
 Update user, `Laracombee::updateUser($user);`
