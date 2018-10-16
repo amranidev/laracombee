@@ -120,6 +120,20 @@ class Laracombee extends AbstractRecombee
     }
 
     /**
+     * Recommend items to user.
+     *
+     * @param \Illuminate\Foundation\Auth\User $user
+     * @param int                              $limit
+     * @param array                            $options
+     *
+     * @return \Recombee\RecommApi\Requests\Request $request
+     */
+    public function recommendTo(User $user, $limit = 10, $options = [])
+    {
+        return $this->recommendItemsToUser($user->id, $limit, $options);
+    }
+
+    /**
      * Send request.
      *
      * @param \Recombee\RecommApi\Requests\Request $request
