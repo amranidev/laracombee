@@ -207,3 +207,22 @@ The following method allow adding, deleting and listing of interactions between 
 - Adds a purchase of a given item made by a given user, `Laracombee::dddPurchase($user_id, $item_id, $options);`
 
 - Deletes an existing purchase uniquely specified by userId, itemId, and timestamp or all the purchases with given userId and itemId if timestamp is omitted, `Laracombee::deletePurchase($user_id, $item_id, $options);`
+
+##### Ratings
+
+- Adds a rating of given item made by a given user, `Laracombee::addRating($user_id, $iten_id, $options);`
+
+- Deletes an existing rating specified by (userId, itemId, timestamp) from the database or all the ratings with given userId and itemId if timestamp is omitted, `Laracombee::deleteRating($user_id, $item_id, $options);`
+
+##### Cart additions
+
+- Adds a cart addition of a given item made by a given user, `Laracombee::addCartAddition($user_id, $item_id, $options);`
+
+- Deletes an existing cart addition uniquely specified by userId, itemId, and timestamp or all the cart additions with given userId and itemId if timestamp is omitted, `Laracombee::deleteCartAddition($user_id, $item_id, $options);`
+
+
+##### Bookmarks
+
+- Adds a bookmark of a given item made by a given user, `Laracombee::addBookmark($user_id, $item_id, $options);`
+
+- Deletes a bookmark uniquely specified by userId, itemId, and timestamp or all the bookmarks with given userId and itemId if timestamp is omitted, `Laracombee::deleteBookmark($user_id, $item_id, $options);`
