@@ -75,7 +75,7 @@ class RollbackCommand extends LaracombeeCommand
         $properties = $class::$laracombee;
 
         return collect($properties)->map(function (string $type, string $property) {
-            return $this->{'delete' . ucfirst($this->argument('type')) . 'Property'}($property, $type);
+            return $this->{'delete'.ucfirst($this->argument('type')).'Property'}($property, $type);
         });
     }
 }
