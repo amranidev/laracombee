@@ -73,13 +73,13 @@ Larcombe comes with a bunch of artisan commands that provides a fluent workflow 
 
 As you remember, every time you trigger the migrate or the rollback command, Laracombee will look for `$laracombee` property and prepare the schema, you just have to specify which catalog you want to migrate/rollback (user/item) and provide the model namespace, Laracombee will do the job for you.
 
-Migrate **`user`** : `php artisan laracombee:migrate user --class=\App\User`
+Migrate **`user`** : `php artisan laracombee:migrate user --class=\App\\User`
 
-Migrate **`item`** : `php artisan laracombee:migrate item --class=\App\Product`
+Migrate **`item`** : `php artisan laracombee:migrate item --class=\App\\Product`
 
-Rollback **`user`** : `php artisan laracombee:rollback user --class=\App\User`
+Rollback **`user`** : `php artisan laracombee:rollback user --class=\App\\User`
 
-Rollback **`item`** : `php artisan laracombee:rollback item --class=\App\Product`
+Rollback **`item`** : `php artisan laracombee:rollback item --class=\App\\Product`
 
 ##### The Seed command.
 
