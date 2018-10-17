@@ -118,7 +118,7 @@ abstract class AbstractRecombee
     }
 
     /**
-     * Get recommended items.
+     * Recommend items to user.
      *
      * @param int   $user_id
      * @param int   $limit
@@ -126,7 +126,7 @@ abstract class AbstractRecombee
      *
      * @return mixed
      */
-    public function recommendItemsToUser($user_id, int $limit, array $filters)
+    public function recommendItemsToUser($user_id, int $limit = 10, array $filters = [])
     {
         $items = new RecommendItemsToUser($user_id, $limit, $filters);
 
@@ -144,7 +144,7 @@ abstract class AbstractRecombee
      *
      * @return mixed
      */
-    public function recommendUsersToUser($usre_id, int $limit, array $filters)
+    public function recommendUsersToUser($usre_id, int $limit = 10, array $filters = [])
     {
         $users = new RecommendUsersToUser($user_id, $limit, $filters);
 
