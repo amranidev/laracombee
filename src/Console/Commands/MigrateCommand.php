@@ -65,10 +65,16 @@ class MigrateCommand extends LaracombeeCommand
     public function prepareScope()
     {
         $class = $this->option('class');
+
+        if (!class_exists($class)) {
+            $this->error("Class $class doesn't exists!");
+            die();
+        }
+
         $properties = $class::$laracombee;
 
         return collect($properties)->map(function (string $type, string $property) {
-            return $this->{'add'.ucfirst($this->argument('type')).'Property'}($property, $type);
+            return $this->{'add' . ucfirst($this->argument('type')) . 'Property'}($property, $type);
         });
     }
 }
