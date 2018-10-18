@@ -2,9 +2,9 @@
 
 namespace Amranidev\Laracombee\Console\Commands;
 
-use Amranidev\Laracombee\Console\LaracombeeCommand;
-use Illuminate\Console\Command;
 use Laracombee;
+use Illuminate\Console\Command;
+use Amranidev\Laracombee\Console\LaracombeeCommand;
 
 class SeedCommand extends LaracombeeCommand
 {
