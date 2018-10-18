@@ -2,10 +2,10 @@
 
 namespace Amranidev\Laracombee\Console;
 
-use Illuminate\Console\Command;
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Foundation\Auth\User;
 use Laracombee;
+use Illuminate\Console\Command;
+use Illuminate\Foundation\Auth\User;
+use Illuminate\Database\Eloquent\Model;
 
 class LaracombeeCommand extends Command
 {
