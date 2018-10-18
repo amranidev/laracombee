@@ -2,13 +2,13 @@
 
 namespace Amranidev\Laracombee\Providers;
 
-use Amranidev\Laracombee\Console\Commands\AddColumnsCommand;
-use Amranidev\Laracombee\Console\Commands\DropColumnsCommand;
-use Amranidev\Laracombee\Console\Commands\MigrateCommand;
-use Amranidev\Laracombee\Console\Commands\RollbackCommand;
-use Amranidev\Laracombee\Console\Commands\SeedCommand;
 use Amranidev\Laracombee\Laracombee;
 use Illuminate\Support\ServiceProvider;
+use Amranidev\Laracombee\Console\Commands\SeedCommand;
+use Amranidev\Laracombee\Console\Commands\MigrateCommand;
+use Amranidev\Laracombee\Console\Commands\RollbackCommand;
+use Amranidev\Laracombee\Console\Commands\AddColumnsCommand;
+use Amranidev\Laracombee\Console\Commands\DropColumnsCommand;
 
 class LaracombeeServiceProvider extends ServiceProvider
 {

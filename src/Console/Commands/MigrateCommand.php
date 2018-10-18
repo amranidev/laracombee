@@ -2,8 +2,8 @@
 
 namespace Amranidev\Laracombee\Console\Commands;
 
-use Amranidev\Laracombee\Console\LaracombeeCommand;
 use Laracombee;
+use Amranidev\Laracombee\Console\LaracombeeCommand;
 
 class MigrateCommand extends LaracombeeCommand
 {

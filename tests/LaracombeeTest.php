@@ -2,8 +2,8 @@
 
 namespace Amranidev\Laracombee\Tests;
 
-use Carbon\Carbon;
 use Laracombee;
+use Carbon\Carbon;
 
 class LaracombeeTest extends TestCase
 {
