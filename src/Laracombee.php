@@ -3,9 +3,9 @@
 namespace Amranidev\Laracombee;
 
 use GuzzleHttp\Promise\Promise;
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Foundation\Auth\User;
 use Recombee\RecommApi\Exceptions;
+use Illuminate\Foundation\Auth\User;
+use Illuminate\Database\Eloquent\Model;
 use Recombee\RecommApi\Requests\Request;
 
 class Laracombee extends AbstractRecombee
