@@ -2,6 +2,7 @@
 
 namespace Amranidev\Laracombee;
 
+
 use Recombee\RecommApi\Client;
 use Recombee\RecommApi\Requests\Batch;
 use Recombee\RecommApi\Requests\Request;
@@ -17,6 +18,7 @@ use Recombee\RecommApi\Requests\DeleteRating;
 use Recombee\RecommApi\Requests\AddDetailView;
 use Recombee\RecommApi\Requests\GetItemValues;
 use Recombee\RecommApi\Requests\GetUserValues;
+use Recombee\RecommApi\Requests\ResetDatabase;
 use Recombee\RecommApi\Requests\SetItemValues;
 use Recombee\RecommApi\Requests\SetUserValues;
 use Recombee\RecommApi\Requests\DeleteBookmark;
@@ -549,5 +551,17 @@ abstract class AbstractRecombee
         $bookmark = new DeleteBookmark($user_id, $item_id, $options);
 
         return $bookmark;
+    }
+    
+    /**
+     * Reset database 
+     *
+     * @return \Recombee\RecommApi\Requests\ResetDatabase
+     */
+    public function resetDatabase()
+    {
+        $reset = new ResetDatabase();
+
+        return $reset;
     }
 }
