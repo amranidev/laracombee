@@ -360,10 +360,10 @@ class LaracombeeTest extends TestCase
 
     public function testResetDatabase()
     {
-    	$request = Laracombee::resetDatabase();
-	
-	$response = Laracombee::send($request)->wait();
-	
-	$this->assertEquals($response, $this->recombeeResponse);
+        $request = Laracombee::resetDatabase();
+
+        $response = Laracombee::send($request)->wait();
+
+        $this->assertEquals($response, $this->recombeeResponse);
     }
 }
