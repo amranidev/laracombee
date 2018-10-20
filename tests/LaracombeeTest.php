@@ -243,7 +243,7 @@ class LaracombeeTest extends TestCase
         $response = Laracombee::send($request)->wait();
 
         $this->assertInternalType('array', $response);
-        $this->assertEquals(5, count($response));
+        $this->assertEquals(1, count($response));
         $this->assertInstanceOf(\Recombee\RecommApi\Requests\Request::class, $request);
 
         foreach ($response as $user) {
