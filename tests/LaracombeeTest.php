@@ -357,4 +357,13 @@ class LaracombeeTest extends TestCase
         $this->assertInstanceOf(\Recombee\RecommApi\Requests\Request::class, $request);
         $this->assertEquals($response, $this->recombeeResponse);
     }
+
+    public function testResetDatabase()
+    {
+    	$request = Laracombee::resetDatabase();
+	
+	$response = Laracombee::send($request)->wait();
+	
+	$this->assertEquals($response, $this->recombeeResponse);
+    }
 }
