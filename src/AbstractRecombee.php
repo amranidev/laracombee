@@ -2,7 +2,6 @@
 
 namespace Amranidev\Laracombee;
 
-
 use Recombee\RecommApi\Client;
 use Recombee\RecommApi\Requests\Batch;
 use Recombee\RecommApi\Requests\Request;
@@ -552,9 +551,9 @@ abstract class AbstractRecombee
 
         return $bookmark;
     }
-    
+
     /**
-     * Reset database 
+     * Reset database.
      *
      * @return \Recombee\RecommApi\Requests\ResetDatabase
      */
