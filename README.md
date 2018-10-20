@@ -249,3 +249,76 @@ Recommendation methods are capable of recommending items (Recommend items to use
 - Based on user’s past interactions (purchases, ratings, etc.) with the items, recommends top-N items that are most likely to be of high value for a given user, `Laracombee::recommendItemsToUser($user_id, $limit, $options);`
 
 - Get similar users as some given user, based on the user’s past interactions (purchases, ratings, etc.) and values of properties, `Laracombee::recommendUsersToUser($user_id, $limit, $options);`
+
+### Tailor your own magic methods.
+
+Sometimes, we need to keep our code consistent, so we wish that we can extend the installed package functionality and adapt it to our needs.
+
+You can tailor your API however you like, you can do that by extending the `AbstractRecombee` class and implement the `send` abstract method, then you're good to go.
+
+Example:
+
+Let's say that you don't like the way Laracombee handle recombee requests/response with promises, dealing with exceptions the way you want, and also, you need a method that can make a user as a top seller in recombee database.
+
+Lets create a new class, you can register it as a facade (if you would like to).
+
+```php
+
+<?php
+
+namespace Acme\Myrecombee;
+
+use Recombee\RecommApi\Requests\Request;
+use Amranidev\Laracombee\AbstractRecombee;
+
+class MyRecombee extends AbstractRecombee
+{
+    public function __construct()
+    {
+        parent::__construct();
+    }
+    
+    /**
+     * @param \App\User $user
+     */
+    public function setTopSeller(User $user)
+    {
+        // Note that we assume that 'isTopSeller' column is already exists in the db. 
+        return $this->setUserValues($user->id, ['isTopSeller' => true]);
+    }
+    
+     /**
+      * Send request.
+      *
+      * @param \Recombee\RecommApi\Requests\Request $request
+      *
+      * @return mixed
+      */
+     public function send(Request $request)
+     {       
+         try {
+             $response = $this->client->send($request);
+         } catch (Exceptions\ApiTimeoutException $e) {
+              // Deal with Api exception
+         } catch (Exceptions\ResponseException $e) {
+              // Deal with Response exception
+         } catch (Exceptions\ApiException $e) {
+              // Deal with Api exception
+         }
+
+         return $response;
+     }
+}
+```
+
+Then you can use these functionality in your project.
+
+```php
+
+$user = User::findorfail($id);
+
+$request = MyRecombee::setTopSeller($user);
+
+$response = MyRecombee::send($request);
+
+```
