@@ -3,7 +3,7 @@
 </p>
 
 <p align="center">
-<a href="https://github.styleci.io/repos/144337523"><img src="https://github.styleci.io/repos/144337523/shield?branch=master" alt="StyleCI"></a> <a href="https://travis-ci.org/amranidev/laracombee"><img src="https://travis-ci.org/amranidev/laracombee.svg?branch=master" alt="StyleCI"></a> <a href="https://packagist.org/packages/amranidev/laracombee"><img src="https://poser.pugx.org/amranidev/laracombee/v/stable" alt="Version stable"></a> <a href="https://packagist.org/packages/amranidev/laracombee"><img src="https://poser.pugx.org/amranidev/laracombee/v/unstable" alt="un-Version"></a> <a href="https://packagist.org/packages/amranidev/laracombee"><img src="https://poser.pugx.org/amranidev/scaffold-interface/license" alt="un-Version"></a>
+<a href="https://github.styleci.io/repos/144337523"><img src="https://github.styleci.io/repos/144337523/shield?branch=master" alt="StyleCI"></a> <a href="https://travis-ci.org/amranidev/laracombee"><img src="https://travis-ci.org/amranidev/laracombee.svg?branch=master" alt="StyleCI"></a> <a href=https://scrutinizer-ci.com/g/amranidev/laracombee/badges><img src="https://scrutinizer-ci.com/g/amranidev/laracombee/badges/quality-score.png?b=master"></a> <a href="https://packagist.org/packages/amranidev/laracombee"><img src="https://poser.pugx.org/amranidev/laracombee/v/stable" alt="Version stable"></a> <a href="https://packagist.org/packages/amranidev/laracombee"><img src="https://poser.pugx.org/amranidev/laracombee/v/unstable" alt="un-Version"></a> <a href="https://packagist.org/packages/amranidev/laracombee"><img src="https://poser.pugx.org/amranidev/scaffold-interface/license" alt="un-Version"></a>
   <a href="http://laravel.com"><img src="https://img.shields.io/badge/built%20for-laravel-blue.svg" alt="Laravel"></a>
 </p>
 
@@ -40,6 +40,8 @@ Amranidev\Laracombee\Providers\LaracombeeServiceProvider::class,
  4. Add `databaseId` and `token` to `config/laracombee.php` in your project.
 
 Congratulations, you have successfully installed Laracombee!
+
+<hr>
 
 ### Usage
 
@@ -99,6 +101,8 @@ Add column : `php artisan laracombee:add email:string age:integer --to=user`
 
 Drop column : `php artisan laracombee:drop email age --from=user`
 
+<hr>
+
 ### Laracombee magic methods.
 
 The package allows to manage recombee users/items through magic methods.
@@ -115,7 +119,7 @@ $addUser = Laracombee::addUser($user);
 Laracombee::send($addUser)->then(function () {
   // Success.
 })->otherWise(function ($error) {
-  //Handle Exeption.
+  // Handle Exeption.
 })->wait();
 ```
 
@@ -165,6 +169,8 @@ Add an Item, `Laracombee::addItem($item);`
 Update an item, `Laracombee::updateItem($item);`
 
 Add multiple items, `Laracombee::addItems($items);`
+
+<hr>
 
 ### API.
 
@@ -250,6 +256,8 @@ Recommendation methods are capable of recommending items (Recommend items to use
 
 - Get similar users as some given user, based on the user’s past interactions (purchases, ratings, etc.) and values of properties, `Laracombee::recommendUsersToUser($user_id, $limit, $options);`
 
+<hr>
+
 ### Tailor your own magic methods.
 
 Sometimes, we need to keep our code consistent, so we wish that we can extend the installed package functionality and adapt it to our needs.
@@ -322,3 +330,9 @@ $request = MyRecombee::setTopSeller($user);
 $response = MyRecombee::send($request);
 
 ```
+
+### Contributing
+
+Thank you for considering contributing to this project! The contribution guide can be found in [Contribution guide](CONTRIBUTING.md).
+
+Feel free to report any bugs, submit any feature request, or even ask any questions.
