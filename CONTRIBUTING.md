@@ -27,4 +27,4 @@ public function bind($abstract, $concrete = null, $shared = false)
 
 ### Style CI
 
-Don't worry if your code styling isn't perfect! [StyleCI](https://styleci.io/) will automatically merge any style fixes into the Laravel repository after pull requests are merged. This allows us to focus on the content of the contribution and not the code style.
+Don't worry if your code styling isn't perfect! [StyleCI](https://styleci.io/) will automatically merge any style fixes into the Laravel-recombee (laracombee) after pull requests are merged. This allows us to focus on the content of the contribution and not the code style.
