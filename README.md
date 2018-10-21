@@ -119,7 +119,7 @@ $addUser = Laracombee::addUser($user);
 Laracombee::send($addUser)->then(function () {
   // Success.
 })->otherWise(function ($error) {
-  //Handle Exeption.
+  // Handle Exeption.
 })->wait();
 ```
 
