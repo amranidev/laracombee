@@ -330,3 +330,9 @@ $request = MyRecombee::setTopSeller($user);
 $response = MyRecombee::send($request);
 
 ```
+
+### Contributing
+
+Thank you for considering contributing to this project! The contribution guide can be found in [Contribution guide](CONTRIBUTING.md).
+
+Feel free to report any bugs, submit any feature request, or even ask any questions.
