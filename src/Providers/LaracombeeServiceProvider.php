@@ -22,16 +22,6 @@ class LaracombeeServiceProvider extends ServiceProvider
         $this->app->bind('Laracombee', function () {
             return new Laracombee();
         });
-
-        $this->commands(
-            [
-                MigrateCommand::class,
-                RollbackCommand::class,
-                AddColumnsCommand::class,
-                DropColumnsCommand::class,
-                SeedCommand::class,
-            ]
-        );
     }
 
     /**
@@ -44,5 +34,15 @@ class LaracombeeServiceProvider extends ServiceProvider
         $configPath = __DIR__.'/../../config/laracombee.php';
         $this->publishes([
             $configPath => config_path('laracombee.php'), ]);
+
+        $this->commands(
+            [
+                MigrateCommand::class,
+                RollbackCommand::class,
+                AddColumnsCommand::class,
+                DropColumnsCommand::class,
+                SeedCommand::class,
+            ]
+        );
     }
 }
