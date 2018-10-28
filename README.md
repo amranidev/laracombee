@@ -336,3 +336,8 @@ $response = MyRecombee::send($request);
 Thank you for considering contributing to this project! The contribution guide can be found in [Contribution guide](CONTRIBUTING.md).
 
 Feel free to report any bugs, submit any feature request, or even ask any questions.
+
+### Todo
+
+- Add the remaining API to larcombe, check the recombee [api](https://docs.recombee.com/api.html) docs.
+
