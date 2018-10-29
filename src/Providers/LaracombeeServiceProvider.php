@@ -19,7 +19,7 @@ class LaracombeeServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->app->bind('Laracombee', function () {
+        $this->app->singleton('Laracombee', function () {
             return new Laracombee();
         });
     }
@@ -31,9 +31,9 @@ class LaracombeeServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        $configPath = __DIR__.'/../../config/laracombee.php';
+        $configPath = __DIR__ . '/../../config/laracombee.php';
         $this->publishes([
-            $configPath => config_path('laracombee.php'), ]);
+            $configPath => config_path('laracombee.php')]);
 
         $this->commands(
             [
