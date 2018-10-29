@@ -89,9 +89,9 @@ If you want to index your users or items records that already exist in your data
 
 > Note: Running this command may take several minutes, depends on your records.
 
-Index **`user`** : `php artisan laracombee:seed user --class=\App\User`
+Index **`user`** : `php artisan laracombee:seed user --class=\App\\User`
 
-Index **`item`** : `php artisan laracombee:seed item --class=\App\Product`
+Index **`item`** : `php artisan laracombee:seed item --class=\App\\Product`
 
 ##### Add/Drop columns.
 
@@ -336,3 +336,8 @@ $response = MyRecombee::send($request);
 Thank you for considering contributing to this project! The contribution guide can be found in [Contribution guide](CONTRIBUTING.md).
 
 Feel free to report any bugs, submit any feature request, or even ask any questions.
+
+### Todo
+
+- Add the remaining API to larcombe, check the recombee [api](https://docs.recombee.com/api.html) docs.
+
