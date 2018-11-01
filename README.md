@@ -39,8 +39,6 @@ Amranidev\Laracombee\Providers\LaracombeeServiceProvider::class,
 
 Congratulations, you have successfully installed Laracombee!
 
-<hr>
-
 # Usage
 
 With Laracombe, the integration of your data is simple, as you may know, Recombee used the user-item based database to predict recommendation based on users interests and interactions, so, you have to address which Laravel eloquent model you want to use as user as well as item.
@@ -98,8 +96,6 @@ You can add or drop columns with these following commands:
 Add column : `php artisan laracombee:add email:string age:integer --to=user`
 
 Drop column : `php artisan laracombee:drop email age --from=user`
-
-<hr>
 
 ## Laracombee magic methods.
 
@@ -167,8 +163,6 @@ Add an Item, `Laracombee::addItem($item);`
 Update an item, `Laracombee::updateItem($item);`
 
 Add multiple items, `Laracombee::addItems($items);`
-
-<hr>
 
 # API.
 
@@ -253,8 +247,6 @@ Recommendation methods are capable of recommending items (Recommend items to use
 - Based on user’s past interactions (purchases, ratings, etc.) with the items, recommends top-N items that are most likely to be of high value for a given user, `Laracombee::recommendItemsToUser($user_id, $limit, $options);`
 
 - Get similar users as some given user, based on the user’s past interactions (purchases, ratings, etc.) and values of properties, `Laracombee::recommendUsersToUser($user_id, $limit, $options);`
-
-<hr>
 
 # Tailor your own magic methods.
 
