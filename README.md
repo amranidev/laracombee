@@ -3,23 +3,21 @@
 </p>
 
 <p align="center">
-<a href="https://github.styleci.io/repos/144337523"><img src="https://github.styleci.io/repos/144337523/shield?branch=master" alt="StyleCI"></a> <a href="https://travis-ci.org/amranidev/laracombee"><img src="https://travis-ci.org/amranidev/laracombee.svg?branch=master" alt="StyleCI"></a> <a href=https://scrutinizer-ci.com/g/amranidev/laracombee/badges><img src="https://scrutinizer-ci.com/g/amranidev/laracombee/badges/quality-score.png?b=master"></a> <a href="https://packagist.org/packages/amranidev/laracombee"><img src="https://poser.pugx.org/amranidev/laracombee/v/stable" alt="Version stable"></a> <a href="https://packagist.org/packages/amranidev/laracombee"><img src="https://poser.pugx.org/amranidev/laracombee/v/unstable" alt="un-Version"></a> <a href="https://packagist.org/packages/amranidev/laracombee"><img src="https://poser.pugx.org/amranidev/scaffold-interface/license" alt="un-Version"></a>
+<a href="https://github.styleci.io/repos/144337523"><img src="https://github.styleci.io/repos/144337523/shield?branch=master" alt="StyleCI"></a> <a href="https://travis-ci.org/amranidev/laracombee"><img src="https://travis-ci.org/amranidev/laracombee.svg?branch=master" alt="StyleCI"></a> <a href=https://scrutinizer-ci.com/g/amranidev/laracombee/badges><img src="https://scrutinizer-ci.com/g/amranidev/laracombee/badges/quality-score.png?b=master"></a> <a href="https://packagist.org/packages/amranidev/laracombee"><img src="https://poser.pugx.org/amranidev/laracombee/v/stable" alt="Version stable"></a> <a href="https://packagist.org/packages/amranidev/laracombee"><img src="https://poser.pugx.org/amranidev/scaffold-interface/license" alt="un-Version"></a>
   <a href="http://laravel.com"><img src="https://img.shields.io/badge/built%20for-laravel-blue.svg" alt="Laravel"></a>
 </p>
 
-> Under development stage, thanks for your testing.
-
-### Introduction.
+# Introduction.
 
 Larcombee is a [Recombee](https://recombee.com) API package for Laravel, it provides a simple API implementation, to get recommendations based on the user's behaviors and interests, whatever you build using Laravel, an e-commerce, music marketplace or movies platform, a recommendation system is a must, that way you can garantee users will spend more time on your platform.
 
-### What is Recombee?
+# What is Recombee?
 
 An artificial Intelligence powered recommendation system service with an intuitive RESTful API & SDKs tailored by data scientists.
 
 Want to know more about how it works? check this following [link](https://medium.com/recombee-blog/recommender-systems-explained-d98e8221f468).
 
-### Getting started.
+# Getting started.
 
  1. Install Laracombee:
  
@@ -43,7 +41,7 @@ Congratulations, you have successfully installed Laracombee!
 
 <hr>
 
-### Usage
+# Usage
 
 With Laracombe, the integration of your data is simple, as you may know, Recombee used the user-item based database to predict recommendation based on users interests and interactions, so, you have to address which Laravel eloquent model you want to use as user as well as item.
 
@@ -67,11 +65,11 @@ class User extends Authenticatable
 }
 ```
 
-#### Commands.
+## Commands.
 
 Larcombe comes with a bunch of artisan commands that provides a fluent workflow for you, such as migrate, rollback, seed, add columns and drop columns.
 
-##### Migration and Rollback commands.
+## Migration and Rollback commands.
 
 As you remember, every time you trigger the migrate or the rollback command, Laracombee will look for `$laracombee` property and prepare the schema, you just have to specify which catalog you want to migrate/rollback (user/item) and provide the model namespace, Laracombee will do the job for you.
 
@@ -83,7 +81,7 @@ Rollback **`user`** : `php artisan laracombee:rollback user --class=\App\\User`
 
 Rollback **`item`** : `php artisan laracombee:rollback item --class=\App\\Product`
 
-##### The Seed command.
+### The Seed command.
 
 If you want to index your users or items records that already exist in your database to recombee, you can run the seed command.
 
@@ -93,7 +91,7 @@ Index **`user`** : `php artisan laracombee:seed user --class=\App\\User`
 
 Index **`item`** : `php artisan laracombee:seed item --class=\App\\Product`
 
-##### Add/Drop columns.
+### Add/Drop columns.
 
 You can add or drop columns with these following commands:
 
@@ -103,11 +101,11 @@ Drop column : `php artisan laracombee:drop email age --from=user`
 
 <hr>
 
-### Laracombee magic methods.
+## Laracombee magic methods.
 
 The package allows to manage recombee users/items through magic methods.
 
-#### Example.
+### Example.
 
 ```php
 // Add a user to recombee.
@@ -158,7 +156,7 @@ $response = Laracombee::send($recommendations)->wait();
 
 ```
 
-#### Other magic methods.
+### Other magic methods.
 
 Update user, `Laracombee::updateUser($user);`
 
@@ -172,11 +170,11 @@ Add multiple items, `Laracombee::addItems($items);`
 
 <hr>
 
-### API.
+# API.
 
 Laracombee follows the same naming conventions as recombee, please check recombee api [docs](https://docs.recombee.com/api.html).
 
-#### Users.
+## Users.
 
 - Deletes a user of given userId from the database, `Laracombee::deleteUser($user_id);`
 
@@ -196,7 +194,7 @@ Merging happens between two users referred to as the target and the source. Afte
 
 - Get all the current property values of a given user, `Laracombee::getUserValues($user_id);`.
 
-#### Items.
+## Items.
 
 - Adding an item property is somehow equivalent to adding a column to the table of items. The items may be characterized by various properties of different types, `Laracombee::addItemProperty($property, $type);`
 
@@ -208,11 +206,11 @@ Merging happens between two users referred to as the target and the source. Afte
 
 - Deletes an item of given itemId from the catalog, `Laracombee::deleteItem($item_id);`
 
-#### User-Item Interactions.
+## User-Item Interactions.
 
 The following method allow adding, deleting and listing of interactions between the users and the items.
 
-##### Detail views
+### Detail views
 
 - Adds a detail view of a given item made by a given user, `Laracombee::addDetailView($user_id, $item_id, $options);`
 
@@ -222,33 +220,33 @@ The following method allow adding, deleting and listing of interactions between 
 
 - Lists all the detail views of different items ever made by a given user, `Laracombee::listUserDetailViews($user_id);`
 
-##### Purchases
+### Purchases
 
 - Adds a purchase of a given item made by a given user, `Laracombee::dddPurchase($user_id, $item_id, $options);`
 
 - Deletes an existing purchase uniquely specified by userId, itemId, and timestamp or all the purchases with given userId and itemId if timestamp is omitted, `Laracombee::deletePurchase($user_id, $item_id, $options);`
 
-##### Ratings
+### Ratings
 
 - Adds a rating of given item made by a given user, `Laracombee::addRating($user_id, $iten_id, $options);`
 
 - Deletes an existing rating specified by (userId, itemId, timestamp) from the database or all the ratings with given userId and itemId if timestamp is omitted, `Laracombee::deleteRating($user_id, $item_id, $options);`
 
-##### Cart additions
+### Cart additions
 
 - Adds a cart addition of a given item made by a given user, `Laracombee::addCartAddition($user_id, $item_id, $options);`
 
 - Deletes an existing cart addition uniquely specified by userId, itemId, and timestamp or all the cart additions with given userId and itemId if timestamp is omitted, `Laracombee::deleteCartAddition($user_id, $item_id, $options);`
 
 
-##### Bookmarks
+### Bookmarks
 
 - Adds a bookmark of a given item made by a given user, `Laracombee::addBookmark($user_id, $item_id, $options);`
 
 - Deletes a bookmark uniquely specified by userId, itemId, and timestamp or all the bookmarks with given userId and itemId if timestamp is omitted, `Laracombee::deleteBookmark($user_id, $item_id, $options);`
 
 
-##### Retrieve Recommendations
+### Retrieve Recommendations
 
 Recommendation methods are capable of recommending items (Recommend items to user, Recommend users to user).
 
@@ -258,7 +256,7 @@ Recommendation methods are capable of recommending items (Recommend items to use
 
 <hr>
 
-### Tailor your own magic methods.
+# Tailor your own magic methods.
 
 Sometimes, we need to keep our code consistent, so we wish that we can extend the installed package functionality and adapt it to our needs.
 
@@ -331,13 +329,12 @@ $response = MyRecombee::send($request);
 
 ```
 
-### Contributing
+# Contributing
 
 Thank you for considering contributing to this project! The contribution guide can be found in [Contribution guide](CONTRIBUTING.md).
 
 Feel free to report any bugs, submit any feature request, or even ask any questions.
 
-### Todo
+# Todo
 
 - Add the remaining API to larcombe, check the recombee [api](https://docs.recombee.com/api.html) docs.
-
