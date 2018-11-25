@@ -6,6 +6,7 @@ use Recombee\RecommApi\Client;
 use Recombee\RecommApi\Requests\Batch;
 use Recombee\RecommApi\Requests\Request;
 use Recombee\RecommApi\Requests\AddRating;
+use Recombee\RecommApi\Requests\AddSeries;
 use Recombee\RecommApi\Requests\ListItems;
 use Recombee\RecommApi\Requests\ListUsers;
 use Recombee\RecommApi\Requests\DeleteItem;
@@ -54,7 +55,7 @@ abstract class AbstractRecombee
      */
     public function __construct()
     {
-        $this->client = new Client(config('laracombee.database'), config('laracombee.token'));
+        $this->client  = new Client(config('laracombee.database'), config('laracombee.token'));
         $this->timeout = config('laracombee.timeout');
     }
 
@@ -550,6 +551,19 @@ abstract class AbstractRecombee
         $bookmark = new DeleteBookmark($user_id, $item_id, $options);
 
         return $bookmark;
+    }
+
+    /**
+     * Add Series.
+     *
+     * @param string $series_id
+     * @return
+     */
+    public function addSeries(string $series_id)
+    {
+        $series = new AddSeries($series_id);
+
+        return $series;
     }
 
     /**
