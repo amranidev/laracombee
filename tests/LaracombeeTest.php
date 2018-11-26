@@ -2,8 +2,8 @@
 
 namespace Amranidev\Laracombee\Tests;
 
-use Carbon\Carbon;
 use Laracombee;
+use Carbon\Carbon;
 
 class LaracombeeTest extends TestCase
 {
@@ -99,7 +99,7 @@ class LaracombeeTest extends TestCase
 
     public function testAddandDeletePurchase()
     {
-        $time    = (float) Carbon::now()->timestamp . '.0';
+        $time = (float) Carbon::now()->timestamp.'.0';
         $options = [
             'timestamp'     => $time,
             'cascadeCreate' => true,
@@ -254,7 +254,7 @@ class LaracombeeTest extends TestCase
 
     public function testListItemRatings()
     {
-        $request  = Laracombee::listItemRatings($this->itemId);
+        $request = Laracombee::listItemRatings($this->itemId);
         $response = Laracombee::send($request)->wait();
 
         $this->assertInstanceOf(\Recombee\RecommApi\Requests\Request::class, $request);
@@ -263,7 +263,7 @@ class LaracombeeTest extends TestCase
 
     public function testListUserRatings()
     {
-        $request  = Laracombee::listUserRatings($this->userId);
+        $request = Laracombee::listUserRatings($this->userId);
         $response = Laracombee::send($request)->wait();
 
         $this->assertInstanceOf(\Recombee\RecommApi\Requests\Request::class, $request);
