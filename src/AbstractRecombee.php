@@ -2,7 +2,6 @@
 
 namespace Amranidev\Laracombee;
 
-
 use Recombee\RecommApi\Client;
 use Recombee\RecommApi\Requests\Batch;
 use Recombee\RecommApi\Requests\Request;
@@ -39,6 +38,7 @@ use Recombee\RecommApi\Requests\ListItemDetailViews;
 use Recombee\RecommApi\Requests\ListUserDetailViews;
 use Recombee\RecommApi\Requests\RecommendItemsToUser;
 use Recombee\RecommApi\Requests\RecommendUsersToUser;
+use Recombee\RecommApi\Requests\InsertToSeries;
 
 abstract class AbstractRecombee
 {
@@ -567,18 +567,32 @@ abstract class AbstractRecombee
 
         return $series;
     }
+ 
+    /**
+     * Add Series.
+     *
+     * @param string $series_id
+     * @return \Recombee\RecommApi\Requests\AddSeries
+     */
+    public function insertToSeries($series_id, string $item_type, $item_id, $time)
+    {
+        $series = new InsertToSeries($series_id, $item_type, $item_id, $time, []);
+        $series->setTimeout($this->timeout);
+
+        return $series;
+    }
 
     /**
      * Delete Series.
      *
      * @param string $series_id
      * @return \Recombee\RecommApi\Requests\DeleteSeries
-     */ 
+     */
     public function deleteSeries(string $series_id)
     {
-    	$series = new DeleteSeries($series_id);
+        $series = new DeleteSeries($series_id);
 
-	return $series;
+        return $series;
     }
     /**
      * Reset database.
