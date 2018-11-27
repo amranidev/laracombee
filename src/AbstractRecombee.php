@@ -24,6 +24,7 @@ use Recombee\RecommApi\Requests\SetItemValues;
 use Recombee\RecommApi\Requests\SetUserValues;
 use Recombee\RecommApi\Requests\DeleteBookmark;
 use Recombee\RecommApi\Requests\DeletePurchase;
+use Recombee\RecommApi\Requests\InsertToSeries;
 use Recombee\RecommApi\Requests\AddCartAddition;
 use Recombee\RecommApi\Requests\AddItemProperty;
 use Recombee\RecommApi\Requests\AddUserProperty;
@@ -38,7 +39,6 @@ use Recombee\RecommApi\Requests\ListItemDetailViews;
 use Recombee\RecommApi\Requests\ListUserDetailViews;
 use Recombee\RecommApi\Requests\RecommendItemsToUser;
 use Recombee\RecommApi\Requests\RecommendUsersToUser;
-use Recombee\RecommApi\Requests\InsertToSeries;
 
 abstract class AbstractRecombee
 {
@@ -568,11 +568,12 @@ abstract class AbstractRecombee
 
         return $series;
     }
- 
+
     /**
      * Add Series.
      *
      * @param string $series_id
+     *
      * @return \Recombee\RecommApi\Requests\AddSeries
      */
     public function insertToSeries($series_id, string $item_type, $item_id, $time)
