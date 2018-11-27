@@ -285,15 +285,15 @@ class LaracombeeTest extends TestCase
 
         $response = Laracombee::send($request)->wait();
 
-	$this->assertEquals($response, 'ok');
-    } 
+        $this->assertEquals($response, 'ok');
+    }
 
-   public function testDeleteSeries()
-   {
+    public function testDeleteSeries()
+    {
         $request = Laracombee::deleteSeries('laracombee-series');
         $response = Laracombee::send($request)->wait();
         $this->assertEquals($response, $this->recombeeResponse);
-   }
+    }
 
     // public function testDeleteRating()
     // {
