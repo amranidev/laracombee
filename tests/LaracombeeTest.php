@@ -279,7 +279,6 @@ class LaracombeeTest extends TestCase
         $this->assertEquals($response, $this->recombeeResponse);
     }
 
-
     public function testInsertToSeries()
     {
         $request = Laracombee::insertToSeries('laracombee-series', 'item', $this->itemId, 200);
@@ -289,12 +288,12 @@ class LaracombeeTest extends TestCase
 	$this->assertEquals($response, 'ok');
     } 
 
-    public function testDeleteSeries()
-    {
-    	$request = Laracombee::deleteSeries('laracombee-series');
-	$response = Laracombee::send($request)->wait();
-	$this->assertEquals($response, $this->recombeeResponse);
-    }
+   public function testDeleteSeries()
+   {
+        $request = Laracombee::deleteSeries('laracombee-series');
+        $response = Laracombee::send($request)->wait();
+        $this->assertEquals($response, $this->recombeeResponse);
+   }
 
     // public function testDeleteRating()
     // {

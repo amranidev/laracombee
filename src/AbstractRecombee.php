@@ -559,6 +559,7 @@ abstract class AbstractRecombee
      * Add Series.
      *
      * @param string $series_id
+     *
      * @return \Recombee\RecommApi\Requests\AddSeries
      */
     public function addSeries(string $series_id)
@@ -586,6 +587,7 @@ abstract class AbstractRecombee
      * Delete Series.
      *
      * @param string $series_id
+     *
      * @return \Recombee\RecommApi\Requests\DeleteSeries
      */
     public function deleteSeries(string $series_id)
@@ -594,6 +596,7 @@ abstract class AbstractRecombee
 
         return $series;
     }
+
     /**
      * Reset database.
      *
