@@ -11,6 +11,7 @@ use Recombee\RecommApi\Requests\ListItems;
 use Recombee\RecommApi\Requests\ListUsers;
 use Recombee\RecommApi\Requests\DeleteItem;
 use Recombee\RecommApi\Requests\DeleteUser;
+use Recombee\RecommApi\Requests\ListSeries;
 use Recombee\RecommApi\Requests\MergeUsers;
 use Recombee\RecommApi\Requests\AddBookmark;
 use Recombee\RecommApi\Requests\AddPurchase;
@@ -24,6 +25,7 @@ use Recombee\RecommApi\Requests\SetItemValues;
 use Recombee\RecommApi\Requests\SetUserValues;
 use Recombee\RecommApi\Requests\DeleteBookmark;
 use Recombee\RecommApi\Requests\DeletePurchase;
+use Recombee\RecommApi\Requests\InsertToSeries;
 use Recombee\RecommApi\Requests\AddCartAddition;
 use Recombee\RecommApi\Requests\AddItemProperty;
 use Recombee\RecommApi\Requests\AddUserProperty;
@@ -38,7 +40,6 @@ use Recombee\RecommApi\Requests\ListItemDetailViews;
 use Recombee\RecommApi\Requests\ListUserDetailViews;
 use Recombee\RecommApi\Requests\RecommendItemsToUser;
 use Recombee\RecommApi\Requests\RecommendUsersToUser;
-use Recombee\RecommApi\Requests\InsertToSeries;
 
 abstract class AbstractRecombee
 {
@@ -597,6 +598,18 @@ abstract class AbstractRecombee
         return $series;
     }
 
+    /**
+     * List Series.
+     *
+     * @return \Recombee\RecommApi\Requests\DeleteSeries 
+     */ 
+    public function listSeries()
+    {
+	$series = new ListSeries();
+
+	return $series;
+    }
+ 
     /**
      * Reset database.
      *
