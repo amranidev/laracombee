@@ -569,11 +569,12 @@ abstract class AbstractRecombee
 
         return $series;
     }
- 
+
     /**
      * Add Series.
      *
      * @param string $series_id
+     *
      * @return \Recombee\RecommApi\Requests\AddSeries
      */
     public function insertToSeries($series_id, string $item_type, $item_id, $time)

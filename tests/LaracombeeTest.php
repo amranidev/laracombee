@@ -285,23 +285,23 @@ class LaracombeeTest extends TestCase
 
         $response = Laracombee::send($request)->wait();
 
-	$this->assertEquals($response, 'ok');
-    } 
+        $this->assertEquals($response, 'ok');
+    }
 
-
-   public function testListSeries()
-   {
+    public function testListSeries()
+    {
         $request = Laracombee::listSeries();
-	$response = Laracombee::send($request)->wait();
+        $response = Laracombee::send($request)->wait();
 
-	$this->assertInternalType('array', $response);
-   }
-   public function testDeleteSeries()
-   {
+        $this->assertInternalType('array', $response);
+    }
+
+    public function testDeleteSeries()
+    {
         $request = Laracombee::deleteSeries('laracombee-series');
         $response = Laracombee::send($request)->wait();
         $this->assertEquals($response, $this->recombeeResponse);
-   }
+    }
 
     // public function testDeleteRating()
     // {
