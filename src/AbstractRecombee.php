@@ -602,15 +602,15 @@ abstract class AbstractRecombee
     /**
      * List Series.
      *
-     * @return \Recombee\RecommApi\Requests\DeleteSeries 
-     */ 
+     * @return \Recombee\RecommApi\Requests\DeleteSeries
+     */
     public function listSeries()
     {
-	$series = new ListSeries();
+        $series = new ListSeries();
 
-	return $series;
+        return $series;
     }
- 
+
     /**
      * Reset database.
      *
