@@ -2,7 +2,6 @@
 
 namespace Amranidev\Laracombee;
 
-
 use Recombee\RecommApi\Client;
 use Recombee\RecommApi\Requests\Batch;
 use Recombee\RecommApi\Requests\Request;
@@ -617,13 +616,14 @@ abstract class AbstractRecombee
      * List Series items.
      *
      * @param string $serie_id
+     *
      * @return \Recombee\RecommApi\Requests\ListSeriesItems
      */
     public function listSeriesItems($serie_id)
     {
         $items = new ListSeriesItems($serie_id);
 
-	return $items;
+        return $items;
     }
 
     /**

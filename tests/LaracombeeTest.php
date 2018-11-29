@@ -299,9 +299,9 @@ class LaracombeeTest extends TestCase
     public function testListSeriesItems()
     {
         $request = Laracombee::listSeriesItems('laracombee-series');
-	$response = Laracombee::send($request)->wait();
+        $response = Laracombee::send($request)->wait();
 
-	$this->assertInternalType('array', $response);
+        $this->assertInternalType('array', $response);
     }
 
     public function testDeleteSeries()
