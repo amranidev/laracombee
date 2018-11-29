@@ -2,6 +2,7 @@
 
 namespace Amranidev\Laracombee;
 
+
 use Recombee\RecommApi\Client;
 use Recombee\RecommApi\Requests\Batch;
 use Recombee\RecommApi\Requests\Request;
@@ -30,6 +31,7 @@ use Recombee\RecommApi\Requests\AddCartAddition;
 use Recombee\RecommApi\Requests\AddItemProperty;
 use Recombee\RecommApi\Requests\AddUserProperty;
 use Recombee\RecommApi\Requests\ListItemRatings;
+use Recombee\RecommApi\Requests\ListSeriesItems;
 use Recombee\RecommApi\Requests\ListUserRatings;
 use Recombee\RecommApi\Requests\DeleteDetailView;
 use Recombee\RecommApi\Requests\DeleteCartAddition;
@@ -609,6 +611,19 @@ abstract class AbstractRecombee
         $series = new ListSeries();
 
         return $series;
+    }
+
+    /**
+     * List Series items.
+     *
+     * @param string $serie_id
+     * @return \Recombee\RecommApi\Requests\ListSeriesItems
+     */
+    public function listSeriesItems($serie_id)
+    {
+        $items = new ListSeriesItems($serie_id);
+
+	return $items;
     }
 
     /**
