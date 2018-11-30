@@ -603,7 +603,7 @@ abstract class AbstractRecombee
     /**
      * List Series.
      *
-     * @return \Recombee\RecommApi\Requests\DeleteSeries
+     * @return \Recombee\RecommApi\Requests\ListSeries
      */
     public function listSeries()
     {
