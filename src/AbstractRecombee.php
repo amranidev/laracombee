@@ -33,6 +33,7 @@ use Recombee\RecommApi\Requests\ListItemRatings;
 use Recombee\RecommApi\Requests\ListSeriesItems;
 use Recombee\RecommApi\Requests\ListUserRatings;
 use Recombee\RecommApi\Requests\DeleteDetailView;
+use Recombee\RecommApi\Requests\RemoveFromSeries;
 use Recombee\RecommApi\Requests\DeleteCartAddition;
 use Recombee\RecommApi\Requests\DeleteItemProperty;
 use Recombee\RecommApi\Requests\DeleteUserProperty;
@@ -572,18 +573,39 @@ abstract class AbstractRecombee
     }
 
     /**
-     * Add Series.
-     *
-     * @param string $series_id
-     *
-     * @return \Recombee\RecommApi\Requests\AddSeries
-     */
+    * Insert item to series.
+    *
+    * @param string $series_id
+    * @param string $item_type
+    * @param string $item_id
+    * @param int $time
+    *
+    * @return \Recombee\RecommApi\Requests\InsertToSeries
+    */
     public function insertToSeries($series_id, string $item_type, $item_id, $time)
     {
         $series = new InsertToSeries($series_id, $item_type, $item_id, $time, []);
         $series->setTimeout($this->timeout);
 
         return $series;
+    }
+
+    /**
+     * Remove item form series.
+     *
+     * @param string $series_id
+     * @param string $item_type
+     * @param string $item_id
+     * @param int $time
+     *
+     * @return \Recombee\RecommApi\Requests\RemoveFromSeries
+     */
+    public function removeFromSeries($series_id, $item_type, $item_id, $time)
+    {
+        $removeFromSeries = new RemoveFromSeries($series_id, $item_type, $item_id, $time, []);
+        $removeFromSeries->setTimeout($this->timeout);
+        
+        return $removeFromSeries;
     }
 
     /**
