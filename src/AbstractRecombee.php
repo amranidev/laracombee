@@ -573,15 +573,15 @@ abstract class AbstractRecombee
     }
 
     /**
-    * Insert item to series.
-    *
-    * @param string $series_id
-    * @param string $item_type
-    * @param string $item_id
-    * @param int $time
-    *
-    * @return \Recombee\RecommApi\Requests\InsertToSeries
-    */
+     * Insert item to series.
+     *
+     * @param string $series_id
+     * @param string $item_type
+     * @param string $item_id
+     * @param int    $time
+     *
+     * @return \Recombee\RecommApi\Requests\InsertToSeries
+     */
     public function insertToSeries($series_id, string $item_type, $item_id, $time)
     {
         $series = new InsertToSeries($series_id, $item_type, $item_id, $time, []);
@@ -596,7 +596,7 @@ abstract class AbstractRecombee
      * @param string $series_id
      * @param string $item_type
      * @param string $item_id
-     * @param int $time
+     * @param int    $time
      *
      * @return \Recombee\RecommApi\Requests\RemoveFromSeries
      */
@@ -604,7 +604,7 @@ abstract class AbstractRecombee
     {
         $removeFromSeries = new RemoveFromSeries($series_id, $item_type, $item_id, $time, []);
         $removeFromSeries->setTimeout($this->timeout);
-        
+
         return $removeFromSeries;
     }
 
