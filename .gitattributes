@@ -6,6 +6,6 @@
 .gitignore export-ignore
 .travis.yml export-ignore
 phpunit.xml export-ignore
-composer.lock
+composer.lock export-ignore
 CONTRIBUTING.md export-ignore
-CHANGELOG.md
+CHANGELOG.md export-ignore
