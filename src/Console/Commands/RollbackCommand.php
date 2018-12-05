@@ -21,7 +21,7 @@ class RollbackCommand extends LaracombeeCommand
      *
      * @var string
      */
-    protected $description = 'Migrate to recombee';
+    protected $description = 'Rollback recombeee';
 
     /**
      * The default user model.
