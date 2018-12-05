@@ -59,7 +59,7 @@ class User extends Authenticatable
 {
     use Notifiable;
 
-    public static $laracombee = ['name', 'age'];
+    public static $laracombee = ['name' => 'string', 'age' => 'integer'];
 }
 ```
 
