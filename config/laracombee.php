@@ -24,4 +24,17 @@ return [
     */
 
     'timeout'  => 2000,
+    
+
+    /*
+    |--------------------------------------------------------------------------
+    | Default protocol for sending requests.
+    |--------------------------------------------------------------------------
+    |
+    | Here where you can define the default protocol for sending requests.
+    |
+    */
+
+    'protocol' => 'http'
+
 ];
