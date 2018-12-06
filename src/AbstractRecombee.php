@@ -60,7 +60,7 @@ abstract class AbstractRecombee
      */
     public function __construct()
     {
-        $this->client = new Client(config('laracombee.database'), config('laracombee.token'));
+        $this->client = new Client(config('laracombee.database'), config('laracombee.token'), config('laracombee.protocol'));
         $this->timeout = config('laracombee.timeout');
     }
 
