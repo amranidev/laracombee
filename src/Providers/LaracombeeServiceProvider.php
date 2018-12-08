@@ -9,6 +9,7 @@ use Amranidev\Laracombee\Console\Commands\MigrateCommand;
 use Amranidev\Laracombee\Console\Commands\RollbackCommand;
 use Amranidev\Laracombee\Console\Commands\AddColumnsCommand;
 use Amranidev\Laracombee\Console\Commands\DropColumnsCommand;
+use Amranidev\Laracombee\Console\Commands\ResetDatabaseCommand;
 
 class LaracombeeServiceProvider extends ServiceProvider
 {
@@ -37,11 +38,12 @@ class LaracombeeServiceProvider extends ServiceProvider
 
         $this->commands(
             [
+                SeedCommand::class,
                 MigrateCommand::class,
                 RollbackCommand::class,
                 AddColumnsCommand::class,
                 DropColumnsCommand::class,
-                SeedCommand::class,
+                ResetDatabaseCommand::class
             ]
         );
     }
