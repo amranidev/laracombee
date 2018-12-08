@@ -75,7 +75,7 @@ class SeedCommand extends LaracombeeCommand
             $batch = $this->{'add'.ucfirst($this->argument('type')).'s'}($users->all());
             Laracombee::batch($batch)->then(function ($response) use ($bar) {
             })->otherwise(function ($error) {
-                $this->info();
+                $this->info('');
                 $this->error($error);
                 die();
             })->wait();
