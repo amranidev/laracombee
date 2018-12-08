@@ -147,8 +147,17 @@ $user = User::findOrFail($id);
 // Prepare the request for recombee server, we need 10 recommended items for a given user.
 $recommendations = Laracombee::recommendTo($user, 1O);
 
-// Results
-$response = Laracombee::send($recommendations)->wait();
+```
+
+**Note**: Unlike the rest of the API, recommendation API triggers the send method automatically, so there will be no need to call send method.
+
+Recommendation API returns an array response that contains an array of recommended (items ids) called recomms.
+
+```php
+
+$itemsIds = $recommendations['recomms']; // [2, 5, 55, 24, 32, 91]
+
+$items = \App\Item::find($itemsIds);
 
 ```
 
