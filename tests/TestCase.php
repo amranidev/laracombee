@@ -23,5 +23,6 @@ abstract class TestCase extends OrchestraTestCase
         $app['config']->set('laracombee.database', 'amranidev');
         $app['config']->set('laracombee.token', 'Ziyu6NtLU7Be9O5AhdwFNvasnSOZj35b0vbJbmQLexnu5xtQEtV01bv8Xpa68Hzi');
         $app['config']->set('laracombee.timeout', '5000');
+        $app['config']->set('laracombee.protocol', 'https');
     }
 }
