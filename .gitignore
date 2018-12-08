@@ -1,2 +1,4 @@
 /vendor/
 tasks.todo
+.php_cs.cache
+
