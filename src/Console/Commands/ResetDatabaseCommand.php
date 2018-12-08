@@ -44,7 +44,7 @@ class ResetDatabaseCommand extends LaracombeeCommand
                 $this->info('Recombee data has been erased!');
             })->otherwise(function ($error) {
                 $this->error($error);
-            });
+            })->wait();
         }
     }
 }
