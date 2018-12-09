@@ -43,7 +43,7 @@ class LaracombeeServiceProvider extends ServiceProvider
                 RollbackCommand::class,
                 AddColumnsCommand::class,
                 DropColumnsCommand::class,
-                ResetDatabaseCommand::class
+                ResetDatabaseCommand::class,
             ]
         );
     }
