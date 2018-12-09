@@ -75,8 +75,6 @@ abstract class AbstractRecombee
     {
         $batch = new Batch($bulk);
 
-        $batch->setTimeout($this->timeout);
-
         return $this->send($batch);
     }
 
@@ -103,8 +101,6 @@ abstract class AbstractRecombee
             'cascadeCreate' => true,
         ]);
 
-        $item->setTimeout($this->timeout);
-
         return $item;
     }
 
@@ -118,8 +114,6 @@ abstract class AbstractRecombee
     public function getItemValues($item_id)
     {
         $values = new GetItemValues($item_id);
-
-        $values->setTimeout($this->timeout);
 
         return $values;
     }
@@ -137,8 +131,6 @@ abstract class AbstractRecombee
     {
         $items = new RecommendItemsToUser($user_id, $limit, $filters);
 
-        $items->setTimeout($this->timeout);
-
         return $this->send($items);
     }
 
@@ -155,8 +147,6 @@ abstract class AbstractRecombee
     {
         $users = new RecommendUsersToUser($user_id, $limit, $filters);
 
-        $items->setTimeout($this->timeout);
-
         return $this->send($users);
     }
 
@@ -171,8 +161,6 @@ abstract class AbstractRecombee
     {
         $item = new DeleteItem($item_id);
 
-        $item->setTimeout($this->timeout);
-
         return $item;
     }
 
@@ -186,8 +174,6 @@ abstract class AbstractRecombee
     public function listItems(array $options)
     {
         $items = new ListItems($options);
-
-        $items->setTimeout($this->timeout);
 
         return $items;
     }
@@ -247,8 +233,6 @@ abstract class AbstractRecombee
     {
         $users = new listUsers($options);
 
-        $users->setTimeout($this->timeout);
-
         return $users;
     }
 
@@ -265,6 +249,7 @@ abstract class AbstractRecombee
         $user = new SetUserValues($user_id, $fields, [
             'cascadeCreate' => true,
         ]);
+        
 
         return $user;
     }
@@ -279,6 +264,7 @@ abstract class AbstractRecombee
     public function getUserValues($user_id)
     {
         $values = new GetUserValues($user_id);
+        
 
         return $values;
     }
@@ -585,7 +571,6 @@ abstract class AbstractRecombee
     public function insertToSeries($series_id, string $item_type, $item_id, $time)
     {
         $series = new InsertToSeries($series_id, $item_type, $item_id, $time, []);
-        $series->setTimeout($this->timeout);
 
         return $series;
     }
@@ -603,7 +588,6 @@ abstract class AbstractRecombee
     public function removeFromSeries($series_id, $item_type, $item_id, $time)
     {
         $removeFromSeries = new RemoveFromSeries($series_id, $item_type, $item_id, $time, []);
-        $removeFromSeries->setTimeout($this->timeout);
 
         return $removeFromSeries;
     }
