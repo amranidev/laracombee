@@ -144,6 +144,7 @@ class Laracombee extends AbstractRecombee
     {
         return $promise = new Promise(function () use (&$promise, $request) {
             try {
+                $request->setTimeout($this->timeout);
                 $response = $this->client->send($request);
                 $promise->resolve($response);
             } catch (Exceptions\ApiTimeoutException $e) {
