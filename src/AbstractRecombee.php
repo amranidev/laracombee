@@ -249,7 +249,6 @@ abstract class AbstractRecombee
         $user = new SetUserValues($user_id, $fields, [
             'cascadeCreate' => true,
         ]);
-        
 
         return $user;
     }
@@ -264,7 +263,6 @@ abstract class AbstractRecombee
     public function getUserValues($user_id)
     {
         $values = new GetUserValues($user_id);
-        
 
         return $values;
     }
