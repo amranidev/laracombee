@@ -13,22 +13,14 @@ class RollbackCommand extends LaracombeeCommand
      * @var string
      */
     protected $signature = 'laracombee:rollback
-    						{type : Catalog type (user or item)}
-    						{--class= : Laravel model}';
+    						{type : Catalog type (user or item)}';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'Rollback recombeee';
-
-    /**
-     * The default user model.
-     *
-     * @var string
-     */
-    protected static $userModel = '\\App\\User';
+    protected $description = 'Rollback recombeee columns';
 
     /**
      * Create a new command instance.
@@ -66,12 +58,8 @@ class RollbackCommand extends LaracombeeCommand
      */
     public function prepareScope()
     {
-        if (!$this->option('class')) {
-            $this->error('--class option is required!');
-            die();
-        }
+        $class = config('laracombee.'.$this->argument('type'));
 
-        $class = $this->option('class');
         $properties = $class::$laracombee;
 
         return collect($properties)->map(function (string $type, string $property) {
