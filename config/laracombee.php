@@ -36,4 +36,15 @@ return [
 
     'protocol' => 'http',
 
+    /*
+    |--------------------------------------------------------------------------
+    | Default models for user and item.
+    |--------------------------------------------------------------------------
+    |
+    | Here where you can define the default class for user and item.
+    |
+    */
+
+    'user'  => app(\App\User::class),
+    'item'  => '',
 ];
