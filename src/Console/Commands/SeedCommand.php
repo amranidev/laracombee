@@ -15,7 +15,6 @@ class SeedCommand extends LaracombeeCommand
      */
     protected $signature = 'laracombee:seed
                             {type : Catalog type (user or item)}
-                            {--class= : Laravel model}
                             {--chunk= : total chunk}';
 
     /**
@@ -56,14 +55,9 @@ class SeedCommand extends LaracombeeCommand
      */
     public function handle()
     {
-        if (!$this->option('class')) {
-            $this->error('--class option is required!');
-            die();
-        }
-
         $chunk = (int) $this->option('chunk') ?: self::$chunk;
 
-        $class = $this->option('class');
+        $class = config('laracombee.'.$this->argument('type'));
 
         $records = $class::all();
 
