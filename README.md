@@ -97,6 +97,14 @@ Add column : `php artisan laracombee:add email:string age:integer --to=user`
 
 Drop column : `php artisan laracombee:drop email age --from=user`
 
+### Reset Command.
+
+- `php artisan laracombee:reset`
+
+This command will completely erases all your data, including items, item properties, series, user database, purchases, ratings, detail views, and bookmarks. Make sure the request to be never executed in production environment! Resetting your database is irreversible, :warning: **Think twice before running this command** :warning:
+
+
+
 ## Laracombee magic methods.
 
 The package allows to manage recombee users/items through magic methods.
