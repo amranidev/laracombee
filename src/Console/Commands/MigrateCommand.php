@@ -13,8 +13,7 @@ class MigrateCommand extends LaracombeeCommand
      * @var string
      */
     protected $signature = 'laracombee:migrate
-    						{type : Catalog type (user or item)}
-    						{--class= : Laravel model}';
+    						{type : Catalog type (user or item)}';
 
     /**
      * The console command description.
@@ -40,11 +39,6 @@ class MigrateCommand extends LaracombeeCommand
      */
     public function handle()
     {
-        if (!$this->option('class')) {
-            $this->error('--class option is required!');
-            die();
-        }
-
         $scope = $this->prepareScope()->all();
 
         Laracombee::batch($scope)
@@ -64,12 +58,7 @@ class MigrateCommand extends LaracombeeCommand
      */
     public function prepareScope()
     {
-        $class = $this->option('class');
-
-        if (!class_exists($class)) {
-            $this->error("Class $class doesn't exists!");
-            die();
-        }
+        $class = config('laracombee.'.$this->argument('type'));
 
         $properties = $class::$laracombee;
 
