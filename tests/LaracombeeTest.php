@@ -319,6 +319,14 @@ class LaracombeeTest extends TestCase
         $this->assertEquals($response, $this->recombeeResponse);
     }
 
+    public function testSetViewPortion()
+    {
+        $request = Laracombee::setViewPortion($this->userId, $this->itemId, 0.22, []);
+        $response = Laracombee::send($request)->wait();
+        $this->assertEquals($response, 'ok');
+    }
+
+
     // public function testDeleteRating()
     // {
     //     $options = [];
