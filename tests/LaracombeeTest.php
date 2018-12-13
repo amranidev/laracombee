@@ -326,7 +326,6 @@ class LaracombeeTest extends TestCase
         $this->assertEquals($response, 'ok');
     }
 
-
     // public function testDeleteRating()
     // {
     //     $options = [];
