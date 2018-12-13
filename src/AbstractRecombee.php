@@ -26,6 +26,7 @@ use Recombee\RecommApi\Requests\SetUserValues;
 use Recombee\RecommApi\Requests\DeleteBookmark;
 use Recombee\RecommApi\Requests\DeletePurchase;
 use Recombee\RecommApi\Requests\InsertToSeries;
+use Recombee\RecommApi\Requests\SetViewPortion;
 use Recombee\RecommApi\Requests\AddCartAddition;
 use Recombee\RecommApi\Requests\AddItemProperty;
 use Recombee\RecommApi\Requests\AddUserProperty;
@@ -629,6 +630,24 @@ abstract class AbstractRecombee
 
         return $items;
     }
+
+    /**
+     * Set view portion.
+     * 
+     * @param string     $userId
+     * @param string     $itemId
+     * @param string|int $portion
+     * @param array      $options
+     *
+     * @return \Recombee\RecommApi\Requests\SetViewPortion
+     */
+    public function setViewPortion($userId, $itemId, $portion, array $options)
+    {
+        $viewPortion = new SetViewPortion($userId, $itemId, $portion, $options);
+
+        return $viewPortion;
+    }
+
 
     /**
      * Reset database.
