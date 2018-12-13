@@ -633,7 +633,7 @@ abstract class AbstractRecombee
 
     /**
      * Set view portion.
-     * 
+     *
      * @param string     $userId
      * @param string     $itemId
      * @param string|int $portion
