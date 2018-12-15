@@ -35,6 +35,7 @@ use Recombee\RecommApi\Requests\ListSeriesItems;
 use Recombee\RecommApi\Requests\ListUserRatings;
 use Recombee\RecommApi\Requests\DeleteDetailView;
 use Recombee\RecommApi\Requests\RemoveFromSeries;
+use Recombee\RecommApi\Requests\DeleteViewPortion;
 use Recombee\RecommApi\Requests\DeleteCartAddition;
 use Recombee\RecommApi\Requests\DeleteItemProperty;
 use Recombee\RecommApi\Requests\DeleteUserProperty;
@@ -648,6 +649,20 @@ abstract class AbstractRecombee
         return $viewPortion;
     }
 
+    /**
+     * Delete view portion.
+     *
+     * @param  string $userId
+     * @param  string $itemId
+     * @param  array  $options
+     * @return \Recombee\RecommApi\Requests\DeleteViewPortion
+     */
+    public function deleteViewPortion($userId, $itemId, array $options)
+    {
+        $deleteViewPortion = new DeleteViewPortion($userId, $itemId, $options);
+
+        return $deleteViewPortion;
+    }
 
     /**
      * Reset database.
