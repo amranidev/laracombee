@@ -326,6 +326,13 @@ class LaracombeeTest extends TestCase
         $this->assertEquals($response, 'ok');
     }
 
+    public function testDeleteViewPortion()
+    {
+        $request = Laracombee::deleteViewPortion($this->userId, $this->itemId, []);
+        $response = Laracombee::send($request)->wait();
+        $this->assertEquals($response, $this->recombeeResponse);   
+    }
+
     // public function testDeleteRating()
     // {
     //     $options = [];
