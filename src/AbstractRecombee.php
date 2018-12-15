@@ -657,6 +657,7 @@ abstract class AbstractRecombee
      * @param string $userId
      * @param string $itemId
      * @param array  $options
+     *
      * @return \Recombee\RecommApi\Requests\DeleteViewPortion
      */
     public function deleteViewPortion($userId, $itemId, array $options)
@@ -670,6 +671,7 @@ abstract class AbstractRecombee
      * List item view portions.
      *
      * @param string $itemId
+     *
      * @return \Recombee\RecommApi\Requests\ListItemViewPortions
      */
     public function listItemViewPortions($itemId)
@@ -683,6 +685,7 @@ abstract class AbstractRecombee
      * List user view portions.
      *
      * @param string $userId
+     *
      * @return \Recombee\RecommApi\Requests\ListUserViewPortions
      */
     public function listItemViewPortions($userId)
