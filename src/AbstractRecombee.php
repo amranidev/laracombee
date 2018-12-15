@@ -42,6 +42,7 @@ use Recombee\RecommApi\Requests\DeleteUserProperty;
 use Recombee\RecommApi\Requests\GetItemPropertyInfo;
 use Recombee\RecommApi\Requests\ListItemDetailViews;
 use Recombee\RecommApi\Requests\ListUserDetailViews;
+use Recombee\RecommApi\Requests\ListItemViewPortions;
 use Recombee\RecommApi\Requests\RecommendItemsToUser;
 use Recombee\RecommApi\Requests\RecommendUsersToUser;
 
@@ -662,6 +663,19 @@ abstract class AbstractRecombee
         $deleteViewPortion = new DeleteViewPortion($userId, $itemId, $options);
 
         return $deleteViewPortion;
+    }
+
+    /**
+     * List item view portions.
+     *
+     * @param  string $itemId
+     * @return \Recombee\RecommApi\Requests\ListItemViewPortions
+     */
+    public function listItemViewPortions($itemId)
+    {
+        $listPortions = new ListItemViewPortions($itemId);
+
+        return $listPortions;
     }
 
     /**
