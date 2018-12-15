@@ -43,6 +43,7 @@ use Recombee\RecommApi\Requests\GetItemPropertyInfo;
 use Recombee\RecommApi\Requests\ListItemDetailViews;
 use Recombee\RecommApi\Requests\ListUserDetailViews;
 use Recombee\RecommApi\Requests\ListItemViewPortions;
+use Recombee\RecommApi\Requests\ListUserViewPortions;
 use Recombee\RecommApi\Requests\RecommendItemsToUser;
 use Recombee\RecommApi\Requests\RecommendUsersToUser;
 
@@ -674,6 +675,19 @@ abstract class AbstractRecombee
     public function listItemViewPortions($itemId)
     {
         $listPortions = new ListItemViewPortions($itemId);
+
+        return $listPortions;
+    }
+
+    /**
+     * List user view portions.
+     *
+     * @param  string $userId
+     * @return \Recombee\RecommApi\Requests\ListUserViewPortions
+     */
+    public function listItemViewPortions($userId)
+    {
+        $listPortions = new ListUserViewPortions($userId);
 
         return $listPortions;
     }
