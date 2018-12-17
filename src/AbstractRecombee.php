@@ -637,10 +637,10 @@ abstract class AbstractRecombee
     /**
      * Set view portion.
      *
-     * @param string     $userId
-     * @param string     $itemId
-     * @param float      $portion
-     * @param array      $options
+     * @param string $userId
+     * @param string $itemId
+     * @param float  $portion
+     * @param array  $options
      *
      * @return \Recombee\RecommApi\Requests\SetViewPortion
      */
