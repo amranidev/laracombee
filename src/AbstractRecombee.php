@@ -147,7 +147,7 @@ abstract class AbstractRecombee
      *
      * @return mixed
      */
-    public function recommendUsersToUser($usre_id, int $limit = 10, array $filters = [])
+    public function recommendUsersToUser($user_id, int $limit = 10, array $filters = [])
     {
         $users = new RecommendUsersToUser($user_id, $limit, $filters);
 
