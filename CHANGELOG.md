@@ -1,6 +1,5 @@
 # CHANGELOG
 
-
 ## v0.1.26 (2018-17-10)
 
 ### Added
@@ -19,8 +18,6 @@
 ### Improved
 
 - Set timeout during each request.
-
-## v0.1.15 (2018-12-03)
 
 ## v0.1.20 (2018-12-10)
 
