@@ -63,6 +63,31 @@ class User extends Authenticatable
 }
 ```
 
+## Configuration.
+
+First thing first, define your default **User** and **Item** class in `laracombee.php` configuration file.
+
+```php
+    /*
+    |--------------------------------------------------------------------------
+    | Default models for user and item.
+    |--------------------------------------------------------------------------
+    |
+    | Here where you can define the default class for user and item.
+    |
+    */
+
+    'user'  => app(\App\User::class),
+    'item'  => app(\App\Book::class),
+```
+
+When you trigger a laracombee artisan command, it will automatically use those classes as a reference.
+
+### Other configuration options.
+
+- You can define which http `protocol` you want to use, by default its `http`
+- You can define the defualt `timeout` in milliseconds for each request. by dedault its `2000`
+
 ## Commands.
 
 Larcombe comes with a bunch of artisan commands that provides a fluent workflow for you, such as migrate, rollback, seed, add columns and drop columns.
@@ -71,13 +96,13 @@ Larcombe comes with a bunch of artisan commands that provides a fluent workflow 
 
 As you remember, every time you trigger the migrate or the rollback command, Laracombee will look for `$laracombee` property and prepare the schema, you just have to specify which catalog you want to migrate/rollback (user/item) and provide the model namespace, Laracombee will do the job for you.
 
-Migrate **`user`** : `php artisan laracombee:migrate user --class=\App\\User`
+Migrate **`user`** : `php artisan laracombee:migrate user`
 
-Migrate **`item`** : `php artisan laracombee:migrate item --class=\App\\Product`
+Migrate **`item`** : `php artisan laracombee:migrate item`
 
-Rollback **`user`** : `php artisan laracombee:rollback user --class=\App\\User`
+Rollback **`user`** : `php artisan laracombee:rollback user`
 
-Rollback **`item`** : `php artisan laracombee:rollback item --class=\App\\Product`
+Rollback **`item`** : `php artisan laracombee:rollback item`
 
 ### The Seed command.
 
@@ -85,9 +110,9 @@ If you want to index your users or items records that already exist in your data
 
 > Note: Running this command may take several minutes, depends on your records.
 
-Index **`user`** : `php artisan laracombee:seed user --class=\App\\User`
+Index **`user`** : `php artisan laracombee:seed user`
 
-Index **`item`** : `php artisan laracombee:seed item --class=\App\\Product`
+Index **`item`** : `php artisan laracombee:seed item`
 
 ### Add/Drop columns.
 
