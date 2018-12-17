@@ -639,12 +639,12 @@ abstract class AbstractRecombee
      *
      * @param string     $userId
      * @param string     $itemId
-     * @param string|int $portion
+     * @param float      $portion
      * @param array      $options
      *
      * @return \Recombee\RecommApi\Requests\SetViewPortion
      */
-    public function setViewPortion($userId, $itemId, $portion, array $options)
+    public function setViewPortion($userId, $itemId, float $portion, array $options)
     {
         $viewPortion = new SetViewPortion($userId, $itemId, $portion, $options);
 
