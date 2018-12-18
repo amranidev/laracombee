@@ -1,6 +1,12 @@
 # CHANGELOG
 
-## v0.1.26 (2018-17-10)
+## v0.1.27 (2018-12-18)
+
+### Fixed
+
+- Fix, recommned users to user [7958844](https://github.com/amranidev/laracombee/commit/795884494ff0a83d4191ef2cd50ceb596eee4676)
+
+## v0.1.26 (2018-12-17)
 
 ### Added
 
