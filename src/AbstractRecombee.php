@@ -589,7 +589,7 @@ abstract class AbstractRecombee
      */
     public function removeFromSeries($series_id, $item_type, $item_id, $time)
     {
-        $removeFromSeries = new RemoveFromSeries($series_id, $item_type, $item_id, $time, []);
+        $removeFromSeries = new RemoveFromSeries($series_id, $item_type, $item_id, $time);
 
         return $removeFromSeries;
     }
