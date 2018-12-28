@@ -688,7 +688,7 @@ abstract class AbstractRecombee
      *
      * @return \Recombee\RecommApi\Requests\ListUserViewPortions
      */
-    public function listItemViewPortions($userId)
+    public function listUserViewPortions($userId)
     {
         $listPortions = new ListUserViewPortions($userId);
 
