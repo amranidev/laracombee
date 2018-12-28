@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## v0.1.28 (2018-12-28)
+
+### Fixed
+
+- Fix bug [#37](https://github.com/amranidev/laracombee/issues/37)
+
 ## v0.1.27 (2018-12-18)
 
 ### Fixed
