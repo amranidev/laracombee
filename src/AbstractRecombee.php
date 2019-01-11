@@ -60,11 +60,17 @@ abstract class AbstractRecombee
     protected $timeout;
 
     /**
-     * Create new Laracombee instance.
+     * AbstractRecombee constructor.
+     *
+     * @param $database_id
+     * @param $token
+     * @param string $protocol
+     * @param int $timeout
+     * @param array $options
      */
-    public function __construct()
+    public function __construct(string $database_id, string $token, string $protocol = 'http', int $timeout = 1000, array $options = [])
     {
-        $this->client = new Client(config('laracombee.database'), config('laracombee.token'), config('laracombee.protocol'));
+        $this->client = new Client($database_id, $token, $protocol, $options);
         $this->timeout = config('laracombee.timeout');
     }
 
