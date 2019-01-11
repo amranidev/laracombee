@@ -65,8 +65,8 @@ class Laracombee extends AbstractRecombee
     /**
      * Merge users.
      *
-     * @param \Illuminate\Foundation\Auth\User $user
-     * @param \Illuminate\Foundation\Auth\User $user
+     * @param \Illuminate\Foundation\Auth\User $target_user
+     * @param \Illuminate\Foundation\Auth\User $source_user
      *
      * @return \Recombee\RecommApi\MergeUsers
      */
