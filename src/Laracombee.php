@@ -15,7 +15,7 @@ class Laracombee extends AbstractRecombee
      */
     public function __construct()
     {
-        parent::__construct();
+        parent::__construct(config('laracombee.database'), config('laracombee.token'), config('laracombee.protocol'));
     }
 
     /**
