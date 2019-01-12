@@ -315,7 +315,7 @@ class MyRecombee extends AbstractRecombee
 {
     public function __construct()
     {
-        parent::__construct();
+        parent::__construct(config('laracombee.database'), config('laracombee.token'), config('laracombee.protocol'));
     }
     
     /**
@@ -361,6 +361,14 @@ $request = MyRecombee::setTopSeller($user);
 
 $response = MyRecombee::send($request);
 
+```
+
+## Working with multiple recombee databases.
+
+As we see in the previous example, you can create another class that will interact with other recombee instance, this new class should extend the AbstractRecombee class, which takes in parameter `database`, `token`, `protocol` and `options`
+
+```php
+parant::__construct($database, $token, $protocol = 'http', $options = [])
 ```
 
 # Contributing
