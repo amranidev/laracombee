@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## v0.1.30 (2019-01-13)
+
+### Added
+
+- Ability to connect multiple databases.
+
 ## v0.1.28 (2018-12-28)
 
 ### Fixed
