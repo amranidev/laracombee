@@ -10,6 +10,7 @@ use Amranidev\Laracombee\Console\Commands\RollbackCommand;
 use Amranidev\Laracombee\Console\Commands\AddColumnsCommand;
 use Amranidev\Laracombee\Console\Commands\DropColumnsCommand;
 use Amranidev\Laracombee\Console\Commands\ResetDatabaseCommand;
+use Amranidev\Laracombee\Console\Commands\CreateNewLaracombeeClass;
 
 class LaracombeeServiceProvider extends ServiceProvider
 {
@@ -44,6 +45,7 @@ class LaracombeeServiceProvider extends ServiceProvider
                 AddColumnsCommand::class,
                 DropColumnsCommand::class,
                 ResetDatabaseCommand::class,
+                CreateNewLaracombeeClass::class,
             ]
         );
     }
