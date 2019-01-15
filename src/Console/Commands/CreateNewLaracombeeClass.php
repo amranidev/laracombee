@@ -48,7 +48,7 @@ class CreateNewLaracombeeClass extends Command
         $className = ucfirst($this->argument('name'));
 
         if (!is_dir($destination = base_path($this->path))) {
-            mkdir($destination, 077, true);
+            mkdir($destination, 777, true);
         }
 
         $template = file_get_contents(__DIR__.'/../../../resources/stubs/laracombee-class.stub');
