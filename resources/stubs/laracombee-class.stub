@@ -12,11 +12,14 @@ use Amranidev\Laracombee\AbstractRecombee;
 class __CLASSNAME__ extends AbstractRecombee
 {
     /**
-     * Create new laracombee instance.
+     * Create new __CLASSNAME__ instance.
      */
     public function __construct()
     {
-        parent::__construct(config('laracombee.database'), config('laracombee.token'), config('laracombee.protocol'));
+        /**
+         * @todo Add recombee database_id and token.
+         */
+        parent::__construct(config('laracombee.database'), config('laracombee.token'));
     }
 
     /**
