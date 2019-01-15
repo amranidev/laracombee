@@ -71,7 +71,7 @@ abstract class AbstractRecombee
     public function __construct(string $database_id, string $token, string $protocol = 'http', int $timeout = 1000, array $options = [])
     {
         $this->client = new Client($database_id, $token, $protocol, $options);
-        $this->timeout = config('laracombee.timeout');
+        $this->timeout = $timeout;
     }
 
     /**
