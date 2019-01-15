@@ -56,7 +56,7 @@ class CreateNewLaracombeeClass extends Command
 
         try {
             file_put_contents($this->path.$className.'.php', $content);
-        } catch(\Exception $e) {
+        } catch (\Exception $e) {
             $this->error($e->getMessage());
         }
     }
