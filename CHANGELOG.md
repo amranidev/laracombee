@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## v0.1.31 (2019-01-16)
+
+### Added
+
+- Ability to create custom laracombee class with artisan command.
+
 ## v0.1.30 (2019-01-13)
 
 ### Added
