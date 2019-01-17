@@ -298,7 +298,7 @@ You can tailor your API however you like, you can do that by extending the `Abst
 
 Example:
 
-Let's say that you don't like the way Laracombee handle recombee requests/response with promises, dealing with exceptions the way you want, and also, you need a method that can make a user as a top seller in recombee database.
+Let's say that you don't like the way Laracombee handles recombee requests/response with promises, dealing with exceptions the way you want, and also, you need a method that can make a user as a top seller in the recombee database.
 
 Lets create a new class, you can register it as a facade (if you would like to).
 
@@ -363,13 +363,11 @@ $response = MyRecombee::send($request);
 
 ```
 
-## Working with multiple recombee databases.
+## Using multiple recombee databases.
 
-As we see in the previous example, you can create another class that will interact with other recombee instance, this new class should extend the AbstractRecombee class, which takes in parameter `database`, `token`, `protocol` and `options`
+Laracombee gives you the flexibility to use multiple recombee databases, gives you the ability to create a custom class that you can use to interact with other recombee instance.
 
-```php
-parant::__construct($database, $token, $protocol = 'http', $options = [])
-```
+You can create a new `Laracombee` class with `php artisan laracombee:new <ClassName>`, it will create a new `Laracombee` class in `app/Laracombee` directory.
 
 # Contributing
 
