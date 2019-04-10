@@ -39,7 +39,7 @@ Amranidev\Laracombee\Providers\LaracombeeServiceProvider::class,
 
 Congratulations, you have successfully installed Laracombee!
 
-# Usage
+# Usage.
 
 With Laracombe, the integration of your data is simple, as you may know, Recombee used the user-item based database to predict recommendation based on users interests and interactions, so, you have to address which Laravel eloquent model you want to use as user as well as item.
 
