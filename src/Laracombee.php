@@ -7,6 +7,7 @@ use Recombee\RecommApi\Exceptions;
 use Illuminate\Foundation\Auth\User;
 use Illuminate\Database\Eloquent\Model;
 use Recombee\RecommApi\Requests\Request;
+use Illuminate\Contracts\Auth\Authenticatable;
 
 class Laracombee extends AbstractRecombee
 {
@@ -15,17 +16,22 @@ class Laracombee extends AbstractRecombee
      */
     public function __construct()
     {
-        parent::__construct(config('laracombee.database'), config('laracombee.token'), config('laracombee.protocol'), config('laracombee.timeout'));
+        parent::__construct(
+            config('laracombee.database'),
+            config('laracombee.token'),
+            config('laracombee.protocol'),
+            config('laracombee.timeout'
+            ));
     }
 
     /**
      * Add a user to recombee db.
      *
-     * @param \Illuminate\Foundation\Auth\User $user
+     * @param \Illuminate\Contracts\Auth\Authenticatable $user
      *
      * @return \Recombee\RecommApi\Requests\SetUserValues
      */
-    public function addUser(User $user)
+    public function addUser(Authenticatable $user)
     {
         $laracombeeProperties = $user::$laracombee;
 
@@ -55,7 +61,7 @@ class Laracombee extends AbstractRecombee
      *
      * @param \Illuminate\Foundation\Auth\User $user
      *
-     * @return \Amranidev\Laracombee\AbstractRecombee;
+     * @return \Recombee\RecommApi\Requests\SetUserValues
      */
     public function updateUser(User $user)
     {
@@ -68,7 +74,7 @@ class Laracombee extends AbstractRecombee
      * @param \Illuminate\Foundation\Auth\User $target_user
      * @param \Illuminate\Foundation\Auth\User $source_user
      *
-     * @return \Recombee\RecommApi\MergeUsers
+     * @return \Recombee\RecommApi\Requests\MergeUsers
      */
     public function mergeUsers(User $target_user, User $source_user)
     {
@@ -98,7 +104,7 @@ class Laracombee extends AbstractRecombee
      *
      * @param \Illuminate\Database\Eloquent\Model $item
      *
-     * @return \Recombee\RecommApi\Requests\AddItemProperty
+     * @return \Recombee\RecommApi\Requests\SetItemValues
      */
     public function updateItem(Model $item)
     {
@@ -123,10 +129,10 @@ class Laracombee extends AbstractRecombee
      * Recommend items to user.
      *
      * @param \Illuminate\Foundation\Auth\User $user
-     * @param int                              $limit
-     * @param array                            $options
+     * @param int $limit
+     * @param array $options
      *
-     * @return \Recombee\RecommApi\Requests\Request $request
+     * @return mixed
      */
     public function recommendTo(User $user, $limit = 10, $options = [])
     {
@@ -138,7 +144,7 @@ class Laracombee extends AbstractRecombee
      *
      * @param \Recombee\RecommApi\Requests\Request $request
      *
-     * @return \GuzzleHttp\Promise\Promise
+     * @return \GuzzleHttp\Promise\Promise|mixed
      */
     public function send(Request $request)
     {
