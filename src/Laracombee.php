@@ -129,8 +129,8 @@ class Laracombee extends AbstractRecombee
      * Recommend items to user.
      *
      * @param \Illuminate\Foundation\Auth\User $user
-     * @param int $limit
-     * @param array $options
+     * @param int                              $limit
+     * @param array                            $options
      *
      * @return mixed
      */
