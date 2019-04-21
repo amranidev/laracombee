@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## v0.1.37 (2019-04-22)
+
+### Fixed
+
+- Fix bug in `addDetailView` param.
+
 ## v0.1.36 (2019-04-21)
 
 ### Fixed
