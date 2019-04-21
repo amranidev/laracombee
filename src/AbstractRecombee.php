@@ -181,7 +181,7 @@ abstract class AbstractRecombee
      *
      * @return \Recombee\RecommApi\Requests\ListItems
      */
-    public function listItems(array $options)
+    public function listItems(array $options = [])
     {
         $items = new ListItems($options);
 
@@ -225,7 +225,7 @@ abstract class AbstractRecombee
      *
      * @return \Recombee\RecommApi\Requests\MergeUsers
      */
-    public function mergeUsersWithId($target_user_id, $source_user_id, array $params)
+    public function mergeUsersWithId($target_user_id, $source_user_id, array $params = [])
     {
         $merge = new MergeUsers($target_user_id, $source_user_id, $params);
 
@@ -239,7 +239,7 @@ abstract class AbstractRecombee
      *
      * @return \Recombee\RecommApi\Requests\ListUsers
      */
-    public function listUsers(array $options)
+    public function listUsers(array $options = [])
     {
         $users = new listUsers($options);
 
@@ -358,9 +358,9 @@ abstract class AbstractRecombee
      *
      * @return \Recombee\RecommApi\Requests\AddDetailView
      */
-    public function addDetailView($user_id, $item_id, array $options)
+    public function addDetailView($user_id, $item_id, array $options = [])
     {
-        $detailedView = new AddDetailView($user_id, $item_id, $options);
+        $detailedView = new AddDetailView($user_id, $item_id, $options = []);
 
         return $detailedView;
     }
@@ -374,7 +374,7 @@ abstract class AbstractRecombee
      *
      * @return \Recombee\RecommApi\Requests\DeleteDetailView
      */
-    public function deleteDetailView($user_id, $item_id, array $options)
+    public function deleteDetailView($user_id, $item_id, array $options = [])
     {
         $detailedView = new DeleteDetailView($user_id, $item_id, $options);
 
@@ -404,7 +404,7 @@ abstract class AbstractRecombee
      *
      * @return \Recombee\RecommApi\Requests\AddPurchase
      */
-    public function addPurchase($user_id, $item_id, $options)
+    public function addPurchase($user_id, $item_id, array $options = [])
     {
         $purchase = new AddPurchase($user_id, $item_id, $options);
 
@@ -420,7 +420,7 @@ abstract class AbstractRecombee
      *
      * @return \Recombee\RecommApi\Requests\DeletePurchase
      */
-    public function deletePurchase($user_id, $item_id, array $options)
+    public function deletePurchase($user_id, $item_id, array $options = [])
     {
         $purchase = new DeletePurchase($user_id, $item_id, $options);
 
@@ -437,7 +437,7 @@ abstract class AbstractRecombee
      *
      * @return \Recombee\RecommApi\Requests\AddRating
      */
-    public function addRating($user_id, $item_id, float $rating, array $options)
+    public function addRating($user_id, $item_id, float $rating, array $options = [])
     {
         $rating = new AddRating($user_id, $item_id, $rating, $options);
 
@@ -453,7 +453,7 @@ abstract class AbstractRecombee
      *
      * @return \Recombee\RecommApi\Requests\DeleteRating
      */
-    public function deleteRating($user_id, $item_id, array $options)
+    public function deleteRating($user_id, $item_id, array $options = [])
     {
         $rating = new DeleteRating($user_id, $item_id, $options);
 
@@ -497,7 +497,7 @@ abstract class AbstractRecombee
      *
      * @return \Recombee\RecommApi\Requests\AddCartAddition
      */
-    public function addCartAddition($user_id, $item_id, array $options)
+    public function addCartAddition($user_id, $item_id, array $options = [])
     {
         $addition = new AddCartAddition($user_id, $item_id, $options);
 
@@ -513,7 +513,7 @@ abstract class AbstractRecombee
      *
      * @return \Recombee\RecommApi\Requests\DeleteCartAddition
      */
-    public function deleteCartAddition($user_id, $item_id, array $options)
+    public function deleteCartAddition($user_id, $item_id, array $options = [])
     {
         $addition = new DeleteCartAddition($user_id, $item_id, $options);
 
@@ -529,7 +529,7 @@ abstract class AbstractRecombee
      *
      * @return \Recombee\RecommApi\Requests\AddBookmark
      */
-    public function addBookmark($user_id, $item_id, array $options)
+    public function addBookmark($user_id, $item_id, array $options = [])
     {
         $bookmark = new AddBookmark($user_id, $item_id, $options);
 
@@ -545,7 +545,7 @@ abstract class AbstractRecombee
      *
      * @return \Recombee\RecommApi\Requests\DeleteBookmark
      */
-    public function deleteBookmark($user_id, $item_id, array $options)
+    public function deleteBookmark($user_id, $item_id, array $options = [])
     {
         $bookmark = new DeleteBookmark($user_id, $item_id, $options);
 
@@ -629,13 +629,13 @@ abstract class AbstractRecombee
     /**
      * List Series items.
      *
-     * @param string $serie_id
+     * @param string $series_id
      *
      * @return \Recombee\RecommApi\Requests\ListSeriesItems
      */
-    public function listSeriesItems($serie_id)
+    public function listSeriesItems($series_id)
     {
-        $items = new ListSeriesItems($serie_id);
+        $items = new ListSeriesItems($series_id);
 
         return $items;
     }
@@ -650,7 +650,7 @@ abstract class AbstractRecombee
      *
      * @return \Recombee\RecommApi\Requests\SetViewPortion
      */
-    public function setViewPortion($userId, $itemId, float $portion, array $options)
+    public function setViewPortion($userId, $itemId, float $portion, array $options = [])
     {
         $viewPortion = new SetViewPortion($userId, $itemId, $portion, $options);
 
@@ -666,7 +666,7 @@ abstract class AbstractRecombee
      *
      * @return \Recombee\RecommApi\Requests\DeleteViewPortion
      */
-    public function deleteViewPortion($userId, $itemId, array $options)
+    public function deleteViewPortion($userId, $itemId, array $options = [])
     {
         $deleteViewPortion = new DeleteViewPortion($userId, $itemId, $options);
 
