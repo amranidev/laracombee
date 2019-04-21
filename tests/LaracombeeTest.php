@@ -85,11 +85,11 @@ class LaracombeeTest extends TestCase
         $this->assertInternalType('array', $response);
     }
 
-    public function testAddDetailedView()
+    public function testAddDetailView()
     {
         $options = ['duration' => 15, 'cascadeCreate' => true];
 
-        $request = Laracombee::addDetailedView($this->userId, $this->itemId, $options);
+        $request = Laracombee::addDetailView($this->userId, $this->itemId, $options);
 
         $response = Laracombee::send($request)->wait();
 
