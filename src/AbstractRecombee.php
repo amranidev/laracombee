@@ -358,7 +358,7 @@ abstract class AbstractRecombee
      *
      * @return \Recombee\RecommApi\Requests\AddDetailView
      */
-    public function addDetailedView($user_id, $item_id, array $options)
+    public function addDetailView($user_id, $item_id, array $options)
     {
         $detailedView = new AddDetailView($user_id, $item_id, $options);
 
