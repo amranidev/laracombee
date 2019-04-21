@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## v0.1.36 (2019-04-21)
+
+### Fixed
+
+- Add an empty array to the defaults params.
+
 ## v0.1.35 (2019-04-21)
 
 ### Fixed
