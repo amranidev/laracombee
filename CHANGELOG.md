@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## v0.1.35 (2019-04-21)
+
+### Fixed
+
+- Make `addDetailView` consistent with the api.
+
 ## v0.1.31 (2019-01-16)
 
 ### Added
