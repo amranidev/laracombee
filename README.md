@@ -178,7 +178,7 @@ You can also recommend items to user.
 $user = User::findOrFail($id);
 
 // Prepare the request for recombee server, we need 10 recommended items for a given user.
-$recommendations = Laracombee::recommendTo($user, 1O);
+$recommendations = Laracombee::recommendTo($user, 1O)->wait();
 
 ```
 
