@@ -35,7 +35,7 @@ class LaracombeeServiceProvider extends ServiceProvider
     {
         $configPath = __DIR__.'/../../config/laracombee.php';
         $this->publishes([
-            $configPath => config_path('laracombee.php'), ]);
+            $configPath => base_path('config/laracombee.php'), ]);
 
         $this->commands(
             [
