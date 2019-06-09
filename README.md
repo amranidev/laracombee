@@ -30,7 +30,7 @@ Want to know more about how it works? check this following [link](https://medium
 Amranidev\Laracombee\Providers\LaracombeeServiceProvider::class,
 
 // Alias.
-'Laracombee' => Amranidev\Laracombee\facades\LaracombeeFacade::class,
+'Laracombee' => Amranidev\Laracombee\Facades\LaracombeeFacade::class,
 ```
 
  3. Create a new instance in [recombee.com](https://www.recombee.com/)
