@@ -4,6 +4,7 @@ namespace Amranidev\Laracombee\Providers;
 
 use Amranidev\Laracombee\Laracombee;
 use Illuminate\Support\ServiceProvider;
+use Amranidev\Laracombee\LaracombeeConnector;
 use Amranidev\Laracombee\Console\Commands\SeedCommand;
 use Amranidev\Laracombee\Console\Commands\MigrateCommand;
 use Amranidev\Laracombee\Console\Commands\RollbackCommand;
@@ -21,8 +22,8 @@ class LaracombeeServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->app->singleton('Laracombee', function () {
-            return new Laracombee();
+        $this->app->singleton('laracombee', function () {
+            return (new LaracombeeConnector())->connect();
         });
     }
 
@@ -33,9 +34,9 @@ class LaracombeeServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        $configPath = __DIR__.'/../../config/laracombee.php';
+        $configPath = __DIR__ . '/../../config/laracombee.php';
         $this->publishes([
-            $configPath => base_path('config/laracombee.php'), ]);
+            $configPath => base_path('config/laracombee.php'),]);
 
         $this->commands(
             [
