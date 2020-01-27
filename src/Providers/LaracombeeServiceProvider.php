@@ -2,7 +2,6 @@
 
 namespace Amranidev\Laracombee\Providers;
 
-use Amranidev\Laracombee\Laracombee;
 use Illuminate\Support\ServiceProvider;
 use Amranidev\Laracombee\LaracombeeConnector;
 use Amranidev\Laracombee\Console\Commands\SeedCommand;
@@ -34,9 +33,9 @@ class LaracombeeServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        $configPath = __DIR__ . '/../../config/laracombee.php';
+        $configPath = __DIR__.'/../../config/laracombee.php';
         $this->publishes([
-            $configPath => base_path('config/laracombee.php'),]);
+            $configPath => base_path('config/laracombee.php'), ]);
 
         $this->commands(
             [
