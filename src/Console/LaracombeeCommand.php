@@ -90,7 +90,7 @@ class LaracombeeCommand extends Command
      */
     public function addItem(Model $item)
     {
-        return Laracombee::addItem($user);
+        return Laracombee::addItem($item);
     }
 
     /**
