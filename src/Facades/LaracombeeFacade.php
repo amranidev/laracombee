@@ -8,6 +8,6 @@ class LaracombeeFacade extends Facade
 {
     protected static function getFacadeAccessor()
     {
-        return 'Amranidev\Laracombee\Laracombee';
+        return 'laracombee';
     }
 }
