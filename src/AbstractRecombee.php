@@ -66,12 +66,12 @@ abstract class AbstractRecombee
      * @param $token
      * @param string $protocol
      * @param int    $timeout
-     * @param array  $options
+     * @param array $options
      */
-    public function __construct(string $database_id, string $token, string $protocol = 'http', int $timeout = 1000, array $options = [])
+    public function __construct(string $database_id, string $token, array $options)
     {
-        $this->client = new Client($database_id, $token, $protocol, $options);
-        $this->timeout = $timeout;
+        $this->client = new Client($database_id, $token, $options);
+        $this->timeout = $options['timeout'];
     }
 
     /**
