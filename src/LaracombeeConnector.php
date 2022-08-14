@@ -5,11 +5,9 @@ namespace Amranidev\Laracombee;
 class LaracombeeConnector
 {
     /**
-     * @param array $config
-     *
      * @return Laracombee
      */
-    public function connect()
+    public function connect(): Laracombee
     {
         return new Laracombee();
     }
