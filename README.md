@@ -9,9 +9,6 @@
     <a href="https://github.com/amranidev/micro-bus/actions">
         <img src="https://github.com/amranidev/laracombee/actions/workflows/tests.yml/badge.svg" alt="Build Status">
     </a>
-    <a href=https://scrutinizer-ci.com/g/amranidev/laracombee/badges>
-        <img src="https://scrutinizer-ci.com/g/amranidev/laracombee/badges/quality-score.png?b=master">
-    </a>
     <a href="https://packagist.org/packages/amranidev/laracombee">
         <img src="https://poser.pugx.org/amranidev/laracombee/v/stable" alt="Version stable">
     </a> 
