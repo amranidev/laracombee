@@ -16,12 +16,17 @@ class Laracombee extends AbstractRecombee
      */
     public function __construct()
     {
+        $options = [
+            'timeout' => config('laracombee.timeout'),
+            'region' => config('laracombee.region') ?? 'eu-west',
+            'protocol' => config('laracombee.protocol') ?? 'https'
+        ];
+
         parent::__construct(
             config('laracombee.database'),
             config('laracombee.token'),
-            config('laracombee.protocol'),
-            config('laracombee.timeout'
-            ));
+            $options
+        );
     }
 
     /**
@@ -31,7 +36,7 @@ class Laracombee extends AbstractRecombee
      *
      * @return \Recombee\RecommApi\Requests\SetUserValues
      */
-    public function addUser(Authenticatable $user)
+    public function addUser(Authenticatable $user): \Recombee\RecommApi\Requests\SetUserValues
     {
         $laracombeeProperties = $user::$laracombee;
 
@@ -49,7 +54,7 @@ class Laracombee extends AbstractRecombee
      *
      * @return array
      */
-    public function addUsers(array $users)
+    public function addUsers(array $users): array
     {
         return array_map(function ($user) {
             return $this->addUser($user);
@@ -63,7 +68,7 @@ class Laracombee extends AbstractRecombee
      *
      * @return \Recombee\RecommApi\Requests\SetUserValues
      */
-    public function updateUser(User $user)
+    public function updateUser(User $user): \Recombee\RecommApi\Requests\SetUserValues
     {
         return $this->addUser($user);
     }
@@ -76,7 +81,7 @@ class Laracombee extends AbstractRecombee
      *
      * @return \Recombee\RecommApi\Requests\MergeUsers
      */
-    public function mergeUsers(User $target_user, User $source_user)
+    public function mergeUsers(User $target_user, User $source_user): \Recombee\RecommApi\Requests\MergeUsers
     {
         return $this->mergeUsersWithId($target_user->id, $source_user->id, ['cascade_create' => true]);
     }
@@ -88,7 +93,7 @@ class Laracombee extends AbstractRecombee
      *
      * @return \Recombee\RecommApi\Requests\SetItemValues
      */
-    public function addItem(Model $item)
+    public function addItem(Model $item): \Recombee\RecommApi\Requests\SetItemValues
     {
         $laracombeeProperties = $item::$laracombee;
 
@@ -106,7 +111,7 @@ class Laracombee extends AbstractRecombee
      *
      * @return \Recombee\RecommApi\Requests\SetItemValues
      */
-    public function updateItem(Model $item)
+    public function updateItem(Model $item): \Recombee\RecommApi\Requests\SetItemValues
     {
         return $this->addItem($item);
     }
@@ -118,7 +123,7 @@ class Laracombee extends AbstractRecombee
      *
      * @return array
      */
-    public function addItems(array $items)
+    public function addItems(array $items): array
     {
         return array_map(function ($item) {
             return $this->addItem($item);
@@ -129,12 +134,12 @@ class Laracombee extends AbstractRecombee
      * Recommend items to user.
      *
      * @param \Illuminate\Foundation\Auth\User $user
-     * @param int                              $limit
-     * @param array                            $options
+     * @param int $limit
+     * @param array $options
      *
      * @return mixed
      */
-    public function recommendTo(User $user, $limit = 10, $options = [])
+    public function recommendTo(User $user, int $limit = 10, array $options = []): mixed
     {
         return $this->recommendItemsToUser($user->id, $limit, $options);
     }
@@ -153,11 +158,7 @@ class Laracombee extends AbstractRecombee
                 $request->setTimeout($this->timeout);
                 $response = $this->client->send($request);
                 $promise->resolve($response);
-            } catch (Exceptions\ApiTimeoutException $e) {
-                $promise->reject($e->getMessage());
-            } catch (Exceptions\ResponseException $e) {
-                $promise->reject($e->getMessage());
-            } catch (Exceptions\ApiException $e) {
+            } catch (Exceptions\ApiTimeoutException|Exceptions\ResponseException|Exceptions\ApiException $e) {
                 $promise->reject($e->getMessage());
             }
         });
