@@ -1,6 +1,14 @@
 # CHANGELOG
 
-## v0.1.37 (2019-04-22)
+## v0.2.1 (2022-08-17)
+
+### Fixed
+
+- Upgrade recombee SDK.
+- Update Laracombee client constructor.
+- Fix tests.
+
+## v0.1.37 (2019-04-21)
 
 ### Fixed
 
