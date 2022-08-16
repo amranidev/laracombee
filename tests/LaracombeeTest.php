@@ -7,7 +7,7 @@ use Carbon\Carbon;
 
 class LaracombeeTest extends TestCase
 {
-    public $recombeeResponse = "ok";
+    public $recombeeResponse = 'ok';
 
     public $userId = 1;
 
@@ -72,7 +72,7 @@ class LaracombeeTest extends TestCase
         $response = Laracombee::send($request)->wait();
 
         $this->assertInstanceOf(\Recombee\RecommApi\Requests\Request::class, $request);
-        $this->assertEquals($response, "ok");
+        $this->assertEquals($response, 'ok');
     }
 
     public function testGetItemValues()
@@ -94,7 +94,7 @@ class LaracombeeTest extends TestCase
         $response = Laracombee::send($request)->wait();
 
         $this->assertInstanceOf(\Recombee\RecommApi\Requests\Request::class, $request);
-        $this->assertEquals($response, "ok");
+        $this->assertEquals($response, 'ok');
     }
 
     public function testAddandDeletePurchase()
@@ -113,7 +113,7 @@ class LaracombeeTest extends TestCase
         $response = Laracombee::send($request)->wait();
 
         $this->assertInstanceOf(\Recombee\RecommApi\Requests\Request::class, $request);
-        $this->assertEquals($response, "ok");
+        $this->assertEquals($response, 'ok');
     }
 
     public function testAddRating()
@@ -130,7 +130,7 @@ class LaracombeeTest extends TestCase
         $response = Laracombee::send($request)->wait();
 
         $this->assertInstanceOf(\Recombee\RecommApi\Requests\Request::class, $request);
-        $this->assertEquals($response, "ok");
+        $this->assertEquals($response, 'ok');
     }
 
     public function testAddCardAddition()
@@ -146,7 +146,7 @@ class LaracombeeTest extends TestCase
         $response = Laracombee::send($request)->wait();
 
         $this->assertInstanceOf(\Recombee\RecommApi\Requests\Request::class, $request);
-        $this->assertEquals($response, "ok");
+        $this->assertEquals($response, 'ok');
     }
 
     public function testAddBookmark()
@@ -160,7 +160,7 @@ class LaracombeeTest extends TestCase
         $response = Laracombee::send($request)->wait();
 
         $this->assertInstanceOf(\Recombee\RecommApi\Requests\Request::class, $request);
-        $this->assertEquals($response, "ok");
+        $this->assertEquals($response, 'ok');
     }
 
     public function testRecommendItemsToUser()
@@ -285,7 +285,7 @@ class LaracombeeTest extends TestCase
 
         $response = Laracombee::send($request)->wait();
 
-        $this->assertEquals($response, "ok");
+        $this->assertEquals($response, 'ok');
     }
 
     public function testListSeries()
@@ -323,7 +323,7 @@ class LaracombeeTest extends TestCase
     {
         $request = Laracombee::setViewPortion($this->userId, $this->itemId, 0.22, []);
         $response = Laracombee::send($request)->wait();
-        $this->assertEquals($response, "ok");
+        $this->assertEquals($response, 'ok');
     }
 
     public function testDeleteViewPortion()
