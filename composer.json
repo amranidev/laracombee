@@ -34,5 +34,8 @@
                 "Amranidev\\Laracombee\\Providers\\LaracombeeServiceProvider"
             ]
         }
+    },
+    "require-dev": {
+        "orchestra/testbench": "^7.6"
     }
 }
