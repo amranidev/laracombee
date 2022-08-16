@@ -67,11 +67,11 @@ class SeedCommand extends LaracombeeCommand
 
         $records->chunk($chunk)->each(function ($users) use ($bar) {
             $batch = $this->{'add'.ucfirst($this->argument('type')).'s'}($users->all());
-            Laracombee::batch($batch)->then(function ($response) use ($bar) {
+            Laracombee::batch($batch)->then(function ($response) {
             })->otherwise(function ($error) {
                 $this->info('');
                 $this->error($error);
-                die();
+                exit();
             })->wait();
 
             $bar->advance();

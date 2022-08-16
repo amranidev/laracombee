@@ -17,9 +17,9 @@ class Laracombee extends AbstractRecombee
     public function __construct()
     {
         $options = [
-            'timeout' => config('laracombee.timeout'),
-            'region' => config('laracombee.region') ?? 'eu-west',
-            'protocol' => config('laracombee.protocol') ?? 'https'
+            'timeout'  => config('laracombee.timeout'),
+            'region'   => config('laracombee.region') ?? 'eu-west',
+            'protocol' => config('laracombee.protocol') ?? 'https',
         ];
 
         parent::__construct(
@@ -134,8 +134,8 @@ class Laracombee extends AbstractRecombee
      * Recommend items to user.
      *
      * @param \Illuminate\Foundation\Auth\User $user
-     * @param int $limit
-     * @param array $options
+     * @param int                              $limit
+     * @param array                            $options
      *
      * @return mixed
      */

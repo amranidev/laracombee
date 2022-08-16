@@ -66,7 +66,7 @@ abstract class AbstractRecombee
      * @param $token
      * @param string $protocol
      * @param int    $timeout
-     * @param array $options
+     * @param array  $options
      */
     public function __construct(string $database_id, string $token, array $options)
     {
