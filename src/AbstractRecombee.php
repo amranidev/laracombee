@@ -62,8 +62,8 @@ abstract class AbstractRecombee
     /**
      * AbstractRecombee constructor.
      *
-     * @param $database_id
-     * @param $token
+     * @param        $database_id
+     * @param        $token
      * @param string $protocol
      * @param int    $timeout
      * @param array  $options
