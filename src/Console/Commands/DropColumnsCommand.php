@@ -42,7 +42,7 @@ class DropColumnsCommand extends LaracombeeCommand
     {
         if (!$this->option('from')) {
             $this->error('--from option is required!');
-            exit();
+            exit;
         }
 
         Laracombee::batch($this->loadColumns($this->argument('columns'))->all())

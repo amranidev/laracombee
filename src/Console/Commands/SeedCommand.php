@@ -71,7 +71,7 @@ class SeedCommand extends LaracombeeCommand
             })->otherwise(function ($error) {
                 $this->info('');
                 $this->error($error);
-                exit();
+                exit;
             })->wait();
 
             $bar->advance();
