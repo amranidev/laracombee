@@ -42,7 +42,7 @@ class AddColumnsCommand extends LaracombeeCommand
     {
         if (!$this->option('to')) {
             $this->error('--to option is required!');
-            exit();
+            exit;
         }
 
         Laracombee::batch($this->loadColumns($this->argument('columns'))->all())
