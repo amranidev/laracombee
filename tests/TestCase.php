@@ -21,7 +21,7 @@ abstract class TestCase extends OrchestraTestCase
     protected function getEnvironmentSetUp($app)
     {
         $app['config']->set('laracombee.database', 'amranidev');
-        $app['config']->set('laracombee.token', 'Ziyu6NtLU7Be9O5AhdwFNvasnSOZj35b0vbJbmQLexnu5xtQEtV01bv8Xpa68Hzi');
+        $app['config']->set('laracombee.token', 'In8pEgDs0PbgdT1QOZupTRP0HP5eMWWdgvjdq6WjmwRUNjhfg2556na0vHQyy88J');
         $app['config']->set('laracombee.timeout', '5000');
         $app['config']->set('laracombee.protocol', 'https');
     }
