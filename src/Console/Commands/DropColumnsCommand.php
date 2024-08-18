@@ -2,7 +2,7 @@
 
 namespace Amranidev\Laracombee\Console\Commands;
 
-use Laracombee;
+use Amranidev\Laracombee\Facades\LaracombeeFacade;
 use Amranidev\Laracombee\Console\LaracombeeCommand;
 
 class DropColumnsCommand extends LaracombeeCommand
@@ -45,7 +45,7 @@ class DropColumnsCommand extends LaracombeeCommand
             exit;
         }
 
-        Laracombee::batch($this->loadColumns($this->argument('columns'))->all())
+        LaracombeeFacade::batch($this->loadColumns($this->argument('columns'))->all())
             ->then(function ($response) {
                 $this->info('Done!');
             })
