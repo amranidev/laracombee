@@ -301,7 +301,7 @@ The following method allow adding, deleting and listing of interactions between 
 
 ### Purchases
 
-- Adds a purchase of a given item made by a given user, `Laracombee::dddPurchase($user_id, $item_id, $options);`
+- Adds a purchase of a given item made by a given user, `Laracombee::addPurchase($user_id, $item_id, $options);`
 
 - Deletes an existing purchase uniquely specified by userId, itemId, and timestamp or all the purchases with given
   userId and itemId if timestamp is omitted, `Laracombee::deletePurchase($user_id, $item_id, $options);`
