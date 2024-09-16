@@ -2,7 +2,7 @@
 
 namespace Amranidev\Laracombee\Tests;
 
-use Laracombee;
+use Amranidev\LaracombeeFacade\Facades\LaracombeeFacade;
 use Carbon\Carbon;
 
 class LaracombeeTest extends TestCase
@@ -23,9 +23,9 @@ class LaracombeeTest extends TestCase
 
     public function testAddItemProperty()
     {
-        $request = Laracombee::addItemProperty('productName', 'string');
+        $request = LaracombeeFacade::addItemProperty('productName', 'string');
 
-        $response = Laracombee::send($request)->wait();
+        $response = LaracombeeFacade::send($request)->wait();
 
         $this->assertInstanceOf(\Recombee\RecommApi\Requests\Request::class, $request);
         $this->assertEquals($response, $this->recombeeResponse);
@@ -33,9 +33,9 @@ class LaracombeeTest extends TestCase
 
     public function testAddUserProperty()
     {
-        $request = Laracombee::addUserProperty('firstName', 'string');
+        $request = LaracombeeFacade::addUserProperty('firstName', 'string');
 
-        $response = Laracombee::send($request)->wait();
+        $response = LaracombeeFacade::send($request)->wait();
 
         $this->assertInstanceOf(\Recombee\RecommApi\Requests\Request::class, $request);
         $this->assertEquals($response, $this->recombeeResponse);
@@ -45,9 +45,9 @@ class LaracombeeTest extends TestCase
     {
         $userProperties = ['firstName' => 'Jhon Doe'];
 
-        $request = Laracombee::setUserValues($this->userId, $userProperties);
+        $request = LaracombeeFacade::setUserValues($this->userId, $userProperties);
 
-        $response = Laracombee::send($request)->wait();
+        $response = LaracombeeFacade::send($request)->wait();
 
         $this->assertInstanceOf(\Recombee\RecommApi\Requests\Request::class, $request);
         $this->assertEquals($response, 'ok');
@@ -55,9 +55,9 @@ class LaracombeeTest extends TestCase
 
     public function testGetUserValues()
     {
-        $request = Laracombee::getUserValues($this->userId);
+        $request = LaracombeeFacade::getUserValues($this->userId);
 
-        $response = Laracombee::send($request)->wait();
+        $response = LaracombeeFacade::send($request)->wait();
 
         $this->assertInstanceOf(\Recombee\RecommApi\Requests\Request::class, $request);
         $this->assertIsArray($response);
@@ -67,9 +67,9 @@ class LaracombeeTest extends TestCase
     {
         $itemProperties = ['productName' => 'My product'];
 
-        $request = Laracombee::setItemValues($this->itemId, $itemProperties);
+        $request = LaracombeeFacade::setItemValues($this->itemId, $itemProperties);
 
-        $response = Laracombee::send($request)->wait();
+        $response = LaracombeeFacade::send($request)->wait();
 
         $this->assertInstanceOf(\Recombee\RecommApi\Requests\Request::class, $request);
         $this->assertEquals($response, 'ok');
@@ -77,9 +77,9 @@ class LaracombeeTest extends TestCase
 
     public function testGetItemValues()
     {
-        $request = Laracombee::getItemValues($this->itemId);
+        $request = LaracombeeFacade::getItemValues($this->itemId);
 
-        $response = Laracombee::send($request)->wait();
+        $response = LaracombeeFacade::send($request)->wait();
 
         $this->assertInstanceOf(\Recombee\RecommApi\Requests\Request::class, $request);
         $this->assertIsArray($response);
@@ -89,9 +89,9 @@ class LaracombeeTest extends TestCase
     {
         $options = ['duration' => 15, 'cascadeCreate' => true];
 
-        $request = Laracombee::addDetailView($this->userId, $this->itemId, $options);
+        $request = LaracombeeFacade::addDetailView($this->userId, $this->itemId, $options);
 
-        $response = Laracombee::send($request)->wait();
+        $response = LaracombeeFacade::send($request)->wait();
 
         $this->assertInstanceOf(\Recombee\RecommApi\Requests\Request::class, $request);
         $this->assertEquals($response, 'ok');
@@ -108,9 +108,9 @@ class LaracombeeTest extends TestCase
             'profit'        => 20,
         ];
 
-        $request = Laracombee::addPurchase($this->userId, $this->itemId, $options);
+        $request = LaracombeeFacade::addPurchase($this->userId, $this->itemId, $options);
 
-        $response = Laracombee::send($request)->wait();
+        $response = LaracombeeFacade::send($request)->wait();
 
         $this->assertInstanceOf(\Recombee\RecommApi\Requests\Request::class, $request);
         $this->assertEquals($response, 'ok');
@@ -125,9 +125,9 @@ class LaracombeeTest extends TestCase
         // rating shoud be a real number betweed  -1.0 < x < 1.0
         $rating = 0.8;
 
-        $request = Laracombee::addRating($this->userId, $this->itemId, (float) $rating, $options);
+        $request = LaracombeeFacade::addRating($this->userId, $this->itemId, (float) $rating, $options);
 
-        $response = Laracombee::send($request)->wait();
+        $response = LaracombeeFacade::send($request)->wait();
 
         $this->assertInstanceOf(\Recombee\RecommApi\Requests\Request::class, $request);
         $this->assertEquals($response, 'ok');
@@ -141,9 +141,9 @@ class LaracombeeTest extends TestCase
             'price'         => 50,
         ];
 
-        $request = Laracombee::addCartAddition($this->userId, $this->itemId, $options);
+        $request = LaracombeeFacade::addCartAddition($this->userId, $this->itemId, $options);
 
-        $response = Laracombee::send($request)->wait();
+        $response = LaracombeeFacade::send($request)->wait();
 
         $this->assertInstanceOf(\Recombee\RecommApi\Requests\Request::class, $request);
         $this->assertEquals($response, 'ok');
@@ -155,9 +155,9 @@ class LaracombeeTest extends TestCase
             'cascadeCreate' => true,
         ];
 
-        $request = Laracombee::addBookmark($this->userId, $this->itemId, $options);
+        $request = LaracombeeFacade::addBookmark($this->userId, $this->itemId, $options);
 
-        $response = Laracombee::send($request)->wait();
+        $response = LaracombeeFacade::send($request)->wait();
 
         $this->assertInstanceOf(\Recombee\RecommApi\Requests\Request::class, $request);
         $this->assertEquals($response, 'ok');
@@ -167,7 +167,7 @@ class LaracombeeTest extends TestCase
     {
         $filter = [];
 
-        $response = Laracombee::recommendItemsToUser($this->userId, 1, $filter)->wait();
+        $response = LaracombeeFacade::recommendItemsToUser($this->userId, 1, $filter)->wait();
         $this->assertIsArray($response);
         $this->assertArrayHasKey('recomms', $response);
         $this->assertArrayHasKey('recommId', $response);
@@ -175,9 +175,9 @@ class LaracombeeTest extends TestCase
 
     public function testListUserDetailViews()
     {
-        $details = Laracombee::listUserDetailViews($this->userId);
+        $details = LaracombeeFacade::listUserDetailViews($this->userId);
 
-        $response = Laracombee::send($details)->wait();
+        $response = LaracombeeFacade::send($details)->wait();
 
         $this->assertInstanceOf(\Recombee\RecommApi\Requests\Request::class, $details);
         $this->assertIsArray($response);
@@ -185,9 +185,9 @@ class LaracombeeTest extends TestCase
 
     public function testListItemDetailViews()
     {
-        $details = Laracombee::listItemDetailViews($this->itemId);
+        $details = LaracombeeFacade::listItemDetailViews($this->itemId);
 
-        $response = Laracombee::send($details)->wait();
+        $response = LaracombeeFacade::send($details)->wait();
 
         $this->assertInstanceOf(\Recombee\RecommApi\Requests\Request::class, $details);
         $this->assertIsArray($response);
@@ -203,9 +203,9 @@ class LaracombeeTest extends TestCase
             'includedProperties' => ['productName'],
         ];
 
-        $request = Laracombee::listItems($options);
+        $request = LaracombeeFacade::listItems($options);
 
-        $response = Laracombee::send($request)->wait();
+        $response = LaracombeeFacade::send($request)->wait();
 
         $this->assertIsArray($response);
 
@@ -217,9 +217,9 @@ class LaracombeeTest extends TestCase
 
     public function testGetItemPropertyInfo()
     {
-        $request = Laracombee::getItemPropertyInfo('productName');
+        $request = LaracombeeFacade::getItemPropertyInfo('productName');
 
-        $response = Laracombee::send($request)->wait();
+        $response = LaracombeeFacade::send($request)->wait();
 
         $this->assertIsArray($response);
         $this->assertArrayHasKey('name', $response);
@@ -238,9 +238,9 @@ class LaracombeeTest extends TestCase
             'includedProperties' => ['firstName'],
         ];
 
-        $request = Laracombee::listUsers($options);
+        $request = LaracombeeFacade::listUsers($options);
 
-        $response = Laracombee::send($request)->wait();
+        $response = LaracombeeFacade::send($request)->wait();
 
         $this->assertIsArray($response);
         $this->assertEquals(1, count($response));
@@ -254,8 +254,8 @@ class LaracombeeTest extends TestCase
 
     public function testListItemRatings()
     {
-        $request = Laracombee::listItemRatings($this->itemId);
-        $response = Laracombee::send($request)->wait();
+        $request = LaracombeeFacade::listItemRatings($this->itemId);
+        $response = LaracombeeFacade::send($request)->wait();
 
         $this->assertInstanceOf(\Recombee\RecommApi\Requests\Request::class, $request);
         $this->assertIsArray($response);
@@ -263,8 +263,8 @@ class LaracombeeTest extends TestCase
 
     public function testListUserRatings()
     {
-        $request = Laracombee::listUserRatings($this->userId);
-        $response = Laracombee::send($request)->wait();
+        $request = LaracombeeFacade::listUserRatings($this->userId);
+        $response = LaracombeeFacade::send($request)->wait();
 
         $this->assertInstanceOf(\Recombee\RecommApi\Requests\Request::class, $request);
         $this->assertIsArray($response);
@@ -272,64 +272,64 @@ class LaracombeeTest extends TestCase
 
     public function testAddSeries()
     {
-        $request = Laracombee::addSeries('laracombee-series');
+        $request = LaracombeeFacade::addSeries('LaracombeeFacade-series');
 
-        $response = Laracombee::send($request)->wait();
+        $response = LaracombeeFacade::send($request)->wait();
 
         $this->assertEquals($response, $this->recombeeResponse);
     }
 
     public function testInsertToSeries()
     {
-        $request = Laracombee::insertToSeries('laracombee-series', 'item', (string) $this->itemId, 200);
+        $request = LaracombeeFacade::insertToSeries('LaracombeeFacade-series', 'item', (string) $this->itemId, 200);
 
-        $response = Laracombee::send($request)->wait();
+        $response = LaracombeeFacade::send($request)->wait();
 
         $this->assertEquals($response, 'ok');
     }
 
     public function testListSeries()
     {
-        $request = Laracombee::listSeries();
-        $response = Laracombee::send($request)->wait();
+        $request = LaracombeeFacade::listSeries();
+        $response = LaracombeeFacade::send($request)->wait();
 
         $this->assertIsArray($response);
     }
 
     public function testListSeriesItems()
     {
-        $request = Laracombee::listSeriesItems('laracombee-series');
-        $response = Laracombee::send($request)->wait();
+        $request = LaracombeeFacade::listSeriesItems('LaracombeeFacade-series');
+        $response = LaracombeeFacade::send($request)->wait();
 
         $this->assertIsArray($response);
     }
 
     public function testRemoveFromSeries()
     {
-        $request = Laracombee::removeFromSeries('laracombee-series', 'item', $this->itemId, 200);
-        $response = Laracombee::send($request)->wait();
+        $request = LaracombeeFacade::removeFromSeries('LaracombeeFacade-series', 'item', $this->itemId, 200);
+        $response = LaracombeeFacade::send($request)->wait();
 
         $this->assertEquals($response, $this->recombeeResponse);
     }
 
     public function testDeleteSeries()
     {
-        $request = Laracombee::deleteSeries('laracombee-series');
-        $response = Laracombee::send($request)->wait();
+        $request = LaracombeeFacade::deleteSeries('LaracombeeFacade-series');
+        $response = LaracombeeFacade::send($request)->wait();
         $this->assertEquals($response, $this->recombeeResponse);
     }
 
     public function testSetViewPortion()
     {
-        $request = Laracombee::setViewPortion($this->userId, $this->itemId, 0.22, []);
-        $response = Laracombee::send($request)->wait();
+        $request = LaracombeeFacade::setViewPortion($this->userId, $this->itemId, 0.22, []);
+        $response = LaracombeeFacade::send($request)->wait();
         $this->assertEquals($response, 'ok');
     }
 
     public function testDeleteViewPortion()
     {
-        $request = Laracombee::deleteViewPortion($this->userId, $this->itemId, []);
-        $response = Laracombee::send($request)->wait();
+        $request = LaracombeeFacade::deleteViewPortion($this->userId, $this->itemId, []);
+        $response = LaracombeeFacade::send($request)->wait();
         $this->assertEquals($response, $this->recombeeResponse);
     }
 
@@ -337,9 +337,9 @@ class LaracombeeTest extends TestCase
     // {
     //     $options = [];
 
-    //     $request = Laracombee::deleteRating($this->userId, $this->itemId, $options);
+    //     $request = LaracombeeFacade::deleteRating($this->userId, $this->itemId, $options);
 
-    //     $response = Laracombee::send($request)->wait();
+    //     $response = LaracombeeFacade::send($request)->wait();
 
     //     $this->assertInstanceOf(\Recombee\RecommApi\Requests\Request::class, $request);
     //     $this->assertEquals($response, $this->recombeeResponse);
@@ -349,9 +349,9 @@ class LaracombeeTest extends TestCase
     // {
     //     $options = [];
 
-    //     $request = Laracombee::deleteCartAddition($this->userId, $this->itemId, $options);
+    //     $request = LaracombeeFacade::deleteCartAddition($this->userId, $this->itemId, $options);
 
-    //     $response = Laracombee::send($request)->wait();
+    //     $response = LaracombeeFacade::send($request)->wait();
 
     //     $this->assertInstanceOf(\Recombee\RecommApi\Requests\Request::class, $request);
     //     $this->assertEquals($response, $this->recombeeResponse);
@@ -361,9 +361,9 @@ class LaracombeeTest extends TestCase
     // {
     //     $options = [];
 
-    //     $request = Laracombee::deleteBookmark($this->userId, $this->itemId, $options);
+    //     $request = LaracombeeFacade::deleteBookmark($this->userId, $this->itemId, $options);
 
-    //     $response = Laracombee::send($request)->wait();
+    //     $response = LaracombeeFacade::send($request)->wait();
 
     //     $this->assertInstanceOf(\Recombee\RecommApi\Requests\Request::class, $request);
     //     $this->assertEquals($response, $this->recombeeResponse);
@@ -373,9 +373,9 @@ class LaracombeeTest extends TestCase
     // {
     //     $options = [];
 
-    //     $request = Laracombee::deleteDetailView($this->userId, $this->itemId, $options);
+    //     $request = LaracombeeFacade::deleteDetailView($this->userId, $this->itemId, $options);
 
-    //     $response = Laracombee::send($request)->wait();
+    //     $response = LaracombeeFacade::send($request)->wait();
 
     //     $this->assertInstanceOf(\Recombee\RecommApi\Requests\Request::class, $request);
     //     $this->assertEquals($response, $this->recombeeResponse);
@@ -383,9 +383,9 @@ class LaracombeeTest extends TestCase
 
     public function testDeleteUser()
     {
-        $request = Laracombee::deleteUser($this->userId);
+        $request = LaracombeeFacade::deleteUser($this->userId);
 
-        $response = Laracombee::send($request)->wait();
+        $response = LaracombeeFacade::send($request)->wait();
 
         $this->assertInstanceOf(\Recombee\RecommApi\Requests\Request::class, $request);
         $this->assertEquals($response, $this->recombeeResponse);
@@ -393,9 +393,9 @@ class LaracombeeTest extends TestCase
 
     public function testDeleteItem()
     {
-        $request = Laracombee::deleteItem($this->itemId);
+        $request = LaracombeeFacade::deleteItem($this->itemId);
 
-        $response = Laracombee::send($request)->wait();
+        $response = LaracombeeFacade::send($request)->wait();
 
         $this->assertInstanceOf(\Recombee\RecommApi\Requests\Request::class, $request);
         $this->assertEquals($response, $this->recombeeResponse);
@@ -403,9 +403,9 @@ class LaracombeeTest extends TestCase
 
     public function testDeleteUserProperty()
     {
-        $request = Laracombee::deleteUserProperty('firstName');
+        $request = LaracombeeFacade::deleteUserProperty('firstName');
 
-        $response = Laracombee::send($request)->wait();
+        $response = LaracombeeFacade::send($request)->wait();
 
         $this->assertInstanceOf(\Recombee\RecommApi\Requests\Request::class, $request);
         $this->assertEquals($response, $this->recombeeResponse);
@@ -413,9 +413,9 @@ class LaracombeeTest extends TestCase
 
     public function testDeleteItemProperty()
     {
-        $request = Laracombee::deleteItemProperty('productName');
+        $request = LaracombeeFacade::deleteItemProperty('productName');
 
-        $response = Laracombee::send($request)->wait();
+        $response = LaracombeeFacade::send($request)->wait();
 
         $this->assertInstanceOf(\Recombee\RecommApi\Requests\Request::class, $request);
         $this->assertEquals($response, $this->recombeeResponse);
@@ -423,9 +423,9 @@ class LaracombeeTest extends TestCase
 
     public function testResetDatabase()
     {
-        $request = Laracombee::resetDatabase();
+        $request = LaracombeeFacade::resetDatabase();
 
-        $response = Laracombee::send($request)->wait();
+        $response = LaracombeeFacade::send($request)->wait();
 
         $this->assertEquals($response, $this->recombeeResponse);
     }

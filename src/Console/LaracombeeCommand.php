@@ -2,7 +2,7 @@
 
 namespace Amranidev\Laracombee\Console;
 
-use Laracombee;
+use Amranidev\Laracombee\Facades\LaracombeeFacade;
 use Illuminate\Console\Command;
 use Illuminate\Foundation\Auth\User;
 use Illuminate\Database\Eloquent\Model;
@@ -29,7 +29,7 @@ class LaracombeeCommand extends Command
      */
     public function addUserProperty(string $property, string $type)
     {
-        return Laracombee::addUserProperty($property, $type);
+        return LaracombeeFacade::addUserProperty($property, $type);
     }
 
     /**
@@ -42,7 +42,7 @@ class LaracombeeCommand extends Command
      */
     public function addItemProperty(string $property, string $type)
     {
-        return Laracombee::addItemProperty($property, $type);
+        return LaracombeeFacade::addItemProperty($property, $type);
     }
 
     /**
@@ -54,7 +54,7 @@ class LaracombeeCommand extends Command
      */
     public function deleteUserProperty(string $property)
     {
-        return Laracombee::deleteUserProperty($property);
+        return LaracombeeFacade::deleteUserProperty($property);
     }
 
     /**
@@ -66,7 +66,7 @@ class LaracombeeCommand extends Command
      */
     public function deleteItemProperty(string $property)
     {
-        return Laracombee::deleteItemProperty($property);
+        return LaracombeeFacade::deleteItemProperty($property);
     }
 
     /**
@@ -78,7 +78,7 @@ class LaracombeeCommand extends Command
      */
     public function addUser(User $user)
     {
-        return Laracombee::addUser($user);
+        return LaracombeeFacade::addUser($user);
     }
 
     /**
@@ -90,7 +90,7 @@ class LaracombeeCommand extends Command
      */
     public function addItem(Model $item)
     {
-        return Laracombee::addItem($item);
+        return LaracombeeFacade::addItem($item);
     }
 
     /**
@@ -102,7 +102,7 @@ class LaracombeeCommand extends Command
      */
     public function addUsers(array $batch)
     {
-        return Laracombee::addUsers($batch);
+        return LaracombeeFacade::addUsers($batch);
     }
 
     /**
@@ -114,6 +114,6 @@ class LaracombeeCommand extends Command
      */
     public function addItems(array $batch)
     {
-        return Laracombee::addItems($batch);
+        return LaracombeeFacade::addItems($batch);
     }
 }

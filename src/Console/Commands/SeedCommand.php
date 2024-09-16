@@ -2,7 +2,7 @@
 
 namespace Amranidev\Laracombee\Console\Commands;
 
-use Laracombee;
+use Amranidev\Laracombee\Facades\LaracombeeFacade;
 use Illuminate\Console\Command;
 use Amranidev\Laracombee\Console\LaracombeeCommand;
 
@@ -67,7 +67,7 @@ class SeedCommand extends LaracombeeCommand
 
         $records->chunk($chunk)->each(function ($users) use ($bar) {
             $batch = $this->{'add'.ucfirst($this->argument('type')).'s'}($users->all());
-            Laracombee::batch($batch)->then(function ($response) {
+            LaracombeeFacade::batch($batch)->then(function ($response) {
             })->otherwise(function ($error) {
                 $this->info('');
                 $this->error($error);

@@ -24,7 +24,7 @@ return [
     |
     */
 
-    'timeout'  => 2000,
+    'timeout'  => 5000,
 
     /*
     |--------------------------------------------------------------------------
@@ -46,6 +46,6 @@ return [
     |
     */
 
-    'user'  => app(\App\User::class),
+    'user'  => app(\App\Models\User::class),
     'item'  => '',
 ];

@@ -2,7 +2,7 @@
 
 namespace Amranidev\Laracombee\Console\Commands;
 
-use Laracombee;
+use Amranidev\Laracombee\Facades\LaracombeeFacade;
 use Amranidev\Laracombee\Console\LaracombeeCommand;
 
 class RollbackCommand extends LaracombeeCommand
@@ -41,7 +41,7 @@ class RollbackCommand extends LaracombeeCommand
     {
         $scope = $this->prepareScope()->all();
 
-        Laracombee::batch($scope)
+        LaracombeeFacade::batch($scope)
             ->then(function ($response) {
                 $this->info('Done!');
             })
