@@ -21,6 +21,8 @@ class LaracombeeServiceProvider extends ServiceProvider
      */
     public function register()
     {
+        $this->mergeConfigFrom(__DIR__.'/../../config/laracombee.php', 'laracombee');
+
         $this->app->singleton('laracombee', function () {
             return (new LaracombeeConnector())->connect();
         });
@@ -35,10 +37,11 @@ class LaracombeeServiceProvider extends ServiceProvider
     {
         $configPath = __DIR__.'/../../config/laracombee.php';
         $this->publishes([
-            $configPath => base_path('config/laracombee.php'), ]);
+            $configPath => config_path('laracombee.php'),
+        ], 'laracombee-config');
 
-        $this->commands(
-            [
+        if ($this->app->runningInConsole()) {
+            $this->commands([
                 SeedCommand::class,
                 MigrateCommand::class,
                 RollbackCommand::class,
@@ -46,7 +49,7 @@ class LaracombeeServiceProvider extends ServiceProvider
                 DropColumnsCommand::class,
                 ResetDatabaseCommand::class,
                 CreateNewLaracombeeClass::class,
-            ]
-        );
+            ]);
+        }
     }
 }

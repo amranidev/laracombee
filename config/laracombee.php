@@ -46,6 +46,6 @@ return [
     |
     */
 
-    'user'  => app(\App\User::class),
+    'user'  => \App\Models\User::class,
     'item'  => '',
 ];

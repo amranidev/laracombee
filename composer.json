@@ -9,6 +9,11 @@
         "source": "https://github.com/amranidev/laracombee"
     },
     "require": {
+        "php": "^8.2",
+        "illuminate/console": "^10.0|^11.0|^12.0",
+        "illuminate/contracts": "^10.0|^11.0|^12.0",
+        "illuminate/database": "^10.0|^11.0|^12.0",
+        "illuminate/support": "^10.0|^11.0|^12.0",
         "recombee/php-api-client": "^4.0",
         "guzzlehttp/guzzle": "^7.4"
     },
@@ -36,6 +41,6 @@
         }
     },
     "require-dev": {
-        "orchestra/testbench": "^7.6"
+        "orchestra/testbench": "^10.0"
     }
 }
