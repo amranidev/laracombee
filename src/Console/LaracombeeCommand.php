@@ -4,8 +4,8 @@ namespace Amranidev\Laracombee\Console;
 
 use Laracombee;
 use Illuminate\Console\Command;
-use Illuminate\Foundation\Auth\User;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Contracts\Auth\Authenticatable;
 
 class LaracombeeCommand extends Command
 {
@@ -72,11 +72,9 @@ class LaracombeeCommand extends Command
     /**
      * Add user to recombee.
      *
-     * @param \Illuminate\Foundation\Auth\User $user.
-     *
      * @return \Recombee\RecommApi\Requests\Request
      */
-    public function addUser(User $user)
+    public function addUser(Authenticatable $user)
     {
         return Laracombee::addUser($user);
     }
