@@ -4,7 +4,6 @@ namespace Amranidev\Laracombee;
 
 use GuzzleHttp\Promise\Promise;
 use Recombee\RecommApi\Exceptions;
-use Illuminate\Foundation\Auth\User;
 use Illuminate\Database\Eloquent\Model;
 use Recombee\RecommApi\Requests\Request;
 use Illuminate\Contracts\Auth\Authenticatable;
@@ -64,11 +63,9 @@ class Laracombee extends AbstractRecombee
     /**
      * Update a user in recombee.
      *
-     * @param \Illuminate\Foundation\Auth\User $user
-     *
      * @return \Recombee\RecommApi\Requests\SetUserValues
      */
-    public function updateUser(User $user): \Recombee\RecommApi\Requests\SetUserValues
+    public function updateUser(Authenticatable $user): \Recombee\RecommApi\Requests\SetUserValues
     {
         return $this->addUser($user);
     }
@@ -76,12 +73,9 @@ class Laracombee extends AbstractRecombee
     /**
      * Merge users.
      *
-     * @param \Illuminate\Foundation\Auth\User $target_user
-     * @param \Illuminate\Foundation\Auth\User $source_user
-     *
      * @return \Recombee\RecommApi\Requests\MergeUsers
      */
-    public function mergeUsers(User $target_user, User $source_user): \Recombee\RecommApi\Requests\MergeUsers
+    public function mergeUsers(Authenticatable $target_user, Authenticatable $source_user): \Recombee\RecommApi\Requests\MergeUsers
     {
         return $this->mergeUsersWithId($target_user->id, $source_user->id, ['cascade_create' => true]);
     }
@@ -133,13 +127,9 @@ class Laracombee extends AbstractRecombee
     /**
      * Recommend items to user.
      *
-     * @param \Illuminate\Foundation\Auth\User $user
-     * @param int                              $limit
-     * @param array                            $options
-     *
      * @return mixed
      */
-    public function recommendTo(User $user, int $limit = 10, array $options = []): mixed
+    public function recommendTo(Authenticatable $user, int $limit = 10, array $options = []): mixed
     {
         return $this->recommendItemsToUser($user->id, $limit, $options);
     }
