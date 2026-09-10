@@ -2,9 +2,12 @@
 
 namespace Amranidev\Laracombee\Console\Commands;
 
-use Laracombee;
+use Amranidev\Laracombee\Facades\LaracombeeFacade as Laracombee;
 use Amranidev\Laracombee\Console\LaracombeeCommand;
 
+/**
+ * Erase Recombee data only after interactive confirmation.
+ */
 class ResetDatabaseCommand extends LaracombeeCommand
 {
     /**
@@ -22,29 +25,19 @@ class ResetDatabaseCommand extends LaracombeeCommand
     protected $description = 'Reset recombee database';
 
     /**
-     * Create a new command instance.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-        parent::__construct();
-    }
-
-    /**
      * Execute the console command.
      *
-     * @return mixed
+     * @return int
      */
-    public function handle()
+    public function handle(): int
     {
-        if ($this->confirm('All your recombee data will be erased, including items, item properties, series, user database, purchases, ratings, detail views, and bookmarks. Make sure the request to be never executed in production environment! Resetting your database is irreversible. Are you sure?')) {
-            $request = Laracombee::resetDatabase();
-            Laracombee::send($request)->then(function ($response) {
-                $this->info('Recombee data has been erased!');
-            })->otherwise(function ($error) {
-                $this->error($error);
-            })->wait();
+        if (!$this->confirm('This permanently erases all Recombee data. Are you sure?')) {
+            return self::SUCCESS;
         }
+
+        return $this->executeOperation(function () {
+            Laracombee::send(Laracombee::resetDatabase())->wait();
+            $this->info('Recombee data has been erased!');
+        });
     }
 }
