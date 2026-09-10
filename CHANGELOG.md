@@ -1,5 +1,34 @@
 # CHANGELOG
 
+## Unreleased
+
+### Added
+
+- Laravel 13 and Orchestra Testbench 11 support, with a Laravel 13 development lockfile.
+- Optional SDK client injection and a configurable `ModelMapper` for identifiers, values, and schema properties.
+- Configurable client creation through `LaracombeeConnector` for multiple databases.
+- Facade alias discovery and container resolution by `Laracombee::class`.
+- Regression tests for SDK execution and failures, model mapping, Artisan commands, database chunking, and generated clients.
+- CI coverage for Laravel 12 on PHP 8.2 and Laravel 13 on PHP 8.3–8.5.
+
+### Changed
+
+- Preserve original exceptions when rejecting promises; error callbacks now receive exception objects instead of strings.
+- Default to HTTPS and read credentials from `RECOMBEE_DATABASE` and `RECOMBEE_TOKEN` environment variables.
+- Seed records using database-level chunks and stop with a failure exit code when a batch fails.
+- Validate command catalog types, configured models, column syntax, and positive chunk sizes.
+- Generate lightweight client subclasses through Laravel's generator, respecting application paths and preventing overwrites.
+- Document deferred synchronous execution, client injection, mapping, testing, and migration considerations.
+
+### Fixed
+
+- Use the package facade explicitly inside commands instead of depending on a global alias supplied only by tests.
+- Use Eloquent primary keys for model identifiers instead of assuming an `id` column.
+- Pass the SDK's `cascadeCreate` option when merging users.
+- Eliminate the missing constructor argument and duplicated implementation in generated clients.
+- Return nonzero command exit codes for validation and execution failures instead of exiting the process or swallowing errors.
+- Correct the CI matrix runner configuration and ignore PHPUnit's cache directory.
+
 ## v0.2.1 (2022-08-17)
 
 ### Fixed
