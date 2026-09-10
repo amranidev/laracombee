@@ -47,39 +47,45 @@ use Recombee\RecommApi\Requests\ListUserViewPortions;
 use Recombee\RecommApi\Requests\RecommendItemsToUser;
 use Recombee\RecommApi\Requests\RecommendUsersToUser;
 
+/**
+ * Build Recombee API requests and delegate execution to a concrete client.
+ */
 abstract class AbstractRecombee
 {
     /**
+     * The SDK client used by concrete request executors.
+     *
      * @var \Recombee\RecommApi\Client
      */
     protected $client;
 
     /**
+     * The request timeout in milliseconds.
+     *
      * @var int
      */
     protected $timeout;
 
     /**
-     * AbstractRecombee constructor.
+     * Configure the SDK client and default request timeout.
      *
-     * @param        $database_id
-     * @param        $token
-     * @param string $protocol
-     * @param int    $timeout
-     * @param array  $options
+     * @param string $database_id
+     * @param string $token
+     * @param array<string, mixed> $options
+     * @param Client|null $client An existing SDK client, or null to construct one.
      */
-    public function __construct(string $database_id, string $token, array $options)
+    public function __construct(string $database_id, string $token, array $options, ?Client $client = null)
     {
-        $this->client = new Client($database_id, $token, $options);
-        $this->timeout = $options['timeout'];
+        $this->client = $client ?? new Client($database_id, $token, $options);
+        $this->timeout = $options['timeout'] ?? 2000;
     }
 
     /**
      * Send request as bulk.
      *
-     * @param array $bulk
+     * @param array<\Recombee\RecommApi\Requests\Request> $bulk
      *
-     * @return \GuzzleHttp\Promise\Promise
+     * @return \GuzzleHttp\Promise\PromiseInterface
      */
     public function batch(array $bulk)
     {
@@ -93,14 +99,14 @@ abstract class AbstractRecombee
      *
      * @param \Recombee\RecommApi\Requests\Request $request
      *
-     * @return mixed
+     * @return \GuzzleHttp\Promise\PromiseInterface
      */
     abstract public function send(Request $request);
 
     /**
      * Add new item to recombee.
      *
-     * @param string $item_id
+     * @param string|int $item_id
      * @param array  $fields
      *
      * @return \Recombee\RecommApi\Requests\SetItemValues
@@ -117,7 +123,7 @@ abstract class AbstractRecombee
     /**
      * Get item values.
      *
-     * @param string $item_id
+     * @param string|int $item_id
      *
      * @return \Recombee\RecommApi\Requests\GetItemValues
      */
@@ -131,11 +137,11 @@ abstract class AbstractRecombee
     /**
      * Recommend items to user.
      *
-     * @param int   $user_id
+     * @param string|int   $user_id
      * @param int   $limit
      * @param array $filters
      *
-     * @return mixed
+     * @return \GuzzleHttp\Promise\PromiseInterface
      */
     public function recommendItemsToUser($user_id, int $limit = 10, array $filters = [])
     {
@@ -147,11 +153,11 @@ abstract class AbstractRecombee
     /**
      * Recommend Users to User.
      *
-     * @param int   $user_id
+     * @param string|int   $user_id
      * @param int   $limit
      * @param array $filters
      *
-     * @return mixed
+     * @return \GuzzleHttp\Promise\PromiseInterface
      */
     public function recommendUsersToUser($user_id, int $limit = 10, array $filters = [])
     {
@@ -163,7 +169,7 @@ abstract class AbstractRecombee
     /**
      * Remove item.
      *
-     * @param int $item_id
+     * @param string|int $item_id
      *
      * @return \Recombee\RecommApi\Requests\DeleteItem
      */
@@ -205,7 +211,7 @@ abstract class AbstractRecombee
     /**
      * Delete user.
      *
-     * @param string $user_id
+     * @param string|int $user_id
      *
      * @return \Recombee\RecommApi\Requests\DeleteUser
      */
@@ -219,8 +225,8 @@ abstract class AbstractRecombee
     /**
      * Merge users.
      *
-     * @param int   $target_user_id
-     * @param int   $source_user_id
+     * @param string|int   $target_user_id
+     * @param string|int   $source_user_id
      * @param array $params
      *
      * @return \Recombee\RecommApi\Requests\MergeUsers
@@ -249,7 +255,7 @@ abstract class AbstractRecombee
     /**
      * Set Users Values.
      *
-     * @param int   $user_id
+     * @param string|int   $user_id
      * @param array $fields
      *
      * @return \Recombee\RecommApi\Requests\SetUserValues
@@ -266,7 +272,7 @@ abstract class AbstractRecombee
     /**
      * Get Users Values.
      *
-     * @param string $user_id
+     * @param string|int $user_id
      *
      * @return \Recombee\RecommApi\Requests\GetUserValues
      */
@@ -309,7 +315,7 @@ abstract class AbstractRecombee
     /**
      * List User Detail Views.
      *
-     * @param int $user_id
+     * @param string|int $user_id
      *
      * @return \Recombee\RecommApi\Requests\ListUserDetailViews
      */
@@ -352,8 +358,8 @@ abstract class AbstractRecombee
     /**
      * Add Detailed View.
      *
-     * @param int   $user_id
-     * @param int   $item_id
+     * @param string|int   $user_id
+     * @param string|int   $item_id
      * @param array $options
      *
      * @return \Recombee\RecommApi\Requests\AddDetailView
@@ -368,8 +374,8 @@ abstract class AbstractRecombee
     /**
      * Delete Item View.
      *
-     * @param int   $user_id
-     * @param int   $item_id
+     * @param string|int   $user_id
+     * @param string|int   $item_id
      * @param array $options
      *
      * @return \Recombee\RecommApi\Requests\DeleteDetailView
@@ -384,7 +390,7 @@ abstract class AbstractRecombee
     /**
      * List Item Detail Views.
      *
-     * @param int $item_id
+     * @param string|int $item_id
      *
      * @return \Recombee\RecommApi\Requests\ListItemDetailViews
      */
@@ -398,8 +404,8 @@ abstract class AbstractRecombee
     /**
      * Add Purchase.
      *
-     * @param int   $user_id
-     * @param int   $item_id
+     * @param string|int   $user_id
+     * @param string|int   $item_id
      * @param array $options
      *
      * @return \Recombee\RecommApi\Requests\AddPurchase
@@ -414,8 +420,8 @@ abstract class AbstractRecombee
     /**
      * Delete Purchase.
      *
-     * @param int   $user_id
-     * @param int   $item_id
+     * @param string|int   $user_id
+     * @param string|int   $item_id
      * @param array $options
      *
      * @return \Recombee\RecommApi\Requests\DeletePurchase
@@ -430,8 +436,8 @@ abstract class AbstractRecombee
     /**
      * Add rating.
      *
-     * @param int   $user_id
-     * @param int   $item_id
+     * @param string|int   $user_id
+     * @param string|int   $item_id
      * @param float $rating
      * @param array $options
      *
@@ -447,8 +453,8 @@ abstract class AbstractRecombee
     /**
      * Delete rating.
      *
-     * @param int   $user_id
-     * @param int   $item_id
+     * @param string|int   $user_id
+     * @param string|int   $item_id
      * @param array $options
      *
      * @return \Recombee\RecommApi\Requests\DeleteRating
@@ -463,7 +469,7 @@ abstract class AbstractRecombee
     /**
      * List item ratings.
      *
-     * @param int $item_id
+     * @param string|int $item_id
      *
      * @return \Recombee\RecommApi\Requests\ListItemRatings
      */
@@ -477,7 +483,7 @@ abstract class AbstractRecombee
     /**
      * list user ratings.
      *
-     * @param int $user_id
+     * @param string|int $user_id
      *
      * @return \Recombee\RecommApi\Requests\ListUserRatings
      */
@@ -489,10 +495,10 @@ abstract class AbstractRecombee
     }
 
     /**
-     * Card Addtion.
+     * Build a cart-addition request.
      *
-     * @param int   $user_id
-     * @param int   $item_id
+     * @param string|int   $user_id
+     * @param string|int   $item_id
      * @param array $options
      *
      * @return \Recombee\RecommApi\Requests\AddCartAddition
@@ -505,10 +511,10 @@ abstract class AbstractRecombee
     }
 
     /**
-     * Delete Card Addtion.
+     * Delete Build a cart-addition request.
      *
-     * @param int   $user_id
-     * @param int   $item_id
+     * @param string|int   $user_id
+     * @param string|int   $item_id
      * @param array $options
      *
      * @return \Recombee\RecommApi\Requests\DeleteCartAddition
@@ -523,8 +529,8 @@ abstract class AbstractRecombee
     /**
      * Add Bookmark.
      *
-     * @param int   $user_id
-     * @param int   $item_id
+     * @param string|int   $user_id
+     * @param string|int   $item_id
      * @param array $options
      *
      * @return \Recombee\RecommApi\Requests\AddBookmark
@@ -539,8 +545,8 @@ abstract class AbstractRecombee
     /**
      * Delete Bookmark.
      *
-     * @param int   $user_id
-     * @param int   $item_id
+     * @param string|int   $user_id
+     * @param string|int   $item_id
      * @param array $options
      *
      * @return \Recombee\RecommApi\Requests\DeleteBookmark
@@ -571,7 +577,7 @@ abstract class AbstractRecombee
      *
      * @param string $series_id
      * @param string $item_type
-     * @param string $item_id
+     * @param string|int $item_id
      * @param int    $time
      *
      * @return \Recombee\RecommApi\Requests\InsertToSeries
@@ -588,7 +594,7 @@ abstract class AbstractRecombee
      *
      * @param string $series_id
      * @param string $item_type
-     * @param string $item_id
+     * @param string|int $item_id
      * @param int    $time
      *
      * @return \Recombee\RecommApi\Requests\RemoveFromSeries
@@ -643,8 +649,8 @@ abstract class AbstractRecombee
     /**
      * Set view portion.
      *
-     * @param string $userId
-     * @param string $itemId
+     * @param string|int $userId
+     * @param string|int $itemId
      * @param float  $portion
      * @param array  $options
      *
@@ -660,8 +666,8 @@ abstract class AbstractRecombee
     /**
      * Delete view portion.
      *
-     * @param string $userId
-     * @param string $itemId
+     * @param string|int $userId
+     * @param string|int $itemId
      * @param array  $options
      *
      * @return \Recombee\RecommApi\Requests\DeleteViewPortion
@@ -676,7 +682,7 @@ abstract class AbstractRecombee
     /**
      * List item view portions.
      *
-     * @param string $itemId
+     * @param string|int $itemId
      *
      * @return \Recombee\RecommApi\Requests\ListItemViewPortions
      */
@@ -690,7 +696,7 @@ abstract class AbstractRecombee
     /**
      * List user view portions.
      *
-     * @param string $userId
+     * @param string|int $userId
      *
      * @return \Recombee\RecommApi\Requests\ListUserViewPortions
      */
