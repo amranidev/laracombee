@@ -3,55 +3,64 @@
 namespace Amranidev\Laracombee;
 
 use GuzzleHttp\Promise\Promise;
-use Recombee\RecommApi\Exceptions;
+use Recombee\RecommApi\Client;
+use Throwable;
 use Illuminate\Database\Eloquent\Model;
 use Recombee\RecommApi\Requests\Request;
 use Illuminate\Contracts\Auth\Authenticatable;
 
+/**
+ * Map Laravel models to Recombee requests and execute deferred SDK calls.
+ */
 class Laracombee extends AbstractRecombee
 {
     /**
-     * Create new laracombee instance.
+     * The strategy used to map model identifiers and properties.
+     *
+     * @var ModelMapper
      */
-    public function __construct()
+    protected ModelMapper $mapper;
+
+    /**
+     * Initialize the client dependencies and configuration.
+     *
+     * @param \Recombee\RecommApi\Client|null $client
+     * @param ModelMapper|null $mapper
+     * @param array<string, mixed>|null $configuration
+     */
+    public function __construct(?Client $client = null, ?ModelMapper $mapper = null, ?array $configuration = null)
     {
-        $options = [
-            'timeout'  => config('laracombee.timeout'),
-            'region'   => config('laracombee.region') ?? 'eu-west',
-            'protocol' => config('laracombee.protocol') ?? 'https',
-        ];
+        $configuration ??= config('laracombee');
+        $this->mapper = $mapper ?? new ModelMapper();
 
         parent::__construct(
-            config('laracombee.database'),
-            config('laracombee.token'),
-            $options
+            $configuration['database'] ?? '',
+            $configuration['token'] ?? '',
+            [
+                'timeout' => $configuration['timeout'] ?? 2000,
+                'region' => $configuration['region'] ?? 'eu-west',
+                'protocol' => $configuration['protocol'] ?? 'https',
+            ],
+            $client
         );
     }
 
     /**
-     * Add a user to recombee db.
+     * Build Recombee value-setting requests from the supplied model.
      *
      * @param \Illuminate\Contracts\Auth\Authenticatable $user
-     *
      * @return \Recombee\RecommApi\Requests\SetUserValues
      */
     public function addUser(Authenticatable $user): \Recombee\RecommApi\Requests\SetUserValues
     {
-        $laracombeeProperties = $user::$laracombee;
-
-        $values = collect($user->toArray())->filter(function ($value, $key) use ($laracombeeProperties) {
-            return isset($laracombeeProperties[$key]);
-        })->all();
-
-        return $this->setUserValues($user->id, $values);
+        return $this->setUserValues($this->mapper->identifier($user), $this->mapper->values($user));
     }
 
     /**
-     * Add multiple users to recombee db.
+     * Build Recombee value-setting requests from the supplied models.
      *
-     * @param array $users
-     *
-     * @return array
+     * @param array<\Illuminate\Contracts\Auth\Authenticatable> $users
+     * @return array<\Recombee\RecommApi\Requests\SetUserValues>
      */
     public function addUsers(array $users): array
     {
@@ -77,25 +86,18 @@ class Laracombee extends AbstractRecombee
      */
     public function mergeUsers(Authenticatable $target_user, Authenticatable $source_user): \Recombee\RecommApi\Requests\MergeUsers
     {
-        return $this->mergeUsersWithId($target_user->id, $source_user->id, ['cascade_create' => true]);
+        return $this->mergeUsersWithId($this->mapper->identifier($target_user), $this->mapper->identifier($source_user), ['cascadeCreate' => true]);
     }
 
     /**
-     * Add an item to recombee db.
+     * Build Recombee value-setting requests from the supplied model.
      *
      * @param \Illuminate\Database\Eloquent\Model $item
-     *
      * @return \Recombee\RecommApi\Requests\SetItemValues
      */
     public function addItem(Model $item): \Recombee\RecommApi\Requests\SetItemValues
     {
-        $laracombeeProperties = $item::$laracombee;
-
-        $values = collect($item->toArray())->filter(function ($value, $key) use ($laracombeeProperties) {
-            return isset($laracombeeProperties[$key]);
-        })->all();
-
-        return $this->setItemValues($item->id, $values);
+        return $this->setItemValues($this->mapper->identifier($item), $this->mapper->values($item));
     }
 
     /**
@@ -111,11 +113,10 @@ class Laracombee extends AbstractRecombee
     }
 
     /**
-     * Add multiple items to recombee db.
+     * Build Recombee value-setting requests from the supplied models.
      *
-     * @param array $items
-     *
-     * @return array
+     * @param array<\Illuminate\Database\Eloquent\Model> $items
+     * @return array<\Recombee\RecommApi\Requests\SetItemValues>
      */
     public function addItems(array $items): array
     {
@@ -127,19 +128,21 @@ class Laracombee extends AbstractRecombee
     /**
      * Recommend items to user.
      *
-     * @return mixed
+     * @return \GuzzleHttp\Promise\PromiseInterface
      */
     public function recommendTo(Authenticatable $user, int $limit = 10, array $options = []): mixed
     {
-        return $this->recommendItemsToUser($user->id, $limit, $options);
+        return $this->recommendItemsToUser($this->mapper->identifier($user), $limit, $options);
     }
 
     /**
-     * Send request.
+     * Defer the synchronous SDK call until the returned promise is awaited.
+     *
+     * SDK failures reject the promise with the original exception object.
      *
      * @param \Recombee\RecommApi\Requests\Request $request
      *
-     * @return \GuzzleHttp\Promise\Promise|mixed
+     * @return \GuzzleHttp\Promise\PromiseInterface
      */
     public function send(Request $request)
     {
@@ -148,8 +151,8 @@ class Laracombee extends AbstractRecombee
                 $request->setTimeout($this->timeout);
                 $response = $this->client->send($request);
                 $promise->resolve($response);
-            } catch (Exceptions\ApiTimeoutException|Exceptions\ResponseException|Exceptions\ApiException $e) {
-                $promise->reject($e->getMessage());
+            } catch (Throwable $e) {
+                $promise->reject($e);
             }
         });
     }
