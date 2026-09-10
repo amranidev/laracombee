@@ -2,84 +2,54 @@
 
 namespace Amranidev\Laracombee\Console\Commands;
 
-use Laracombee;
-use Illuminate\Console\Command;
+use Amranidev\Laracombee\Facades\LaracombeeFacade as Laracombee;
 use Amranidev\Laracombee\Console\LaracombeeCommand;
 
+/**
+ * Synchronize configured Eloquent records in bounded database batches.
+ */
 class SeedCommand extends LaracombeeCommand
 {
     /**
-     * The name and signature of the console command.
+     * The Artisan command name, arguments, and options.
      *
      * @var string
      */
-    protected $signature = 'laracombee:seed
-                            {type : Catalog type (user or item)}
-                            {--chunk= : total chunk}';
+    protected $signature = 'laracombee:seed {type : Catalog type (user or item)} {--chunk=100 : Records per batch}';
 
     /**
-     * The console command description.
+     * The command description displayed in Artisan help.
      *
      * @var string
      */
-    protected $description = 'Seed records into recombee db';
+    protected $description = 'Seed records into Recombee';
 
     /**
-     * The default user model.
+     * Execute the command and return its success or failure exit code.
      *
-     * @var string
+     * @return int
      */
-    protected static $userModel = '\\App\\User';
-
-    /**
-     * The default chunk value.
-     *
-     * @var int
-     */
-    protected static $chunk = 100;
-
-    /**
-     * Create a new command instance.
-     *
-     * @return void
-     */
-    public function __construct()
+    public function handle(): int
     {
-        parent::__construct();
-    }
+        return $this->executeOperation(function () {
+            $chunk = filter_var($this->option('chunk'), FILTER_VALIDATE_INT, ['options' => ['min_range' => 1]]);
+            if ($chunk === false) {
+                throw new \InvalidArgumentException('Chunk size must be a positive integer.');
+            }
 
-    /**
-     * Execute the console command.
-     *
-     * @return void
-     */
-    public function handle()
-    {
-        $chunk = (int) $this->option('chunk') ?: self::$chunk;
+            $type = $this->catalogType($this->argument('type'));
+            $class = $this->modelClass($type);
+            $this->modelProperties($type);
+            $bar = $this->output->createProgressBar($class::query()->count());
 
-        $class = config('laracombee.'.$this->argument('type'));
+            $class::query()->chunkById($chunk, function ($records) use ($type, $bar) {
+                $batch = $this->{'add'.ucfirst($type).'s'}($records->all());
+                Laracombee::batch($batch)->wait();
+                $bar->advance($records->count());
+            });
 
-        $records = $class::all();
-
-        $total = $records->count();
-
-        $bar = $this->output->createProgressBar($total / $chunk);
-
-        $records->chunk($chunk)->each(function ($users) use ($bar) {
-            $batch = $this->{'add'.ucfirst($this->argument('type')).'s'}($users->all());
-            Laracombee::batch($batch)->then(function ($response) {
-            })->otherwise(function ($error) {
-                $this->info('');
-                $this->error($error);
-                exit;
-            })->wait();
-
-            $bar->advance();
+            $bar->finish();
+            $this->newLine();
         });
-
-        $bar->finish();
-
-        $this->info('');
-        $this->info('Done!');
     }
 }

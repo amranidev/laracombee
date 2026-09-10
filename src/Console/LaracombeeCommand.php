@@ -2,28 +2,21 @@
 
 namespace Amranidev\Laracombee\Console;
 
-use Laracombee;
+use Amranidev\Laracombee\Facades\LaracombeeFacade as Laracombee;
 use Illuminate\Console\Command;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Contracts\Auth\Authenticatable;
 
+/**
+ * Share model validation, request helpers, and exit-code handling between commands.
+ */
 class LaracombeeCommand extends Command
 {
     /**
-     * Create a new command instance.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-        parent::__construct();
-    }
-
-    /**
      * Add User property.
      *
-     * @param string $property.
-     * @param string $type.
+     * @param string $property
+     * @param string $type
      *
      * @return \Recombee\RecommApi\Requests\AddUserProperty
      */
@@ -35,8 +28,8 @@ class LaracombeeCommand extends Command
     /**
      * Add Item property.
      *
-     * @param string $property.
-     * @param string $type.
+     * @param string $property
+     * @param string $type
      *
      * @return \Recombee\RecommApi\Requests\AddItemProperty
      */
@@ -48,7 +41,7 @@ class LaracombeeCommand extends Command
     /**
      * Delete User property.
      *
-     * @param string $property.
+     * @param string $property
      *
      * @return \Recombee\RecommApi\Requests\DeleteUserProperty
      */
@@ -60,7 +53,7 @@ class LaracombeeCommand extends Command
     /**
      * Delete Item property.
      *
-     * @param string $property.
+     * @param string $property
      *
      * @return \Recombee\RecommApi\Requests\DeleteItemProperty
      */
@@ -70,9 +63,10 @@ class LaracombeeCommand extends Command
     }
 
     /**
-     * Add user to recombee.
+     * Build Recombee value-setting requests from the supplied model.
      *
-     * @return \Recombee\RecommApi\Requests\Request
+     * @param \Illuminate\Contracts\Auth\Authenticatable $user
+     * @return \Recombee\RecommApi\Requests\SetUserValues
      */
     public function addUser(Authenticatable $user)
     {
@@ -80,11 +74,10 @@ class LaracombeeCommand extends Command
     }
 
     /**
-     * Add item to recombee.
+     * Build Recombee value-setting requests from the supplied model.
      *
-     * @param \Illuminate\Database\Eloquent\Model $item.
-     *
-     * @return \Recombee\RecommApi\Requests\Request
+     * @param \Illuminate\Database\Eloquent\Model $item
+     * @return \Recombee\RecommApi\Requests\SetItemValues
      */
     public function addItem(Model $item)
     {
@@ -92,11 +85,10 @@ class LaracombeeCommand extends Command
     }
 
     /**
-     * Add users as bulk.
+     * Build Recombee value-setting requests from the supplied models.
      *
-     * @param array $batch.
-     *
-     * @return \Recombee\RecommApi\Requests\Request
+     * @param array<\Illuminate\Contracts\Auth\Authenticatable> $batch
+     * @return array<\Recombee\RecommApi\Requests\SetUserValues>
      */
     public function addUsers(array $batch)
     {
@@ -104,14 +96,85 @@ class LaracombeeCommand extends Command
     }
 
     /**
-     * Add items as bulk.
+     * Build Recombee value-setting requests from the supplied models.
      *
-     * @param array $batch.
-     *
-     * @return \Recombee\RecommApi\Requests\Request
+     * @param array<\Illuminate\Database\Eloquent\Model> $batch
+     * @return array<\Recombee\RecommApi\Requests\SetItemValues>
      */
     public function addItems(array $batch)
     {
         return Laracombee::addItems($batch);
+    }
+    /**
+     * Run a command operation and convert exceptions into a failure exit code.
+     *
+     * @param callable(): void $operation
+     * @return int
+     */
+    protected function executeOperation(callable $operation): int
+    {
+        try {
+            $operation();
+            $this->info('Done!');
+
+            return self::SUCCESS;
+        } catch (\Throwable $error) {
+            $this->error($error->getMessage());
+
+            return self::FAILURE;
+        }
+    }
+
+    /**
+     * Validate a catalog selector before constructing requests.
+     *
+     * @param string|null $type
+     * @return string
+     *
+     * @throws \InvalidArgumentException When the model or supplied arguments are invalid.
+     */
+    protected function catalogType(?string $type): string
+    {
+        if (!in_array($type, ['user', 'item'], true)) {
+            throw new \InvalidArgumentException('Catalog type must be user or item.');
+        }
+
+        return $type;
+    }
+
+    /**
+     * Resolve and validate the configured Eloquent model for a catalog.
+     *
+     * @param string $type
+     * @return class-string<\Illuminate\Database\Eloquent\Model>
+     *
+     * @throws \InvalidArgumentException When the model or supplied arguments are invalid.
+     */
+    protected function modelClass(string $type): string
+    {
+        $class = config('laracombee.'.$this->catalogType($type));
+
+        if (!is_string($class) || !is_subclass_of($class, Model::class)) {
+            throw new \InvalidArgumentException('Configure an Eloquent model for laracombee.'.$type.'.');
+        }
+
+        if ($type === 'user' && !is_subclass_of($class, Authenticatable::class)) {
+            throw new \InvalidArgumentException('The user model must implement Authenticatable.');
+        }
+
+        return $class;
+    }
+
+    /**
+     * Resolve the configured mapper’s schema definitions for a catalog.
+     *
+     * @param string $type
+     * @return array<string, string>
+     *
+     * @throws \InvalidArgumentException When the model or supplied arguments are invalid.
+     */
+    protected function modelProperties(string $type): array
+    {
+        return app(\Amranidev\Laracombee\ModelMapper::class)->properties($this->modelClass($type));
     }
 }

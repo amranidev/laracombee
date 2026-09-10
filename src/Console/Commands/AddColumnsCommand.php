@@ -2,72 +2,60 @@
 
 namespace Amranidev\Laracombee\Console\Commands;
 
-use Laracombee;
+use Amranidev\Laracombee\Facades\LaracombeeFacade as Laracombee;
 use Amranidev\Laracombee\Console\LaracombeeCommand;
+use Illuminate\Support\Collection;
 
+/**
+ * Create explicitly supplied properties in a Recombee catalog.
+ */
 class AddColumnsCommand extends LaracombeeCommand
 {
     /**
-     * The name and signature of the console command.
+     * The Artisan command name, arguments, and options.
      *
      * @var string
      */
-    protected $signature = 'laracombee:add
-                            {columns* : Columns}
-                            {--to= : table}';
+    protected $signature = 'laracombee:add {columns* : Properties} {--to= : Catalog type (user or item)}';
 
     /**
-     * The console command description.
+     * The command description displayed in Artisan help.
      *
      * @var string
      */
-    protected $description = 'Add new columns to recombee db';
+    protected $description = 'Add Recombee properties';
 
     /**
-     * Create a new command instance.
+     * Execute the command and return its success or failure exit code.
      *
-     * @return void
+     * @return int
      */
-    public function __construct()
+    public function handle(): int
     {
-        parent::__construct();
+        return $this->executeOperation(function () {
+            Laracombee::batch($this->loadColumns($this->argument('columns'))->all())->wait();
+        });
     }
 
     /**
-     * Execute the console command.
+     * Validate property arguments and build their Recombee requests.
      *
-     * @return mixed
-     */
-    public function handle()
-    {
-        if (!$this->option('to')) {
-            $this->error('--to option is required!');
-            exit;
-        }
-
-        Laracombee::batch($this->loadColumns($this->argument('columns'))->all())
-            ->then(function ($response) {
-                $this->info('Done!');
-            })
-            ->otherwise(function ($error) {
-                $this->error($error);
-            })
-            ->wait();
-    }
-
-    /**
-     * Load columns.
-     *
-     * @param array $columns
-     *
+     * @param array<int, string> $columns
      * @return \Illuminate\Support\Collection
+     *
+     * @throws \InvalidArgumentException When the model or supplied arguments are invalid.
      */
-    public function loadColumns(array $columns)
+    public function loadColumns(array $columns): Collection
     {
-        return collect($columns)->map(function (string $column) {
-            list($property, $type) = explode(':', $column);
+        $type = $this->catalogType($this->option('to'));
 
-            return $this->{'add'.ucfirst($this->option('to')).'Property'}($property, $type);
+        return collect($columns)->map(function (string $column) use ($type) {
+            $parts = explode(':', $column);
+            if (count($parts) !== 2 || $parts[0] === '' || $parts[1] === '') {
+                throw new \InvalidArgumentException('Columns must use the name:type format.');
+            }
+
+            return $this->{'add'.ucfirst($type).'Property'}($parts[0], $parts[1]);
         });
     }
 }

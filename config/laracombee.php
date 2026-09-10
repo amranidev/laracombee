@@ -11,8 +11,8 @@ return [
     |
     */
 
-    'database' => '',
-    'token'    => '',
+    'database' => env('RECOMBEE_DATABASE', ''),
+    'token'    => env('RECOMBEE_TOKEN', ''),
     'region'   => 'eu-west',
 
     /*
@@ -35,7 +35,7 @@ return [
     |
     */
 
-    'protocol' => 'http',
+    'protocol' => 'https',
 
     /*
     |--------------------------------------------------------------------------

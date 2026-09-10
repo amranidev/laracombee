@@ -37,7 +37,7 @@ To learn more about how Recombee works, see the official documentation:
 ## Requirements
 
 - PHP 8.2 or later
-- Laravel 10, 11, or 12
+- Laravel 10, 11, 12, or 13 (Laravel 13 requires PHP 8.3 or later)
 
 ## Installation
 
@@ -47,7 +47,7 @@ Install the package with Composer:
 composer require amranidev/laracombee
 ```
 
-Laravel package discovery will register the service provider automatically.
+Laravel package discovery registers the service provider and the `Laracombee` facade alias automatically. You can also import the facade explicitly with `use Amranidev\Laracombee\Facades\LaracombeeFacade as Laracombee;`.
 
 If you want to publish the configuration file, run:
 
@@ -55,7 +55,14 @@ If you want to publish the configuration file, run:
 php artisan vendor:publish --tag=laracombee-config
 ```
 
-Then add your Recombee database ID and private token to `config/laracombee.php`.
+Set your credentials in `.env`:
+
+```dotenv
+RECOMBEE_DATABASE=your-database-id
+RECOMBEE_TOKEN=your-private-token
+```
+
+The default configuration reads these variables. If you previously published the configuration, update its `database` and `token` entries to use `env('RECOMBEE_DATABASE', '')` and `env('RECOMBEE_TOKEN', '')`, or continue supplying those values through your existing configuration.
 
 ## Configuration
 
@@ -70,13 +77,13 @@ These classes are used by the package commands.
 
 You can also configure:
 
-- `protocol`: the HTTP protocol used for requests. The default is `http`.
+- `protocol`: the HTTP protocol used for requests. The default is `https`.
 - `timeout`: the default request timeout in milliseconds. The default is `2000`.
 - `region`: the Recombee region. The default is `eu-west`.
 
 ## Defining Recombee Properties
 
-Each model that should be synchronized with Recombee must define a static `$laracombee` property.
+Each model that should be synchronized with Recombee must define a public static `$laracombee` property mapping property names to Recombee type strings.
 
 ```php
 <?php
@@ -97,7 +104,9 @@ class User extends Authenticatable
 }
 ```
 
-Do the same for your item model.
+Do the same for your item model. The default mapper uses the Eloquent primary key (`getKey()`), so custom primary key names are supported. Models must have an identifier before synchronization.
+
+Only declared properties present in `toArray()` are exported. Eloquent hidden attributes remain excluded. User models must implement Laravel's `Authenticatable` contract; the built-in commands require Eloquent models.
 
 ## Usage
 
@@ -116,7 +125,8 @@ Laracombee::send($request)
         // Success.
     })
     ->otherwise(function ($error) {
-        // Handle the error.
+        // $error is the original exception.
+        report($error);
     })
     ->wait();
 ```
@@ -149,7 +159,9 @@ $itemIds = collect($recommendations['recomms'])
     ->all();
 ```
 
-Unlike most other methods in the package, recommendation methods trigger the request immediately and return a promise directly.
+Most methods build a Recombee request, which you pass to `send()`. Recommendation methods and `batch()` return a promise directly. Call `wait()` to execute the SDK request and obtain its result.
+
+The promise defers a synchronous SDK call; it does not provide concurrent network requests. A failed `wait()` throws the original exception. If you attach `otherwise()`, its callback receives that exception and can handle or rethrow it.
 
 ## Commands
 
@@ -184,6 +196,10 @@ You can also set a custom chunk size:
 php artisan laracombee:seed user --chunk=250
 ```
 
+Seeding reads records in database chunks instead of loading the entire table. `--chunk` must be a positive integer. The `type`, `--to`, and `--from` arguments accept only `user` or `item`.
+
+Commands return exit code `0` on success and `1` on validation or execution failure. Seeding stops at the first failed batch; previously completed batches are not rolled back.
+
 ### Add or drop properties manually
 
 ```bash
@@ -205,7 +221,7 @@ This command permanently removes all Recombee data, including users, items, prop
 php artisan laracombee:new CustomLaracombee
 ```
 
-This creates a new class in `app/Laracombee`.
+This creates a subclass of the package client in your application’s `Laracombee` directory (normally `app/Laracombee`). The generator supports nested namespaces, rejects invalid class names, and refuses to overwrite existing files.
 
 ## Available Methods
 
@@ -275,49 +291,91 @@ Laracombee generally follows Recombee naming conventions.
 
 ## Extending the Package
 
-If you want to tailor the behavior of the package, you can extend `AbstractRecombee` and implement your own `send()` method.
+Resolve the configured singleton through the container or inject it into a controller or service:
 
 ```php
-<?php
+use Amranidev\Laracombee\Laracombee;
 
-namespace Acme\MyRecombee;
-
-use Amranidev\Laracombee\AbstractRecombee;
-use Recombee\RecommApi\Requests\Request;
-
-class MyRecombee extends AbstractRecombee
-{
-    public function __construct()
-    {
-        parent::__construct(
-            config('laracombee.database'),
-            config('laracombee.token'),
-            [
-                'timeout' => config('laracombee.timeout'),
-                'region' => config('laracombee.region'),
-                'protocol' => config('laracombee.protocol'),
-            ]
-        );
-    }
-
-    public function send(Request $request)
-    {
-        return $this->client->send($request);
-    }
-}
+$client = app(Laracombee::class);
 ```
 
-This is useful if you want to customize error handling, request flow, or database targeting.
+The service provider uses `LaracombeeConnector` to construct the SDK client and injects it into `Laracombee`. You can supply an SDK client directly for testing or custom construction:
+
+```php
+use Amranidev\Laracombee\Laracombee;
+use Recombee\RecommApi\Client;
+
+$configuration = config('laracombee');
+$sdk = new Client($configuration['database'], $configuration['token'], [
+    'region' => $configuration['region'],
+    'protocol' => $configuration['protocol'],
+]);
+
+$client = new Laracombee($sdk, configuration: $configuration);
+```
+
+Existing `new Laracombee()` calls still use the Laravel configuration. Existing `AbstractRecombee` subclasses can still use the three-argument constructor; an optional fourth SDK client argument is available for injection.
+
+### Custom model mapping
+
+Extend `ModelMapper` to control identifiers or exported properties, then bind it in your application's service provider before resolving the client:
+
+```php
+use Amranidev\Laracombee\ModelMapper;
+
+class CatalogMapper extends ModelMapper
+{
+    public function values(object $model): array
+    {
+        $values = parent::values($model);
+        if (isset($values['name'])) {
+            $values['name'] = trim($values['name']);
+        }
+
+        return $values;
+    }
+}
+
+$this->app->bind(ModelMapper::class, CatalogMapper::class);
+```
+
+You can override `identifier(object $model): string|int`, `values(object $model): array`, and `properties(string $model): array`. Commands use `properties()` for schema operations; `identifier()` and `values()` control synchronization requests.
 
 ## Multiple Recombee Databases
 
-You can create additional Laracombee-style classes if you need to work with multiple Recombee databases from the same application.
+Create clients from separate configuration arrays without copying the request or promise implementation:
 
-The built-in generator can help you scaffold those classes:
+```php
+use Amranidev\Laracombee\LaracombeeConnector;
+
+$reporting = app(LaracombeeConnector::class)->connect([
+    'database' => config('services.recombee_reporting.database'),
+    'token' => config('services.recombee_reporting.token'),
+    'region' => 'eu-west',
+    'protocol' => 'https',
+    'timeout' => 2000,
+]);
+```
+
+You can also run `php artisan laracombee:new ReportingLaracombee` to generate a subclass when you need custom behavior.
+
+## Testing
 
 ```bash
-php artisan laracombee:new ReportingLaracombee
+composer install
+vendor/bin/phpunit --display-all-issues
 ```
+
+The checked-in lockfile currently targets PHP 8.4 or later for the development tools. On PHP 8.3, use `composer update` to resolve compatible tools. For Laravel 12 on PHP 8.2, use `composer update --with 'orchestra/testbench:^10.0'`.
+
+Tests mock the SDK boundary and do not contact Recombee. They cover request construction, deferred execution and failures, model mapping, service registration, command validation, SQLite database chunking, and generated clients. The database tests require `pdo_sqlite`.
+
+## Upgrade Notes
+
+- Error callbacks now receive the original exception instead of its message string. Use `$error->getMessage()` when you need text.
+- The default protocol is now HTTPS. Previously published configuration files keep their existing values until you update them.
+- Commands report invalid arguments and SDK failures with a nonzero exit code.
+- Previously generated client classes are not rewritten automatically. New generated classes extend `Laracombee` and inherit its fixes.
 
 ## Contributing
 
