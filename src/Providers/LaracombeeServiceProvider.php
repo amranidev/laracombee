@@ -3,6 +3,8 @@
 namespace Amranidev\Laracombee\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use Amranidev\Laracombee\Laracombee;
+use Amranidev\Laracombee\ModelMapper;
 use Amranidev\Laracombee\LaracombeeConnector;
 use Amranidev\Laracombee\Console\Commands\SeedCommand;
 use Amranidev\Laracombee\Console\Commands\MigrateCommand;
@@ -12,6 +14,9 @@ use Amranidev\Laracombee\Console\Commands\DropColumnsCommand;
 use Amranidev\Laracombee\Console\Commands\ResetDatabaseCommand;
 use Amranidev\Laracombee\Console\Commands\CreateNewLaracombeeClass;
 
+/**
+ * Register the package client, configuration publishing, and Artisan commands.
+ */
 class LaracombeeServiceProvider extends ServiceProvider
 {
     /**
@@ -23,13 +28,19 @@ class LaracombeeServiceProvider extends ServiceProvider
     {
         $this->mergeConfigFrom(__DIR__.'/../../config/laracombee.php', 'laracombee');
 
-        $this->app->singleton('laracombee', function () {
-            return (new LaracombeeConnector())->connect();
+        $this->app->singleton(ModelMapper::class);
+        $this->app->alias('laracombee', Laracombee::class);
+
+        $this->app->singleton('laracombee', function ($app) {
+            return $app->make(LaracombeeConnector::class)->connect(
+                $app['config']->get('laracombee'),
+                $app->make(ModelMapper::class)
+            );
         });
     }
 
     /**
-     * Seriveprovider's boot method.
+     * Boot the service provider.
      *
      * @return void
      */
