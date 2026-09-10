@@ -3,9 +3,6 @@
 </p>
 
 <p align="center">
-  <a href="https://github.styleci.io/repos/144337523">
-    <img src="https://github.styleci.io/repos/144337523/shield?branch=master" alt="StyleCI">
-  </a>
   <a href="https://github.com/amranidev/laracombee/actions/workflows/tests.yml">
     <img src="https://github.com/amranidev/laracombee/actions/workflows/tests.yml/badge.svg" alt="Build Status">
   </a>
