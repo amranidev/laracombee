@@ -2,68 +2,57 @@
 
 namespace Amranidev\Laracombee\Console\Commands;
 
-use Laracombee;
+use Amranidev\Laracombee\Facades\LaracombeeFacade as Laracombee;
 use Amranidev\Laracombee\Console\LaracombeeCommand;
+use Illuminate\Support\Collection;
 
+/**
+ * Create Recombee properties declared by the configured model.
+ */
 class MigrateCommand extends LaracombeeCommand
 {
     /**
-     * The name and signature of the console command.
+     * The Artisan command name, arguments, and options.
      *
      * @var string
      */
-    protected $signature = 'laracombee:migrate
-    						{type : Catalog type (user or item)}';
+    protected $signature = 'laracombee:migrate {type : Catalog type (user or item)}';
 
     /**
-     * The console command description.
+     * The command description displayed in Artisan help.
      *
      * @var string
      */
-    protected $description = 'Migrate to recombee';
+    protected $description = 'Create Recombee properties';
 
     /**
-     * Create a new command instance.
+     * Execute the command and return its success or failure exit code.
      *
-     * @return void
+     * @return int
      */
-    public function __construct()
+    public function handle(): int
     {
-        parent::__construct();
+        return $this->executeOperation(function () {
+            $requests = $this->prepareScope()->all();
+            if ($requests !== []) {
+                Laracombee::batch($requests)->wait();
+            }
+        });
     }
 
     /**
-     * Execute the console command.
+     * Build schema requests from the configured model’s property definitions.
      *
-     * @return void
-     */
-    public function handle()
-    {
-        $scope = $this->prepareScope()->all();
-
-        Laracombee::batch($scope)
-            ->then(function ($response) {
-                $this->info('Done!');
-            })
-            ->otherwise(function ($error) {
-                $this->error($error);
-            })
-            ->wait();
-    }
-
-    /**
-     * Prepare scope.
+     * @return \Illuminate\Support\Collection
      *
-     * @return mixed
+     * @throws \InvalidArgumentException When the model or supplied arguments are invalid.
      */
-    public function prepareScope()
+    public function prepareScope(): Collection
     {
-        $class = config('laracombee.'.$this->argument('type'));
+        $type = $this->catalogType($this->argument('type'));
 
-        $properties = $class::$laracombee;
-
-        return collect($properties)->map(function (string $type, string $property) {
-            return $this->{'add'.ucfirst($this->argument('type')).'Property'}($property, $type);
+        return collect($this->modelProperties($type))->map(function (string $propertyType, string $property) use ($type) {
+            return $this->{'add'.ucfirst($type).'Property'}($property, $propertyType);
         });
     }
 }
