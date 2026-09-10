@@ -2,62 +2,75 @@
 
 namespace Amranidev\Laracombee\Console\Commands;
 
-use Illuminate\Console\Command;
+use Illuminate\Console\GeneratorCommand;
 
-class CreateNewLaracombeeClass extends Command
+/**
+ * Generate a custom client subclass without overwriting existing files.
+ */
+class CreateNewLaracombeeClass extends GeneratorCommand
 {
     /**
-     * The name and signature of the console command.
+     * The Artisan command name, arguments, and options.
      *
      * @var string
      */
-    protected $signature = 'laracombee:new
-                            {name : Class Name}';
+    protected $signature = 'laracombee:new {name : Class name}';
 
     /**
-     * The console command description.
+     * The command description displayed in Artisan help.
      *
      * @var string
      */
-    protected $description = 'Create laracombee class';
+    protected $description = 'Create a custom Laracombee client';
 
     /**
-     * Class path.
+     * The generated artifact name shown in command output.
      *
      * @var string
      */
-    private $path = 'app/Laracombee/';
+    protected $type = 'Laracombee client';
 
     /**
-     * Create a new command instance.
+     * Execute the command and return its success or failure exit code.
      *
-     * @return void
-     */
-    public function __construct()
-    {
-        parent::__construct();
-    }
-
-    /**
-     * Execute the console command.
-     *
-     * @return mixed
+     * @return int
      */
     public function handle()
     {
-        $className = ucfirst($this->argument('name'));
+        $name = $this->getNameInput();
+        if (!preg_match('/^[A-Za-z_][A-Za-z0-9_]*(?:\\\\[A-Za-z_][A-Za-z0-9_]*)*$/D', $name)) {
+            $this->error('Use a valid PHP class name, optionally with a namespace.');
 
-        if (!is_dir($destination = base_path($this->path))) {
-            mkdir($destination, 777, true);
+            return self::FAILURE;
         }
-
-        $template = file_get_contents(__DIR__.'/../../../resources/stubs/laracombee-class.stub');
-        $content = str_replace('__CLASSNAME__', $className, $template);
 
         try {
-            file_put_contents($this->path.$className.'.php', $content);
-        } catch (\Exception $e) {
-            $this->error($e->getMessage());
+            return parent::handle() === false ? self::FAILURE : self::SUCCESS;
+        } catch (\Throwable $error) {
+            $this->error($error->getMessage());
+
+            return self::FAILURE;
         }
+    }
+
+    /**
+     * Locate the template used to generate a custom client class.
+     *
+     * @return string
+     */
+    protected function getStub()
+    {
+        return __DIR__.'/../../../resources/stubs/laracombee-class.stub';
+    }
+
+    /**
+     * Place generated clients in the application’s Laracombee namespace.
+     *
+     * @param string $rootNamespace
+     * @return string
+     */
+    protected function getDefaultNamespace($rootNamespace)
+    {
+        return $rootNamespace.'\\Laracombee';
     }
 }
